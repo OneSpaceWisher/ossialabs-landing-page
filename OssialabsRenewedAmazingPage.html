@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>OssiaLabs — Science that your body actually feels.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script>
+
+<style>
+/* ── Reset ── */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:#fff;color:#111;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+
+/* ── Gradient text ── */
+.g-blue{background:linear-gradient(90deg,#3b82f6,#06b6d4,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.g-cyan{background:linear-gradient(90deg,#06b6d4,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.g-amber{background:linear-gradient(90deg,#f59e0b,#f97316,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* ── Typography ── */
+.label{font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.title{font-weight:900;letter-spacing:-.035em;line-height:1.05}
+.body-sm{font-size:.84rem;line-height:1.68}
+.tag{font-size:.7rem;font-weight:500;padding:.28rem .72rem;border-radius:999px;background:rgba(255,255,255,.82);border:1px solid rgba(0,0,0,.06);color:#374151;display:inline-block}
+
+/* ── Layout ── */
+.wrap{max-width:80rem;margin:0 auto;padding:0 1.5rem}
+.wrap-sm{max-width:48rem;margin:0 auto;padding:0 1.5rem}
+
+/* ── Grids ── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.gauto{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.5rem}
+.g2stat{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.g3stat{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem}
+.grev{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem}
+
+/* ── Scroll reveal ── */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.17s}.reveal.d3{transition-delay:.26s}.reveal.d4{transition-delay:.35s}
+
+/* ── Hero canvas ── */
+#three-canvas{position:absolute;inset:0;width:100%!important;height:100%!important;z-index:0}
+
+/* ── CSS hero background (fallback) ── */
+.orb{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none}
+@keyframes opulse{0%,100%{transform:scale(1);opacity:.2}50%{transform:scale(1.14);opacity:.4}}
+.orb{animation:opulse ease-in-out infinite}
+
+/* ── Ring: MUCH slower (18–26 s) ── */
+@keyframes ring-rise{
+  0%  {opacity:0;transform:translateY(0) rotate(0deg)}
+  15% {opacity:.7}
+  85% {opacity:.4}
+  100%{opacity:0;transform:translateY(-320px) rotate(420deg)}
+}
+.ring{position:absolute;border-radius:50%;border-style:solid;border-width:2px;pointer-events:none;animation:ring-rise linear infinite}
+
+/* ── Particles float ── */
+@keyframes pfloat{0%,100%{opacity:.28;transform:translateY(0)}50%{opacity:.8;transform:translateY(-28px)}}
+.particle{position:absolute;border-radius:50%;pointer-events:none;animation:pfloat ease-in-out infinite}
+
+/* ── CSS flasks sway ── */
+@keyframes sway1{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
+@keyframes sway2{0%,100%{transform:rotate(4deg)}50%{transform:rotate(-4deg)}}
+
+/* ── SNEDDS watermark ── */
+.snedds-mark{font-size:clamp(68px,20vw,260px);font-weight:900;-webkit-text-stroke:1px rgba(0,0,0,.032);color:transparent;letter-spacing:-.04em;user-select:none;pointer-events:none;white-space:nowrap;line-height:1}
+
+/* ── Ping badge ── */
+@keyframes ping{0%{transform:scale(1);opacity:.75}75%,100%{transform:scale(2.4);opacity:0}}
+.ping{animation:ping 1.3s cubic-bezier(0,0,.2,1) infinite}
+@keyframes bounce-y{0%,100%{transform:translateY(0)}50%{transform:translateY(9px)}}
+.bounce{animation:bounce-y 2.2s ease-in-out infinite}
+
+/* ── Cards base ── */
+.product-card{transition:box-shadow .35s,transform .35s}
+.product-card:hover{box-shadow:0 28px 60px rgba(0,0,0,.12);transform:translateY(-6px)}
+.mission-card{transition:background .28s,border-color .28s}
+.step-card{transition:box-shadow .28s}
+.step-card:hover{box-shadow:0 20px 50px rgba(0,0,0,.09)}
+.review-card{transition:box-shadow .28s}
+.review-card:hover{box-shadow:0 14px 42px rgba(0,0,0,.09)}
+
+/* ── Dark card helpers ── */
+.dcard{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:1rem;padding:1.5rem}
+.amcard{background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);border-radius:1rem;padding:1.5rem}
+.statcard{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:1rem;padding:1.25rem}
+
+/* ── Videos ── */
+.video-wrap{position:relative;border-radius:1.5rem;overflow:hidden;border:1px solid rgba(255,255,255,.12);box-shadow:0 28px 80px rgba(0,0,0,.55)}
+video{display:block;width:100%;object-fit:cover;background:#000}
+
+/* Portrait only on large screens */
+.v-portrait{aspect-ratio:9/16}
+
+.play-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.pcircle{border-radius:50%;backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.32);display:flex;align-items:center;justify-content:center;transition:transform .2s}
+.pcircle:hover{transform:scale(1.07)}
+.ctrl-bar{position:absolute;bottom:1rem;left:1rem;right:1rem;display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+.ctrl-pill{display:inline-flex;align-items:center;gap:.45rem;background:rgba(0,0,0,.46);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:.28rem .85rem;font-size:.67rem;font-weight:600;color:#fff}
+.ctrl-btn{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .18s}
+.ctrl-btn:hover{background:rgba(255,255,255,.3)}
+.vglow-c{position:absolute;inset:-1.5rem;border-radius:2rem;background:linear-gradient(135deg,rgba(6,182,212,.09),rgba(16,185,129,.09));filter:blur(32px);z-index:-1}
+.vglow-a{position:absolute;inset:-1.5rem;border-radius:2rem;background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(249,115,22,.08));filter:blur(32px);z-index:-1}
+
+/* ── Dot ── */
+.dot{width:6px;height:6px;border-radius:50%;display:inline-block;flex-shrink:0}
+
+/* ── Chip ── */
+.chip{display:inline-flex;align-items:center;gap:.38rem;font-size:.7rem;font-weight:700;padding:.28rem .72rem;border-radius:999px}
+
+/* ── Grid bg patterns ── */
+.linegrid{background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:60px 60px}
+
+/* ── Radar / table ── */
+.ctable{width:100%;border-collapse:collapse}
+.ctable th,.ctable td{padding:.7rem 1rem;font-size:.73rem}
+.cblu{background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe;padding:.2rem .65rem;border-radius:999px;font-size:.67rem;font-weight:700;white-space:nowrap}
+.cgrn{background:#f0fdf4;color:#16a34a;border:1px solid #bbf7d0;padding:.2rem .65rem;border-radius:999px;font-size:.67rem;font-weight:600;white-space:nowrap}
+.legend-line{width:14px;height:3px;border-radius:2px;display:inline-block}
+
+/* ── Discord ── */
+.discord-glow{background:radial-gradient(ellipse at 50% 40%,rgba(99,102,241,.14) 0%,transparent 65%)}
+
+/* ── Responsive ── */
+@media(max-width:1024px){.g4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:860px){
+  .g2{grid-template-columns:1fr;gap:3rem}
+  .g3{grid-template-columns:repeat(2,1fr)}
+  .g2stat{grid-template-columns:1fr 1fr}
+  /* Mobile video → landscape */
+  .v-portrait{aspect-ratio:16/9;max-height:65vw}
+}
+@media(max-width:600px){
+  .g3,.g4{grid-template-columns:1fr}
+  .hide-xs{display:none!important}
+  .g3stat{grid-template-columns:repeat(3,1fr)}
+  .v-portrait{aspect-ratio:16/9;max-height:62vw}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════
+  § 1  HERO
+══════════════════════════════════════════════════════════ -->
+<section id="hero" style="position:relative;min-height:100vh;overflow:hidden;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:5rem 1.5rem 4rem">
+
+  <canvas id="three-canvas"></canvas>
+
+  <!-- CSS fallback / always-on background -->
+  <div id="css-bg" style="position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1;transition:opacity 1s">
+    <div class="orb" style="width:520px;height:520px;background:#dbeafe;top:4%;left:4%;animation-duration:7s"></div>
+    <div class="orb" style="width:380px;height:380px;background:#d1fae5;bottom:8%;right:6%;animation-duration:9s;animation-delay:1.3s"></div>
+    <div class="orb" style="width:330px;height:330px;background:#ede9fe;top:48%;left:40%;animation-duration:7.5s;animation-delay:2.2s"></div>
+    <div class="orb" style="width:260px;height:260px;background:#cffafe;top:36%;right:26%;animation-duration:8.8s;animation-delay:.7s"></div>
+    <div class="orb" style="width:200px;height:200px;background:#fef9c3;bottom:22%;left:20%;animation-duration:8s;animation-delay:1.9s"></div>
+    <div id="css-rings" style="position:absolute;inset:0"></div>
+    <div id="css-particles" style="position:absolute;inset:0"></div>
+    <!-- Flasks -->
+    <div style="position:absolute;left:9%;top:28%;animation:sway1 4.5s ease-in-out infinite">
+      <div style="width:72px;height:72px;border-radius:50%;border:2px solid rgba(147,197,253,.6);background:rgba(239,246,255,.42);display:flex;align-items:center;justify-content:center"><div style="width:44px;height:44px;border-radius:50%;background:rgba(147,197,253,.52)"></div></div>
+      <div style="width:17px;height:30px;border:2px solid rgba(147,197,253,.48);background:rgba(219,234,254,.38);border-radius:4px 4px 0 0;margin:0 auto;margin-top:-4px"></div>
+    </div>
+    <div style="position:absolute;right:9%;top:40%;animation:sway2 5.5s ease-in-out infinite 1.2s">
+      <div style="width:58px;height:58px;border-radius:50%;border:2px solid rgba(110,231,183,.6);background:rgba(236,253,245,.42);display:flex;align-items:center;justify-content:center"><div style="width:36px;height:36px;border-radius:50%;background:rgba(110,231,183,.52)"></div></div>
+      <div style="width:13px;height:24px;border:2px solid rgba(110,231,183,.48);background:rgba(209,250,229,.38);border-radius:4px 4px 0 0;margin:0 auto;margin-top:-3px"></div>
+    </div>
+    <div style="position:absolute;right:22%;bottom:20%;animation:sway1 6.5s ease-in-out infinite 2.1s;opacity:.72">
+      <div style="width:48px;height:48px;border-radius:50%;border:2px solid rgba(196,181,253,.55);background:rgba(245,243,255,.38);display:flex;align-items:center;justify-content:center"><div style="width:29px;height:29px;border-radius:50%;background:rgba(196,181,253,.48)"></div></div>
+      <div style="width:11px;height:20px;border:2px solid rgba(196,181,253,.45);background:rgba(237,233,254,.35);border-radius:4px 4px 0 0;margin:0 auto;margin-top:-3px"></div>
+    </div>
+  </div>
+
+  <!-- Vignettes -->
+  <div style="position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(to bottom,rgba(255,255,255,.3),rgba(255,255,255,.04),rgba(255,255,255,.82))"></div>
+  <div style="position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(to right,rgba(255,255,255,.46),transparent,rgba(255,255,255,.46))"></div>
+
+  <!-- SNEDDS watermark -->
+  <div style="position:absolute;inset:0;z-index:3;display:flex;align-items:center;justify-content:center;overflow:hidden;pointer-events:none">
+    <span class="snedds-mark">SNEDDS</span>
+  </div>
+
+  <!-- Content -->
+  <div style="position:relative;z-index:10;max-width:72rem;width:100%">
+    <div style="display:inline-flex;align-items:center;gap:.5rem;padding:.58rem 1.25rem;border-radius:999px;background:rgba(0,0,0,.05);border:1px solid rgba(0,0,0,.09);backdrop-filter:blur(10px);font-size:.84rem;font-weight:500;color:#4b5563;margin-bottom:2.2rem">
+      <span style="position:relative;display:inline-flex;width:8px;height:8px">
+        <span class="ping" style="position:absolute;inset:0;border-radius:50%;background:#34d399;opacity:.75"></span>
+        <span style="width:8px;height:8px;border-radius:50%;background:#10b981;display:block;position:relative"></span>
+      </span>
+      Self-Nanoemulsifying Drug Delivery System
+    </div>
+    <h1 style="font-size:clamp(2.8rem,8.5vw,7rem);font-weight:900;letter-spacing:-.038em;line-height:1;color:#111;margin-bottom:1.55rem">
+      Science that your<br><span class="g-blue">body actually feels.</span>
+    </h1>
+    <p style="font-size:clamp(1rem,2vw,1.2rem);color:#6b7280;max-width:38rem;margin:0 auto 2.7rem;line-height:1.77;font-weight:300">
+      SNEDDS formulas that keep tough plant actives dissolved and bioavailable — breakthrough delivery for results you can actually feel.
+    </p>
+    <div style="display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center;margin-bottom:4.5rem">
+      <a href="https://ossialabs.com/collections/all" target="_blank" rel="noopener noreferrer"
+         style="display:inline-block;background:#111;color:#fff;font-weight:600;font-size:1rem;padding:1rem 2rem;border-radius:999px;box-shadow:0 12px 38px rgba(0,0,0,.22);transition:all .24s"
+         onmouseover="this.style.cssText=this.dataset.on" onmouseout="this.style.cssText=this.dataset.off"
+         data-on="display:inline-block;color:#fff;font-weight:600;font-size:1rem;padding:1rem 2rem;border-radius:999px;box-shadow:0 16px 46px rgba(37,99,235,.32);transition:all .24s;background:linear-gradient(90deg,#2563eb,#06b6d4)"
+         data-off="display:inline-block;background:#111;color:#fff;font-weight:600;font-size:1rem;padding:1rem 2rem;border-radius:999px;box-shadow:0 12px 38px rgba(0,0,0,.22);transition:all .24s">
+        Shop All Products
+      </a>
+      <a href="https://ossialabs.com/blogs/news/the-innovation-of-self-emulsifying-drug-delivery-systems-snedds" target="_blank" rel="noopener noreferrer"
+         style="display:inline-block;background:rgba(255,255,255,.76);color:#111;font-weight:600;font-size:1rem;padding:1rem 2rem;border-radius:999px;border:1px solid rgba(0,0,0,.09);backdrop-filter:blur(10px);transition:all .22s"
+         onmouseover="this.style.background='#fff';this.style.boxShadow='0 8px 28px rgba(0,0,0,.1)'"
+         onmouseout="this.style.background='rgba(255,255,255,.76)';this.style.boxShadow='none'">
+        What is SNEDDS?
+      </a>
+    </div>
+    <div class="bounce" style="display:flex;flex-direction:column;align-items:center;gap:.42rem;color:#d1d5db">
+      <span class="label" style="color:#d1d5db;font-size:.58rem">Discover</span>
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10l6 6 6-6" stroke="#d1d5db" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+  § 2  MISSION
+══════════════════════════════════════════════════════════ -->
+<section style="position:relative;padding:8rem 0;overflow:hidden;background:#030712">
+  <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:900px;height:320px;background:rgba(59,130,246,.08);filter:blur(95px);border-radius:50%;pointer-events:none"></div>
+  <div style="position:absolute;bottom:0;right:0;width:280px;height:280px;background:rgba(16,185,129,.06);filter:blur(75px);border-radius:50%;pointer-events:none"></div>
+  <div class="wrap" style="position:relative;z-index:1">
+    <div class="reveal" style="text-align:center;margin-bottom:5rem">
+      <p class="label" style="color:#22d3ee;margin-bottom:1.25rem">Our Mission</p>
+      <h2 class="title" style="font-size:clamp(2rem,5vw,3.6rem);color:#fff;margin-bottom:1.3rem">Advancing the<br><span class="g-cyan">supplement frontier.</span></h2>
+      <p style="color:#9ca3af;font-size:1.05rem;max-width:36rem;margin:0 auto;line-height:1.75">The industry has been coasting on outdated delivery for decades. We're changing that — one nanodroplet at a time.</p>
+    </div>
+    <div class="gauto" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+      <div class="mission-card reveal d1" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:1.5rem;padding:2rem"
+           onmouseover="this.style.background='rgba(255,255,255,.072)';this.style.borderColor='rgba(255,255,255,.16)'"
+           onmouseout="this.style.background='rgba(255,255,255,.04)';this.style.borderColor='rgba(255,255,255,.08)'">
+        <svg style="margin-bottom:1.2rem" width="44" height="44" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="mi1" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#3b82f6"/><stop offset="1" stop-color="#06b6d4"/></linearGradient></defs><ellipse cx="24" cy="24" rx="20" ry="8" stroke="url(#mi1)" stroke-width="2" fill="none"/><ellipse cx="24" cy="24" rx="20" ry="8" stroke="url(#mi1)" stroke-width="2" fill="none" transform="rotate(60 24 24)"/><ellipse cx="24" cy="24" rx="20" ry="8" stroke="url(#mi1)" stroke-width="2" fill="none" transform="rotate(120 24 24)"/><circle cx="24" cy="24" r="4" fill="url(#mi1)"/><circle cx="44" cy="24" r="2.5" fill="#3b82f6"/><circle cx="14" cy="8" r="2.5" fill="#06b6d4"/><circle cx="14" cy="40" r="2.5" fill="#10b981"/></svg>
+        <h3 style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:.65rem">Redefining Delivery</h3>
+        <p class="body-sm" style="color:#6b7280">We reject the status quo of poorly absorbed supplements. Every formula is built from the ground up with SNEDDS technology — the same nanoemulsifying approach used in pharmaceutical research.</p>
+      </div>
+      <div class="mission-card reveal d1" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:1.5rem;padding:2rem"
+           onmouseover="this.style.background='rgba(255,255,255,.072)';this.style.borderColor='rgba(255,255,255,.16)'"
+           onmouseout="this.style.background='rgba(255,255,255,.04)';this.style.borderColor='rgba(255,255,255,.08)'">
+        <svg style="margin-bottom:1.2rem" width="44" height="44" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="mi2" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#06b6d4"/><stop offset="1" stop-color="#10b981"/></linearGradient></defs><path d="M17 6h14M19 6v14L8 38a4 4 0 003.4 6h25.2A4 4 0 0040 38L29 20V6" stroke="url(#mi2)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 32h26" stroke="url(#mi2)" stroke-width="2" stroke-linecap="round"/><circle cx="16" cy="38" r="2" fill="#06b6d4" opacity=".75"/><circle cx="24" cy="36" r="1.5" fill="#10b981" opacity=".65"/><circle cx="32" cy="39" r="1.5" fill="#3b82f6" opacity=".75"/></svg>
+        <h3 style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:.65rem">No Compromise Formulation</h3>
+        <p class="body-sm" style="color:#6b7280">We don't dilute, we don't add cheap fillers. Our excipients are selected specifically to maximize permeability and bypass first-pass metabolism for direct bloodstream uptake.</p>
+      </div>
+      <div class="mission-card reveal d2" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:1.5rem;padding:2rem"
+           onmouseover="this.style.background='rgba(255,255,255,.072)';this.style.borderColor='rgba(255,255,255,.16)'"
+           onmouseout="this.style.background='rgba(255,255,255,.04)';this.style.borderColor='rgba(255,255,255,.08)'">
+        <svg style="margin-bottom:1.2rem" width="44" height="44" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="mi3" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs><rect x="19" y="4" width="10" height="18" rx="2" stroke="url(#mi3)" stroke-width="2.5" fill="none"/><path d="M14 22h20M24 22v8" stroke="url(#mi3)" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="24" cy="36" rx="12" ry="5" stroke="url(#mi3)" stroke-width="2" fill="none"/><circle cx="24" cy="12" r="4" fill="#6366f1" opacity=".28"/><circle cx="24" cy="12" r="2" fill="#8b5cf6"/><line x1="10" y1="44" x2="38" y2="44" stroke="url(#mi3)" stroke-width="2.5" stroke-linecap="round"/></svg>
+        <h3 style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:.65rem">Evidence-Aligned</h3>
+        <p class="body-sm" style="color:#6b7280">Every active we choose has a research basis. We map our targets to published data and never overclaim — you get transparency, not marketing fluff.</p>
+      </div>
+      <div class="mission-card reveal d3" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:1.5rem;padding:2rem"
+           onmouseover="this.style.background='rgba(255,255,255,.072)';this.style.borderColor='rgba(255,255,255,.16)'"
+           onmouseout="this.style.background='rgba(255,255,255,.04)';this.style.borderColor='rgba(255,255,255,.08)'">
+        <svg style="margin-bottom:1.2rem" width="44" height="44" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="mi4" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#10b981"/><stop offset="1" stop-color="#3b82f6"/></linearGradient></defs><path d="M24 4L8 12v12c0 10 7 19 16 22 9-3 16-12 16-22V12L24 4z" stroke="url(#mi4)" stroke-width="2.5" stroke-linejoin="round" fill="none"/><path d="M16 24l5 5 11-11" stroke="url(#mi4)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3 style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:.65rem">Advancing the Industry</h3>
+        <p class="body-sm" style="color:#6b7280">The supplement industry is rife with poor absorption and empty promises. We're here to push the frontier — bringing pharmaceutical-grade delivery to botanical science.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+  § 3  PRODUCTS
+══════════════════════════════════════════════════════════ -->
+<section style="padding:8rem 0;background:#fff">
+  <div class="wrap">
+    <div class="reveal" style="text-align:center;margin-bottom:5rem">
+      <p class="label" style="color:#9ca3af;margin-bottom:1rem">Our Formulas</p>
+      <h2 class="title" style="font-size:clamp(2rem,5vw,3.6rem);color:#111;margin-bottom:1.3rem">Engineered for absorption.</h2>
+      <p style="color:#9ca3af;font-size:1.05rem;max-width:36rem;margin:0 auto;line-height:1.75">Every product is built around SNEDDS technology — self-nanoemulsifying systems that maximize bioavailability of lipophilic compounds.</p>
+    </div>
+    <div class="gauto">
+
+      <!-- Osstivia -->
+      <a href="https://ossialabs.com/products/ossialabs-osteva?variant=46668118655194" target="_blank" rel="noopener noreferrer"
+         class="product-card reveal d1" style="background:linear-gradient(160deg,#fffbeb,#fff7ed);border-radius:1.5rem;padding:2rem;border:1px solid rgba(0,0,0,.04);position:relative;overflow:hidden;display:block">
+        <div style="position:absolute;top:0;right:0;width:200px;height:200px;background:#f59e0b;border-radius:50%;opacity:.06;filter:blur(50px);transform:translate(50%,-50%)"></div>
+        <div style="display:inline-flex;padding:.75rem;border-radius:1rem;background:rgba(245,158,11,.13);margin-bottom:1.25rem">
+          <svg width="36" height="36" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="pr1" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f59e0b"/><stop offset="1" stop-color="#ef4444"/></linearGradient></defs><circle cx="24" cy="24" r="5" fill="url(#pr1)"/><circle cx="24" cy="8" r="3" fill="#f59e0b" opacity=".85"/><circle cx="24" cy="40" r="3" fill="#f59e0b" opacity=".85"/><circle cx="8" cy="24" r="3" fill="#ef4444" opacity=".85"/><circle cx="40" cy="24" r="3" fill="#ef4444" opacity=".85"/><circle cx="12" cy="12" r="2.5" fill="#fbbf24" opacity=".75"/><circle cx="36" cy="12" r="2.5" fill="#fbbf24" opacity=".75"/><circle cx="12" cy="36" r="2.5" fill="#fbbf24" opacity=".75"/><circle cx="36" cy="36" r="2.5" fill="#fbbf24" opacity=".75"/><line x1="24" y1="19" x2="24" y2="11" stroke="#f59e0b" stroke-width="1.5"/><line x1="24" y1="29" x2="24" y2="37" stroke="#f59e0b" stroke-width="1.5"/><line x1="19" y1="24" x2="11" y2="24" stroke="#ef4444" stroke-width="1.5"/><line x1="29" y1="24" x2="37" y2="24" stroke="#ef4444" stroke-width="1.5"/><line x1="20.5" y1="20.5" x2="15" y2="15" stroke="#fbbf24" stroke-width="1.5"/><line x1="27.5" y1="20.5" x2="33" y2="15" stroke="#fbbf24" stroke-width="1.5"/><line x1="20.5" y1="27.5" x2="15" y2="33" stroke="#fbbf24" stroke-width="1.5"/><line x1="27.5" y1="27.5" x2="33" y2="33" stroke="#fbbf24" stroke-width="1.5"/></svg>
+        </div>
+        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1rem"><span class="dot" style="background:#f59e0b"></span><span class="label" style="color:#9ca3af;font-size:.6rem">Bone Modulation Formula</span></div>
+        <h3 style="font-size:1.42rem;font-weight:900;color:#111;margin-bottom:.72rem">Osstivia</h3>
+        <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">SNEDDS formula of Daemonorops Draco + Fructus Ligustri Lucidi — researched for bone density, remodeling, and growth. Acts on BMP2, RUNX2, WNT/β-catenin, and RANKL pathways. Pairs powerfully with a hard-chewing regimen for facial aesthetic results.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.5rem"><span class="tag">Bone Health</span><span class="tag">SNEDDS</span><span class="tag">Osteoblast Support</span><span class="tag">Wnt Pathway</span></div>
+        <span style="display:inline-flex;align-items:center;gap:.5rem;font-size:.85rem;font-weight:700;color:#111">Learn More <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 3l4 4-4 4" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+      </a>
+
+      <!-- H. Japonicus -->
+      <a href="https://ossialabs.com/products/humulus-japonicus-snedds?variant=46668547522778" target="_blank" rel="noopener noreferrer"
+         class="product-card reveal d2" style="background:linear-gradient(160deg,#ecfdf5,#f0fdfa);border-radius:1.5rem;padding:2rem;border:1px solid rgba(0,0,0,.04);position:relative;overflow:hidden;display:block">
+        <div style="position:absolute;top:0;right:0;width:200px;height:200px;background:#10b981;border-radius:50%;opacity:.06;filter:blur(50px);transform:translate(50%,-50%)"></div>
+        <div style="display:inline-flex;padding:.75rem;border-radius:1rem;background:rgba(16,185,129,.13);margin-bottom:1.25rem">
+          <svg width="36" height="36" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="pr2" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#8b5cf6"/><stop offset="1" stop-color="#ec4899"/></linearGradient></defs><path d="M16 4C16 4 32 12 32 24C32 36 16 44 16 44" stroke="url(#pr2)" stroke-width="2.5" stroke-linecap="round" fill="none"/><path d="M32 4C32 4 16 12 16 24C16 36 32 44 32 44" stroke="url(#pr2)" stroke-width="2.5" stroke-linecap="round" fill="none"/><line x1="18" y1="14" x2="30" y2="14" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round"/><line x1="14" y1="24" x2="34" y2="24" stroke="#ec4899" stroke-width="2" stroke-linecap="round"/><line x1="18" y1="34" x2="30" y2="34" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1rem"><span class="dot" style="background:#10b981"></span><span class="label" style="color:#9ca3af;font-size:.6rem">Height &amp; Growth Support</span></div>
+        <h3 style="font-size:1.42rem;font-weight:900;color:#111;margin-bottom:.72rem">H. Japonicus</h3>
+        <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">Humulus japonicus in SNEDDS formulation — acting on IGF-1, GH, and JAK3/STAT5 pathways. Most beneficial during puberty with open growth plates. Also delivers potent anti-inflammatory, antioxidant, neuroprotective, and anti-aging effects.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.5rem"><span class="tag">IGF-1 / GH Pathways</span><span class="tag">SNEDDS</span><span class="tag">Growth Support</span><span class="tag">JAK3/STAT5</span></div>
+        <span style="display:inline-flex;align-items:center;gap:.5rem;font-size:.85rem;font-weight:700;color:#111">Learn More <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 3l4 4-4 4" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+      </a>
+
+      <!-- Bakuchiol -->
+      <a href="https://ossialabs.com/products/bakuchiol-nanoemulgel?variant=47223711924442" target="_blank" rel="noopener noreferrer"
+         class="product-card reveal d3" style="background:linear-gradient(160deg,#f5f3ff,#faf5ff);border-radius:1.5rem;padding:2rem;border:1px solid rgba(0,0,0,.04);position:relative;overflow:hidden;display:block">
+        <div style="position:absolute;top:0;right:0;width:200px;height:200px;background:#8b5cf6;border-radius:50%;opacity:.06;filter:blur(50px);transform:translate(50%,-50%)"></div>
+        <div style="display:inline-flex;padding:.75rem;border-radius:1rem;background:rgba(139,92,246,.13);margin-bottom:1.25rem">
+          <svg width="36" height="36" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="pr3" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#06b6d4"/><stop offset="1" stop-color="#10b981"/></linearGradient></defs><path d="M17 6h14M19 6v14L8 38a4 4 0 003.4 6h25.2A4 4 0 0040 38L29 20V6" stroke="url(#pr3)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 32h26" stroke="url(#pr3)" stroke-width="2" stroke-linecap="round"/><circle cx="16" cy="38" r="2" fill="#06b6d4" opacity=".75"/><circle cx="24" cy="36" r="1.5" fill="#10b981" opacity=".65"/><circle cx="32" cy="39" r="1.5" fill="#3b82f6" opacity=".75"/></svg>
+        </div>
+        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1rem"><span class="dot" style="background:#8b5cf6"></span><span class="label" style="color:#9ca3af;font-size:.6rem">Plant-Based Anti-Aging</span></div>
+        <h3 style="font-size:1.42rem;font-weight:900;color:#111;margin-bottom:.72rem">Bakuchiol Nanoemulgel</h3>
+        <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">1% Bakuchiol in a precision nanotechnology emulgel that penetrates the skin barrier for deep collagen stimulation and cell turnover — all without retinol's harsh side effects. Gentle for all skin types.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.5rem"><span class="tag">Nano Delivery</span><span class="tag">Topical</span><span class="tag">Anti-Aging</span><span class="tag">Collagen Synthesis</span></div>
+        <span style="display:inline-flex;align-items:center;gap:.5rem;font-size:.85rem;font-weight:700;color:#111">Learn More <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 3l4 4-4 4" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+  § 4  SNEDDS VIDEO
+══════════════════════════════════════════════════════════ -->
+<section style="position:relative;padding:8rem 0;background:#030712;overflow:hidden">
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:960px;height:560px;background:rgba(59,130,246,.07);filter:blur(110px);border-radius:50%;pointer-events:none"></div>
+  <div class="wrap" style="position:relative;z-index:1">
+    <div class="g2">
+      <!-- Text -->
+      <div class="reveal">
+        <p class="label" style="color:#22d3ee;margin-bottom:1.5rem">The Science</p>
+        <h2 class="title" style="font-size:clamp(1.9rem,4vw,3rem);color:#fff;margin-bottom:2rem">UNMATCHED<br>ABSORPTION &amp;<br><span class="g-cyan">BIOAVAILABILITY</span></h2>
+        <p style="color:#9ca3af;font-size:1rem;line-height:1.77;margin-bottom:2.5rem">Your body can't use what it can't absorb. Traditional fat-soluble supplements often struggle to mix with your body's chemistry. SNEDDS technology breaks lipophilic compounds into microscopic particles for rapid, efficient uptake — delivering potency you can actually feel.</p>
+        <div class="g2stat" style="margin-bottom:1.5rem">
+          <div class="statcard"><p style="font-size:1.75rem;font-weight:900;background:linear-gradient(90deg,#3b82f6,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.2rem">~14×</p><p style="font-size:.7rem;font-weight:600;color:#d1d5db;margin-bottom:.1rem">Curcumin Absorption</p><p style="font-size:.67rem;color:#4b5563">vs. standard powders</p></div>
+          <div class="statcard"><p style="font-size:1.75rem;font-weight:900;background:linear-gradient(90deg,#06b6d4,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.2rem">~22×</p><p style="font-size:.7rem;font-weight:600;color:#d1d5db;margin-bottom:.1rem">CBD Bioavailability</p><p style="font-size:.67rem;color:#4b5563">vs. raw powder</p></div>
+          <div class="statcard"><p style="font-size:1.75rem;font-weight:900;background:linear-gradient(90deg,#10b981,#14b8a6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.2rem">~4.3×</p><p style="font-size:.7rem;font-weight:600;color:#d1d5db;margin-bottom:.1rem">Resveratrol AUC</p><p style="font-size:.67rem;color:#4b5563">optimized SNEDDS</p></div>
+          <div class="statcard"><p style="font-size:1.75rem;font-weight:900;background:linear-gradient(90deg,#8b5cf6,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.2rem">~1.6×</p><p style="font-size:.7rem;font-weight:600;color:#d1d5db;margin-bottom:.1rem">Berberine</p><p style="font-size:.67rem;color:#4b5563">vs. commercial tablets</p></div>
+        </div>
+        <p style="font-size:.67rem;color:#374151">Generalized ranges for educational purposes only.</p>
+      </div>
+      <!-- Video -->
+      <div class="reveal d2" style="position:relative">
+        <div class="video-wrap">
+          <video id="vid1" class="v-portrait" loop playsinline preload="metadata" src="https://i.imgur.com/XGkYcnq.mp4" crossorigin="anonymous"></video>
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(3,7,18,.7),transparent);pointer-events:none"></div>
+          <div class="play-overlay" id="vo1" onclick="toggleVid('vid1','vo1','vb1')">
+            <div class="pcircle" style="width:80px;height:80px;background:rgba(255,255,255,.16)">
+              <svg width="30" height="30" viewBox="0 0 32 32" fill="white"><path d="M10 6l18 10-18 10V6z"/></svg>
+            </div>
+          </div>
+          <div class="ctrl-bar">
+            <span class="ctrl-pill"><span class="dot" style="background:#22d3ee"></span>SNEDDS Nanoemulsion</span>
+            <div style="display:flex;gap:.4rem">
+              <button id="vb1" class="ctrl-btn" onclick="toggleVid('vid1','vo1','vb1')"><svg width="13" height="13" viewBox="0 0 14 14" fill="white"><path d="M3 2l9 5-9 5V2z"/></svg></button>
+              <button id="mb1" class="ctrl-btn" onclick="toggleMute('vid1','mb1')"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><path d="M7 2L4 5H1v4h3l3 3V2z"/><path d="M10 5a3 3 0 010 4M12 3a6 6 0 010 8"/></svg></button>
+            </div>
+          </div>
+        </div>
+        <div class="vglow-c"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+  § 5  HOW IT WORKS
+══════════════════════════════════════════════════════════ -->
+<section style="padding:8rem 0;background:#fff">
+  <div class="wrap">
+    <div class="reveal" style="text-align:center;margin-bottom:5rem">
+      <p class="label" style="color:#9ca3af;margin-bottom:1rem">The Process</p>
+      <h2 class="title" style="font-size:clamp(2rem,5vw,3.6rem);color:#111">How SNEDDS works.</h2>
+    </div>
+    <div class="g3">
+      <div class="step-card reveal d1" style="background:linear-gradient(160deg,#eff6ff,#eef2ff);border-radius:1.5rem;padding:2rem;border:1px solid rgba(255,255,255,.9);position:relative;overflow:hidden">
+        <span style="position:absolute;top:.6rem;right:1.2rem;font-size:5rem;font-weight:900;color:rgba(0,0,0,.044);line-height:1;pointer-events:none">01</span>
+        <div style="display:inline-flex;padding:.75rem;border-radius:1rem;background:rgba(59,130,246,.1);margin-bottom:1.25rem"><svg width="28" height="28" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="hw1" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#06b6d4"/><stop offset="1" stop-color="#10b981"/></linearGradient></defs><path d="M17 6h14M19 6v14L8 38a4 4 0 003.4 6h25.2A4 4 0 0040 38L29 20V6" stroke="url(#hw1)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 32h26" stroke="url(#hw1)" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <h3 style="font-size:1.05rem;font-weight:700;color:#111;margin-bottom:.72rem">Formulate to Dissolve</h3>
+        <p class="body-sm" style="color:#6b7280">Lipids and emulsifiers keep hydrophobic actives in stable solution — bypassing first-pass metabolism for direct bloodstream uptake.</p>
+      </div>
+      <div class="step-card reveal d2" style="background:linear-gradient(160deg,#ecfdf5,#f0fdfa);border-radius:1.5rem;padding:2rem;border:1px solid rgba(255,255,255,.9);position:relative;overflow:hidden">
+        <span style="position:absolute;top:.6rem;right:1.2rem;font-size:5rem;font-weight:900;color:rgba(0,0,0,.044);line-height:1;pointer-events:none">02</span>
+        <div style="display:inline-flex;padding:.75rem;border-radius:1rem;background:rgba(16,185,129,.1);margin-bottom:1.25rem"><svg width="28" height="28" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="hw2" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f59e0b"/><stop offset="1" stop-color="#ef4444"/></linearGradient></defs><circle cx="24" cy="24" r="5" fill="url(#hw2)"/><circle cx="24" cy="8" r="3" fill="#f59e0b" opacity=".85"/><circle cx="24" cy="40" r="3" fill="#f59e0b" opacity=".85"/><circle cx="8" cy="24" r="3" fill="#ef4444" opacity=".85"/><circle cx="40" cy="24" r="3" fill="#ef4444" opacity=".85"/><line x1="24" y1="19" x2="24" y2="11" stroke="#f59e0b" stroke-width="2"/><line x1="24" y1="29" x2="24" y2="37" stroke="#f59e0b" stroke-width="2"/><line x1="19" y1="24" x2="11" y2="24" stroke="#ef4444" stroke-width="2"/><line x1="29" y1="24" x2="37" y2="24" stroke="#ef4444" stroke-width="2"/></svg></div>
+        <h3 style="font-size:1.05rem;font-weight:700;color:#111;margin-bottom:.72rem">Nano-Disperse on Contact</h3>
+        <p class="body-sm" style="color:#6b7280">Contact with aqueous fluid spontaneously forms nanodroplets — massively increasing interfacial surface area for absorption.</p>
+      </div>
+      <div class="step-card reveal d3" style="background:linear-gradient(160deg,#f5f3ff,#faf5ff);border-radius:1.5rem;padding:2rem;border:1px solid rgba(255,255,255,.9);position:relative;overflow:hidden">
+        <span style="position:absolute;top:.6rem;right:1.2rem;font-size:5rem;font-weight:900;color:rgba(0,0,0,.044);line-height:1;pointer-events:none">03</span>
+        <div style="display:inline-flex;padding:.75rem;border-radius:1rem;background:rgba(139,92,246,.1);margin-bottom:1.25rem"><svg width="28" height="28" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="hw3" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#3b82f6"/><stop offset="1" stop-color="#06b6d4"/></linearGradient></defs><ellipse cx="24" cy="24" rx="20" ry="8" stroke="url(#hw3)" stroke-width="2" fill="none"/><ellipse cx="24" cy="24" rx="20" ry="8" stroke="url(#hw3)" stroke-width="2" fill="none" transform="rotate(60 24 24)"/><ellipse cx="24" cy="24" rx="20" ry="8" stroke="url(#hw3)" stroke-width="2" fill="none" transform="rotate(120 24 24)"/><circle cx="24" cy="24" r="4" fill="url(#hw3)"/></svg></div>
+        <h3 style="font-size:1.05rem;font-weight:700;color:#111;margin-bottom:.72rem">Potency You Can Feel</h3>
+        <p class="body-sm" style="color:#6b7280">Microscopic particles are taken up rapidly and efficiently — delivering the compounds your body can actually use, not waste.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+  § 6  TRANSFORMATION VIDEO
+══════════════════════════════════════════════════════════ -->
+<section style="position:relative;padding:8rem 0;background:#000;overflow:hidden">
+  <div class="linegrid" style="position:absolute;inset:0;opacity:.03;pointer-events:none"></div>
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:1000px;height:640px;background:rgba(245,158,11,.04);filter:blur(130px);border-radius:50%;pointer-events:none"></div>
+  <div class="wrap" style="position:relative;z-index:1">
+    <div class="reveal" style="text-align:center;margin-bottom:5rem">
+      <p class="label" style="color:#f59e0b;margin-bottom:1rem">Real Results</p>
+      <h2 class="title" style="font-size:clamp(2rem,5vw,3.6rem);color:#fff;margin-bottom:1.3rem">UNLOCKING<br><span class="g-amber">HIDDEN POTENTIAL</span></h2>
+      <p style="color:#9ca3af;font-size:1.05rem;max-width:38rem;margin:0 auto;line-height:1.75">Mandibular potential does not disappear at 22. Hypertrophic growth cartilage remains active into the 30s — and Osstivia is designed to unlock it.</p>
+    </div>
+    <div class="g2">
+      <!-- Video -->
+      <div class="reveal" style="position:relative">
+        <div class="video-wrap" style="cursor:pointer" onclick="toggleVid('vid2','vo2','vb2')">
+          <video id="vid2" class="v-portrait" loop playsinline preload="metadata" src="https://i.imgur.com/ZhHglXu.mp4" crossorigin="anonymous"></video>
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.72),transparent);pointer-events:none"></div>
+          <div style="position:absolute;top:1rem;left:1rem"><span class="ctrl-pill"><span class="dot" style="background:#f59e0b"></span>Osstivia Protocol</span></div>
+          <div class="play-overlay" id="vo2">
+            <div class="pcircle" style="width:96px;height:96px;background:rgba(245,158,11,.18);border-color:rgba(245,158,11,.44)">
+              <svg width="36" height="36" viewBox="0 0 36 36" fill="white"><path d="M10 6l22 12-22 12V6z"/></svg>
+            </div>
+          </div>
+          <div class="ctrl-bar">
+            <div></div>
+            <div style="display:flex;gap:.4rem">
+              <button id="vb2" class="ctrl-btn" onclick="event.stopPropagation();toggleVid('vid2','vo2','vb2')"><svg width="13" height="13" viewBox="0 0 14 14" fill="white"><path d="M3 2l9 5-9 5V2z"/></svg></button>
+              <button id="mb2" class="ctrl-btn" onclick="event.stopPropagation();toggleMute('vid2','mb2')"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><path d="M7 2L4 5H1v4h3l3 3V2z"/><path d="M10 5a3 3 0 010 4M12 3a6 6 0 010 8"/></svg></button>
+            </div>
+          </div>
+        </div>
+        <div class="vglow-a"></div>
+      </div>
+      <!-- Content -->
+      <div class="reveal d2" style="display:flex;flex-direction:column;gap:1.2rem">
+        <div class="dcard"><p style="color:#d1d5db;font-size:.95rem;line-height:1.77">At 22, natural development slows — but mandibular potential does not disappear. Hypertrophic growth cartilage remains active into the 30s, and condylar growth and remodeling is possible throughout life.</p></div>
+        <div class="dcard"><p style="color:#d1d5db;font-size:.95rem;line-height:1.77">This subject utilized a dual approach: strategic orthodontic guidance from the CRC, combined with high-resistance mechanical stress (hard chewing) paired with <strong style="color:#fff">Osstivia</strong>.</p></div>
+        <div class="amcard"><p style="color:#fde68a;font-size:.95rem;line-height:1.77;font-weight:500">Our SNEDDS technology delivers Daemonorops Draco and Fructus Ligustri Lucidi to modulate the bone's response to physical stress — so chewing forces actively initiate mandibular remodeling, growth, and bone deposition. The result converts strategic guidance into tangible forward projection.</p></div>
+        <div>
+          <p class="label" style="color:#4b5563;font-size:.6rem;margin-bottom:.72rem">Pathway Targets</p>
+          <div style="display:flex;flex-wrap:wrap;gap:.38rem">
+            <span class="chip" style="color:#06b6d4;border:1px solid rgba(6,182,212,.26);background:rgba(6,182,212,.09)"><span class="dot" style="background:#06b6d4"></span>BMP2</span>
+            <span class="chip" style="color:#10b981;border:1px solid rgba(16,185,129,.26);background:rgba(16,185,129,.09)"><span class="dot" style="background:#10b981"></span>RUNX2</span>
+            <span class="chip" style="color:#8b5cf6;border:1px solid rgba(139,92,246,.26);background:rgba(139,92,246,.09)"><span class="dot" style="background:#8b5cf6"></span>WNT/β-catenin</span>
+            <span class="chip" style="color:#f59e0b;border:1px solid rgba(245,158,11,.26);background:rgba(245,158,11,.09)"><span class="dot" style="background:#f59e0b"></span>RANKL</span>
+            <span class="chip" style="color:#ec4899;border:1px solid rgba(236,72,153,.26);background:rgba(236,72,153,.09)"><span class="dot" style="background:#ec4899"></span>IGF-1</span>
+          </div>
+        </div>
+        <div class="g3stat">
+          <div class="dcard" style="text-align:center;padding:1rem"><p style="font-size:1rem;font-weight:900;color:#fff;margin-bottom:.18rem">20s–30s</p><p style="font-size:.65rem;color:#6b7280">Active Window</p></div>
+          <div class="dcard" style="text-align:center;padding:1rem"><p style="font-size:1rem;font-weight:900;color:#fff;margin-bottom:.18rem">SNEDDS</p><p style="font-size:.65rem;color:#6b7280">Delivery System</p></div>
+          <div class="dcard" style="text-align:center;padding:1rem"><p style="font-size:1rem;font-weight:900;color:#fff;margin-bottom:.18rem">Dual</p><p style="font-size:.65rem;color:#6b7280">Protocol</p></div>
+        </div>
+        <p style="font-size:.65rem;color:#1f2937">Educational content only. Individual results vary. Not medical advice.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+  § 7  RADAR CHART
+══════════════════════════════════════════════════════════ -->
+<section style="padding:8rem 0;background:#f9fafb;overflow:hidden">
+  <div class="wrap">
+    <div class="reveal" style="text-align:center;margin-bottom:5rem">
+      <p class="label" style="color:#9ca3af;margin-bottom:1rem">Proof</p>
+      <h2 class="title" style="font-size:clamp(2rem,5vw,3.6rem);color:#111;margin-bottom:1rem">Evidence &amp; Format Profile</h2>
+      <p style="color:#9ca3af;font-size:1rem;max-width:28rem;margin:0 auto">Higher score = better. Comparing SNEDDS delivery vs standard forms across key dimensions.</p>
+    </div>
+    <div class="g2" style="gap:3rem;align-items:start">
+      <div class="reveal" style="background:#fff;border:1px solid #f3f4f6;border-radius:1.5rem;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,.05)">
+        <h3 style="font-weight:700;color:#111;font-size:.95rem;margin-bottom:1.5rem">Profile Comparison (Higher = Better)</h3>
+        <canvas id="radarChart" style="max-height:360px"></canvas>
+        <div style="display:flex;flex-wrap:wrap;gap:1.2rem;justify-content:center;margin-top:1.25rem;font-size:.75rem;color:#6b7280">
+          <span style="display:flex;align-items:center;gap:.4rem"><span class="legend-line" style="background:#06b6d4"></span>OssiaLabs (SNEDDS)</span>
+          <span style="display:flex;align-items:center;gap:.4rem"><span class="legend-line" style="background:#94a3b8"></span>Standard oils/powders</span>
+        </div>
+      </div>
+      <div class="reveal d2" style="background:#fff;border:1px solid #f3f4f6;border-radius:1.5rem;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.05)">
+        <div style="overflow-x:auto">
+          <table class="ctable">
+            <thead><tr style="border-bottom:1px solid #f3f4f6"><th style="text-align:left;color:#6b7280;width:38%">Dimension</th><th style="text-align:center"><span class="cblu">OssiaLabs (SNEDDS)</span></th><th style="text-align:center;color:#9ca3af" class="hide-xs">Typical SNEDDS</th></tr></thead>
+            <tbody>
+              <tr style="border-bottom:1px solid #f9fafb"><td style="color:#6b7280;font-size:.72rem;font-weight:500">Absorption of hard-to-dissolve actives</td><td style="text-align:center"><span class="cgrn">High — nano droplets</span></td><td style="text-align:center;color:#9ca3af;font-size:.72rem" class="hide-xs">Medium–High</td></tr>
+              <tr style="border-bottom:1px solid #f9fafb;background:#fafafa"><td style="color:#6b7280;font-size:.72rem;font-weight:500">Time to effect</td><td style="text-align:center"><span class="cgrn">Often faster</span></td><td style="text-align:center;color:#9ca3af;font-size:.72rem" class="hide-xs">Varies</td></tr>
+              <tr style="border-bottom:1px solid #f9fafb"><td style="color:#6b7280;font-size:.72rem;font-weight:500">Consistency across doses</td><td style="text-align:center"><span class="cgrn">High — stays dissolved</span></td><td style="text-align:center;color:#9ca3af;font-size:.72rem" class="hide-xs">Medium–High</td></tr>
+              <tr style="border-bottom:1px solid #f9fafb;background:#fafafa"><td style="color:#6b7280;font-size:.72rem;font-weight:500">Works for ingestible actives</td><td style="text-align:center"><span class="cgrn">✓ ✓</span></td><td style="text-align:center;color:#9ca3af;font-size:.72rem" class="hide-xs">✓ ✓</td></tr>
+              <tr><td style="color:#6b7280;font-size:.72rem;font-weight:500">Research-backed</td><td style="text-align:center"><span class="cgrn">Yes — citations</span></td><td style="text-align:center;color:#9ca3af;font-size:.72rem" class="hide-xs">Varies</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="padding:1rem 1.25rem;border-top:1px solid #f9fafb"><p style="font-size:.67rem;color:#9ca3af">Generalized overview for educational purposes only, not medical advice.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+  § 8  REVIEWS (12 reviews)
+══════════════════════════════════════════════════════════ -->
+<section style="padding:8rem 0;background:#fff">
+  <div class="wrap">
+    <div class="reveal" style="text-align:center;margin-bottom:5rem">
+      <p class="label" style="color:#9ca3af;margin-bottom:1rem">Community</p>
+      <h2 class="title" style="font-size:clamp(2rem,5vw,3.6rem);color:#111;margin-bottom:1.2rem">Real people. Real results.</h2>
+      <p style="color:#9ca3af;font-size:1.05rem;max-width:30rem;margin:0 auto;line-height:1.7">Over a thousand customers. Verified purchases. No hype.</p>
+    </div>
+    <div class="grev">
+
+      <div class="review-card reveal d1" style="background:#fff;border:1px solid #f3f4f6;border-radius:1.5rem;padding:1.75rem;box-shadow:0 1px 4px rgba(0,0,0,.05)">
+        <div style="color:#fbbf24;margin-bottom:1rem">★★★★★</div>
+        <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">"Been taking Osstivia for 3 months alongside my chewing regimen and my jawline definition has genuinely improved. The SNEDDS formulation makes all the difference — you can feel it working."</p>
+        <div style="display:flex;align-items:center;gap:.72rem">
+          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#fef3c7,#fed7aa);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:#92400e;flex-shrink:0">MR</div>
+          <div><p style="font-size:.85rem;font-weight:600;color:#111">Marcus R.</p><p style="font-size:.7rem;color:#9ca3af">Verified — Osstivia</p></div>
+        </div>
+      </div>
+
+      <div class="review-card reveal d2" style="background:#fff;border:1px solid #f3f4f6;border-radius:1.5rem;padding:1.75rem;box-shadow:0 1px 4px rgba(0,0,0,.05)">
+        <div style="color:#fbbf24;margin-bottom:1rem">★★★★★</div>
+        <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">"Started H. Japonicus during my growth window. The taste is surprisingly pleasant — almost juicy. Inflammation is noticeably down. Unique product I haven't seen anywhere else."</p>
+        <div style="display:flex;align-items:center;gap:.72rem">
+          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#d1fae5,#a7f3d0);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:#064e3b;flex-shrink:0">TK</div>
+          <div><p style="font-size:.85rem;font-weight:600;color:#111">Theo K.</p><p style="font-size:.7rem;color:#9ca3af">Verified — H. Japonicus</p></div>
+        </div>
+      </div>
+
+      <div class="review-card reveal d3" style="background:#fff;border:1px solid #f3f4f6;border-radius:1.5rem;padding:1.75rem;box-shadow:0 1px 4px rgba(0,0,0,.05)">
+        <div style="color:#fbbf24;margin-bottom:1rem">★★★★★</div>
+        <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">"Finally a Bakuchiol formula that actually penetrates. The gel texture absorbs instantly, zero irritation. After 6 weeks my skin texture is smoother and I'm seeing real firmness. No retinol drama."</p>
+        <div style="display:flex;align-items:center;gap:.72rem">
+          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#ede9fe,#ddd6fe);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:#4c1d95;flex-shrink:0">AM</div>
+          <div><p style="font-size:.85rem;font-weight:600;color:#111">Aisha M.</p><p style="font-size:.7rem;color:#9ca3af">Verified — Bakuchiol Nanoemulgel</p></div>
+        </div>
+      </div>
+
+      <div class="review-card reveal" style="background:#fff;border:1px solid #f3f4f6;border-radius:1.5rem;padding:1.75rem;box-shadow:0 1px 4px rgba(0,0,0,.05)">
+        <div style="color:#fbbf24;margin-bottom:1rem">★★★★★</div>
+        <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">"The science behind this is real. Daemonorops Draco in SNEDDS form is a completely different tier. Noticed better recovery and bone density after just 8 weeks."</p>
+        <div style="display:flex;align-items:center;gap:.72rem">
+          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#dbeafe,#bfdbfe);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:#1e3a8a;flex-shrink:0">JL</div>
+          <div><p style="font-size:.85rem;font-weight:600;color:#111">Jordan L.</p><p style="font-size:.7rem;color:#9ca3af">Verified — Osstivia</p></div>
+        </div>
+      </div>
+
+      <div class="review-card reveal d1" style="background:#fff;border:1px solid #f3f4f6;border-radius:1.5rem;padding:1.75rem;box-shadow:0 1px 4px rgba(0,0,0,.05)">
+        <div style="color:#fbbf24;margin-bottom:1rem">★★★★★</div>
+        <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">"OssiaLabs are literally the only company doing SNEDDS on H. Japonicus. The anti-inflammatory effects are real and I appreciate the science-based approach without overclaiming."</p>
+        <div style="display:flex;align-items:center;gap:.72rem">
+          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#fce7f3,#fbcfe8);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:#831843;flex-shrink:0">CP</div>
+          <div><p style="font-size:.85rem;font-weight:600;color:#111">Cass P.</p><p style="font-size:.7rem;color:#9ca3af">Verified — H. Japonicus</p></div>
+        </div>
+      </div>
+
+      <div class="review-card reveal d2" style="background:#fff;border:1px solid #f3f4f6;border-radius:1.5rem;padding:1.75rem;box-shadow:0 1px 4px rgba(0,0,0,.05)">
+        <div style="color:#fbbf24;margin-bottom:1rem">★★★★★</div>
+        <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">"This gel absorbs at a different level vs regular creams. Fine lines around my eyes are visibly softer — this is now a permanent part of my routine."</p>
+        <div style="display:flex;align-items:center;gap:.72rem">
+          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#cffafe,#a5f3fc);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:#164e63;flex-shrink:0">DN</div>
+          <div><p style="font-size:.85rem;font-weight:600;color:#111">Dev N.</p><p style="font-size:.7rem;color:#9ca3af">Verified — Bakuchiol Nanoemulgel</p></div>
+        </div>
+      </div>
+
+      <div class="review-card reveal d3" style="background:#fff;border:1px solid #f3f4f6;border-radius:1.5rem;padding:1.75rem;box-shadow:0 1px 4px rgba(0,0,0,.05)">
+        <div style="color:#fbbf24;margin-bottom:1rem">★★★★★</div>
+        <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">"My jaw has been asymmetric for years. Two months on Osstivia with hard chewing and I'm seeing genuine changes in definition. Was skeptical but the pathway science is legit."</p>
+        <div style="display:flex;align-items:center;gap:.72rem">
+          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#fef9c3,#fde68a);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:#78350f;flex-shrink:0">RA</div>
+          <div><p style="font-size:.85rem;font-weight:600;color:#111">Ryan A.</p><p style="font-size:.7rem;color:#9ca3af">Verified — Osstivia</p></div>
+        </div>
+      </div>
+
+      <div class="review-card reveal" style="background:#fff;border:1px solid #f3f4f6;border-radius:1.5rem;padding:1.75rem;box-shadow:0 1px 4px rgba(0,0,0,.05)">
+        <div style="color:#fbbf24;margin-bottom:1rem">★★★★★</div>
+        <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">"I've tried a lot of growth support supplements for my 16 year old son. H. Japonicus is the only one with actual pharmacokinetic data behind the delivery. Parents — this is the one to try."</p>
+        <div style="display:flex;align-items:center;gap:.72rem">
+          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#d1fae5,#bbf7d0);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:#065f46;flex-shrink:0">KM</div>
+          <div><p style="font-size:.85rem;font-weight:600;color:#111">Karen M.</p><p style="font-size:.7rem;color:#9ca3af">Verified — H. Japonicus</p></div>
+        </div>
+      </div>
+
+      <div class="review-card reveal d1" style="background:#fff;border:1px solid #f3f4f6;border-radius:1.5rem;padding:1.75rem;box-shadow:0 1px 4px rgba(0,0,0,.05)">
+        <div style="color:#fbbf24;margin-bottom:1rem">★★★★★</div>
+        <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">"I'm a biochem grad student and I was impressed by how transparent OssiaLabs is. The SNEDDS excipient list is clean, the bioavailability citations are real, and the product actually works."</p>
+        <div style="display:flex;align-items:center;gap:.72rem">
+          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#e0e7ff,#c7d2fe);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:#3730a3;flex-shrink:0">SH</div>
+          <div><p style="font-size:.85rem;font-weight:600;color:#111">Sophia H.</p><p style="font-size:.7rem;color:#9ca3af">Verified — H. Japonicus</p></div>
+        </div>
+      </div>
+
+      <div class="review-card reveal d2" style="background:#fff;border:1px solid #f3f4f6;border-radius:1.5rem;padding:1.75rem;box-shadow:0 1px 4px rgba(0,0,0,.05)">
+        <div style="color:#fbbf24;margin-bottom:1rem">★★★★★</div>
+        <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">"Osstivia + mewing for 4 months. Cheekbones more prominent, jaw more structured. My face changed in ways I didn't expect. Whatever is in this SNEDDS formula — it's doing something real."</p>
+        <div style="display:flex;align-items:center;gap:.72rem">
+          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#fce7f3,#fbb6ce);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:#9d174d;flex-shrink:0">LT</div>
+          <div><p style="font-size:.85rem;font-weight:600;color:#111">Lena T.</p><p style="font-size:.7rem;color:#9ca3af">Verified — Osstivia</p></div>
+        </div>
+      </div>
+
+      <div class="review-card reveal d3" style="background:#fff;border:1px solid #f3f4f6;border-radius:1.5rem;padding:1.75rem;box-shadow:0 1px 4px rgba(0,0,0,.05)">
+        <div style="color:#fbbf24;margin-bottom:1rem">★★★★★</div>
+        <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">"The Bakuchiol Nanoemulgel replaced my entire retinol routine. My skin barrier is stronger, redness gone, and I'm waking up with actual glow. I've recommended it to 6 people already."</p>
+        <div style="display:flex;align-items:center;gap:.72rem">
+          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#f0fdf4,#bbf7d0);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:#14532d;flex-shrink:0">NW</div>
+          <div><p style="font-size:.85rem;font-weight:600;color:#111">Nina W.</p><p style="font-size:.7rem;color:#9ca3af">Verified — Bakuchiol Nanoemulgel</p></div>
+        </div>
+      </div>
+
+      <div class="review-card reveal" style="background:#fff;border:1px solid #f3f4f6;border-radius:1.5rem;padding:1.75rem;box-shadow:0 1px 4px rgba(0,0,0,.05)">
+        <div style="color:#fbbf24;margin-bottom:1rem">★★★★★</div>
+        <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">"Joined the Discord after buying and the team actually answered my questions with research papers. That level of transparency is unheard of in supplements. Earned a lifetime customer."</p>
+        <div style="display:flex;align-items:center;gap:.72rem">
+          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#f5f3ff,#ddd6fe);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:#5b21b6;flex-shrink:0">OB</div>
+          <div><p style="font-size:.85rem;font-weight:600;color:#111">Omar B.</p><p style="font-size:.7rem;color:#9ca3af">Verified — Osstivia</p></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+  § 9  DISCORD CTA
+══════════════════════════════════════════════════════════ -->
+<section style="position:relative;padding:6rem 0;background:#030712;overflow:hidden">
+  <div class="discord-glow" style="position:absolute;inset:0;pointer-events:none"></div>
+  <div class="linegrid" style="position:absolute;inset:0;opacity:.04;pointer-events:none"></div>
+  <div class="wrap-sm" style="position:relative;z-index:1;text-align:center">
+    <div class="reveal">
+      <div style="width:80px;height:80px;border-radius:1.5rem;background:rgba(99,102,241,.15);border:1px solid rgba(99,102,241,.28);display:flex;align-items:center;justify-content:center;margin:0 auto 2rem">
+        <svg width="40" height="40" viewBox="0 0 71 55" fill="#818cf8"><path d="M60.1045 4.8978C55.5792 2.8214 50.7265 1.2916 45.6527 0.41542C45.5603 0.39851 45.468 0.440769 45.4204 0.525289C44.7963 1.6353 44.105 3.0834 43.6209 4.2216C38.1637 3.4046 32.7345 3.4046 27.3892 4.2216C26.905 3.0581 26.1886 1.6353 25.5617 0.525289C25.5141 0.443589 25.4218 0.40133 25.3294 0.41542C20.2584 1.2888 15.4057 2.8186 10.8776 4.8978C10.8384 4.9147 10.8048 4.9429 10.7825 4.9795C1.57795 18.7309 -0.943561 32.1443 0.293408 45.3914C0.299005 45.4562 0.335386 45.5182 0.385761 45.5576C6.45866 50.0174 12.3413 52.7249 18.1147 54.5195C18.2071 54.5477 18.305 54.5139 18.3638 54.4378C19.7295 52.5728 20.9469 50.6063 21.9907 48.5383C22.0523 48.4172 21.9935 48.2735 21.8676 48.2256C19.9366 47.4931 18.0979 46.6 16.3292 45.5858C16.1893 45.5041 16.1781 45.304 16.3068 45.2082C16.679 44.9293 17.0513 44.6391 17.4067 44.3461C17.471 44.2926 17.5606 44.2813 17.6362 44.3151C29.2558 49.6202 41.8354 49.6202 53.3179 44.3151C53.3935 44.2785 53.4831 44.2898 53.5502 44.3433C53.9057 44.6363 54.2779 44.9293 54.6529 45.2082C54.7816 45.304 54.7732 45.5041 54.6333 45.5858C52.8646 46.6197 51.0259 47.4931 49.0921 48.2228C48.9662 48.2707 48.9102 48.4172 48.9718 48.5383C50.038 50.6034 51.2554 52.5699 52.5959 54.435C52.6519 54.5139 52.7526 54.5477 52.845 54.5195C58.6464 52.7249 64.529 50.0174 70.6019 45.5576C70.6551 45.5182 70.6887 45.459 70.6943 45.3942C72.1747 30.0791 68.2147 16.7757 60.1968 4.9823C60.1772 4.9429 60.1437 4.9147 60.1045 4.8978ZM23.7259 37.3253C20.2276 37.3253 17.3451 34.1136 17.3451 30.1693C17.3451 26.225 20.1717 23.0133 23.7259 23.0133C27.308 23.0133 30.1626 26.2532 30.1066 30.1693C30.1066 34.1136 27.28 37.3253 23.7259 37.3253ZM47.3178 37.3253C43.8196 37.3253 40.9371 34.1136 40.9371 30.1693C40.9371 26.225 43.7636 23.0133 47.3178 23.0133C50.9 23.0133 53.7545 26.2532 53.6986 30.1693C53.6986 34.1136 50.9 37.3253 47.3178 37.3253Z"/></svg>
+      </div>
+      <p class="label" style="color:#818cf8;margin-bottom:1rem">Community</p>
+      <h2 class="title" style="font-size:clamp(1.9rem,4vw,2.9rem);color:#fff;margin-bottom:1.3rem">Join the lab on Discord.</h2>
+      <p style="color:#9ca3af;font-size:1.05rem;line-height:1.77;margin-bottom:2.6rem">Discuss the science, share your results, ask questions directly, and stay ahead of new formulas before they launch. We're transparent — come talk to us.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center;margin-bottom:2.6rem">
+        <a href="https://discord.gg/vYrn6vYQ9u" target="_blank" rel="noopener noreferrer"
+           style="display:inline-flex;align-items:center;gap:.75rem;background:#6366f1;color:#fff;font-weight:700;font-size:1rem;padding:1rem 2rem;border-radius:999px;box-shadow:0 12px 38px rgba(99,102,241,.3);transition:all .22s"
+           onmouseover="this.style.background='#818cf8';this.style.boxShadow='0 18px 52px rgba(99,102,241,.44)'"
+           onmouseout="this.style.background='#6366f1';this.style.boxShadow='0 12px 38px rgba(99,102,241,.3)'">
+          <svg width="20" height="20" viewBox="0 0 71 55" fill="white"><path d="M60.1045 4.8978C55.5792 2.8214 50.7265 1.2916 45.6527 0.41542C45.5603 0.39851 45.468 0.440769 45.4204 0.525289C44.7963 1.6353 44.105 3.0834 43.6209 4.2216C38.1637 3.4046 32.7345 3.4046 27.3892 4.2216C26.905 3.0581 26.1886 1.6353 25.5617 0.525289C25.5141 0.443589 25.4218 0.40133 25.3294 0.41542C20.2584 1.2888 15.4057 2.8186 10.8776 4.8978C10.8384 4.9147 10.8048 4.9429 10.7825 4.9795C1.57795 18.7309 -0.943561 32.1443 0.293408 45.3914C0.299005 45.4562 0.335386 45.5182 0.385761 45.5576C6.45866 50.0174 12.3413 52.7249 18.1147 54.5195C18.2071 54.5477 18.305 54.5139 18.3638 54.4378C19.7295 52.5728 20.9469 50.6063 21.9907 48.5383C22.0523 48.4172 21.9935 48.2735 21.8676 48.2256C19.9366 47.4931 18.0979 46.6 16.3292 45.5858C16.1893 45.5041 16.1781 45.304 16.3068 45.2082C16.679 44.9293 17.0513 44.6391 17.4067 44.3461C17.471 44.2926 17.5606 44.2813 17.6362 44.3151C29.2558 49.6202 41.8354 49.6202 53.3179 44.3151C53.3935 44.2785 53.4831 44.2898 53.5502 44.3433C53.9057 44.6363 54.2779 44.9293 54.6529 45.2082C54.7816 45.304 54.7732 45.5041 54.6333 45.5858C52.8646 46.6197 51.0259 47.4931 49.0921 48.2228C48.9662 48.2707 48.9102 48.4172 48.9718 48.5383C50.038 50.6034 51.2554 52.5699 52.5959 54.435C52.6519 54.5139 52.7526 54.5477 52.845 54.5195C58.6464 52.7249 64.529 50.0174 70.6019 45.5576C70.6551 45.5182 70.6887 45.459 70.6943 45.3942C72.1747 30.0791 68.2147 16.7757 60.1968 4.9823C60.1772 4.9429 60.1437 4.9147 60.1045 4.8978ZM23.7259 37.3253C20.2276 37.3253 17.3451 34.1136 17.3451 30.1693C17.3451 26.225 20.1717 23.0133 23.7259 23.0133C27.308 23.0133 30.1626 26.2532 30.1066 30.1693C30.1066 34.1136 27.28 37.3253 23.7259 37.3253ZM47.3178 37.3253C43.8196 37.3253 40.9371 34.1136 40.9371 30.1693C40.9371 26.225 43.7636 23.0133 47.3178 23.0133C50.9 23.0133 53.7545 26.2532 53.6986 30.1693C53.6986 34.1136 50.9 37.3253 47.3178 37.3253Z"/></svg>
+          Join the Server
+        </a>
+        <a href="https://ossialabs.com/blogs/news" target="_blank" rel="noopener noreferrer"
+           style="display:inline-flex;align-items:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:#fff;font-weight:600;font-size:1rem;padding:1rem 2rem;border-radius:999px;transition:background .22s"
+           onmouseover="this.style.background='rgba(255,255,255,.12)'" onmouseout="this.style.background='rgba(255,255,255,.06)'">
+          Read the Science Blog
+        </a>
+      </div>
+      <div style="display:flex;justify-content:center;gap:3rem">
+        <div style="text-align:center"><p style="font-size:1.55rem;font-weight:900;color:#fff">2,400+</p><p style="font-size:.7rem;color:#4b5563;margin-top:.2rem">Members</p></div>
+        <div style="text-align:center"><p style="font-size:1.55rem;font-weight:900;color:#fff">Daily</p><p style="font-size:.7rem;color:#4b5563;margin-top:.2rem">Active Discussions</p></div>
+        <div style="text-align:center"><p style="font-size:1.55rem;font-weight:900;color:#fff">Free</p><p style="font-size:.7rem;color:#4b5563;margin-top:.2rem">Always</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+  VANILLA JS
+════════════════════════════════════════════════════════════ -->
+<script>
+/* ── CSS rings (very slow: 20-28 s) & particles ── */
+(function(){
+  var rc=document.getElementById('css-rings');
+  [{t:'14%',l:'7%',c:'#5cb85c',s:36,d:0},{t:'24%',l:'19%',c:'#7ec8e3',s:24,d:3},
+   {t:'58%',l:'4%',c:'#f0c040',s:28,d:6},{t:'74%',l:'17%',c:'#e88a3c',s:20,d:9},
+   {t:'9%',r:'7%',c:'#9b59b6',s:32,d:2},{t:'38%',r:'4%',c:'#3498db',s:26,d:5},
+   {t:'68%',r:'11%',c:'#1abc9c',s:22,d:8},{t:'82%',r:'19%',c:'#e74c3c',s:18,d:11},
+   {t:'50%',l:'35%',c:'#f39c12',s:16,d:4},{t:'30%',l:'48%',c:'#6c5ce7',s:12,d:14}
+  ].forEach(function(r){
+    var el=document.createElement('div');el.className='ring';
+    /* duration 20–28s, delay spread so they stagger naturally */
+    el.style.cssText='width:'+r.s+'px;height:'+r.s+'px;border-color:'+r.c+
+      ';top:'+r.t+';'+(r.l?'left:'+r.l:'')+';'+(r.r?'right:'+r.r:'')+
+      ';animation-duration:'+(20+r.d*.6)+'s;animation-delay:'+(r.d*.8)+'s';
+    rc.appendChild(el);
+  });
+  var pc=document.getElementById('css-particles');
+  var cols=['#7ec8e3','#a8e6cf','#ffd3b6','#d4a4f7','#c8f5c8','#fda4af'];
+  for(var i=0;i<28;i++){
+    var el=document.createElement('div');el.className='particle';
+    var s=3+(i%4)*1.8;
+    el.style.cssText='width:'+s+'px;height:'+s+'px;left:'+(4+((i*41)%91))+'%;top:'+(8+((i*57)%82))+'%'+
+      ';background:'+cols[i%6]+';animation-duration:'+(3+(i%5))+'s;animation-delay:'+((i*.28)%3)+'s;opacity:.52';
+    pc.appendChild(el);
+  }
+})();
+
+/* ── Scroll reveal ── */
+(function(){
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in');});
+  },{threshold:.08,rootMargin:'0px 0px -36px 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+})();
+
+/* ── Video controls ── */
+var MUTE_I='<svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><path d="M7 2L4 5H1v4h3l3 3V2z"/><line x1="10" y1="5" x2="13" y2="9"/><line x1="13" y1="5" x2="10" y2="9"/></svg>';
+var UNMUTE_I='<svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><path d="M7 2L4 5H1v4h3l3 3V2z"/><path d="M10 5a3 3 0 010 4M12 3a6 6 0 010 8"/></svg>';
+var PAUSE_I='<svg width="13" height="13" viewBox="0 0 14 14" fill="white"><rect x="2" y="2" width="4" height="10" rx="1"/><rect x="8" y="2" width="4" height="10" rx="1"/></svg>';
+var PLAY_I='<svg width="13" height="13" viewBox="0 0 14 14" fill="white"><path d="M3 2l9 5-9 5V2z"/></svg>';
+function toggleVid(vId,oId,bId){
+  var v=document.getElementById(vId),o=document.getElementById(oId),b=document.getElementById(bId);
+  if(v.paused){v.play();if(o)o.style.display='none';if(b)b.innerHTML=PAUSE_I;}
+  else{v.pause();if(o)o.style.display='flex';if(b)b.innerHTML=PLAY_I;}
+}
+function toggleMute(vId,bId){
+  var v=document.getElementById(vId),b=document.getElementById(bId);
+  v.muted=!v.muted;if(b)b.innerHTML=v.muted?MUTE_I:UNMUTE_I;
+}
+
+/* ── Radar ── */
+(function(){
+  var ctx=document.getElementById('radarChart').getContext('2d');
+  new Chart(ctx,{type:'radar',
+    data:{labels:['Evidence Depth','Absorption Design','Consistency','Research-Backed','Promise Restraint','Transparency'],
+      datasets:[
+        {label:'OssiaLabs',data:[95,98,90,92,88,96],backgroundColor:'rgba(6,182,212,.18)',borderColor:'#06b6d4',borderWidth:2.5,pointBackgroundColor:'#06b6d4',pointRadius:3.5,pointHoverRadius:5},
+        {label:'Standard',data:[45,38,50,42,35,40],backgroundColor:'rgba(148,163,184,.1)',borderColor:'#94a3b8',borderWidth:1.5,pointBackgroundColor:'#94a3b8',pointRadius:2.5}
+      ]},
+    options:{responsive:true,maintainAspectRatio:true,
+      plugins:{legend:{display:false},tooltip:{backgroundColor:'#fff',titleColor:'#111',bodyColor:'#6b7280',borderColor:'#e5e7eb',borderWidth:1,padding:10,cornerRadius:8}},
+      scales:{r:{min:0,max:100,ticks:{stepSize:25,font:{size:9},color:'#cbd5e1',backdropColor:'transparent'},grid:{color:'#e5e7eb'},angleLines:{color:'#e5e7eb'},pointLabels:{font:{size:11,weight:'600'},color:'#6b7280'}}}}
+  });
+})();
+</script>
+
+<!-- ════════════════════════════════════════════════════════════
+  THREE.JS  —  FULL OPTIMIZED 3-D HERO
+  • Instanced geometries where possible
+  • Vertex distortion every-other-frame (halved cost)
+  • Reduced sphere resolution (48×48 → still smooth)
+  • devicePixelRatio capped at 1.5 (save ~44 % fill on Retina)
+  • Mobile auto-detects: lower particle count, skip vertex distortion
+  • Adds: tetrahedra (6), glow energy rings (5), extra DNA strand,
+    dodecahedra (4), second particle layer
+════════════════════════════════════════════════════════════ -->
+<script type="module">
+import * as THREE from 'three';
+
+(function(){
+  var canvas  = document.getElementById('three-canvas');
+  var section = document.getElementById('hero');
+  var isMobile = window.innerWidth < 768;
+
+  /* ── WebGL check ── */
+  try{
+    var tc=document.createElement('canvas');
+    var tgl=tc.getContext('webgl')||tc.getContext('experimental-webgl');
+    if(!tgl) return;
+    var ext=tgl.getExtension('WEBGL_lose_context');if(ext)ext.loseContext();
+  }catch(e){return;}
+
+  /* Hide CSS fallback */
+  var cssBg=document.getElementById('css-bg');
+  cssBg.style.opacity='0';cssBg.style.pointerEvents='none';
+
+  /* ── Renderer ── */
+  var renderer=new THREE.WebGLRenderer({canvas,antialias:!isMobile,alpha:true,powerPreference:'high-performance'});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1 : 1.5));
+  renderer.setClearColor(0x000000,0);
+  renderer.toneMapping=THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure=1.1;
+
+  var scene=new THREE.Scene();
+  var camera=new THREE.PerspectiveCamera(52,1,.1,100);
+  camera.position.set(0,.5,6.5);
+
+  function resize(){
+    var w=section.clientWidth,h=section.clientHeight;
+    renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();
+  }
+  resize();window.addEventListener('resize',function(){resize();isMobile=window.innerWidth<768;});
+
+  /* Mouse parallax */
+  var mouse={x:0,y:0};
+  window.addEventListener('mousemove',function(e){mouse.x=(e.clientX/window.innerWidth-.5)*2;mouse.y=(e.clientY/window.innerHeight-.5)*2;});
+
+  /* ── Lights ── */
+  scene.add(new THREE.AmbientLight(0xffffff,.65));
+  var sun=new THREE.DirectionalLight(0xffffff,1.3);sun.position.set(6,10,4);scene.add(sun);
+  var pl1=new THREE.PointLight(0xa8d8f0,.95,22);pl1.position.set(-6,4,3);scene.add(pl1);
+  var pl2=new THREE.PointLight(0xc8f5c8,.72,18);pl2.position.set(4,-3,5);scene.add(pl2);
+  var pl3=new THREE.PointLight(0xd4a4f7,.5,14);pl3.position.set(0,6,-2);scene.add(pl3);
+
+  /* ── Shared geometries ── */
+  var sphereSmGeo=new THREE.SphereGeometry(.06,8,8);
+  var sphereMdGeo=new THREE.SphereGeometry(.18,14,14);
+
+  /* ════════════════════════════════
+     PARTICLE SYSTEM A (colour field)
+  ════════════════════════════════ */
+  var PCOUNT=isMobile?140:260;
+  var pPos=new Float32Array(PCOUNT*3);
+  var pCol=new Float32Array(PCOUNT*3);
+  var pal=[[.49,.79,.89],[.56,.9,.81],[1,.83,.71],[.83,.64,.97],[.78,.96,.78],[.99,.64,.67]];
+  for(var i=0;i<PCOUNT;i++){
+    pPos[i*3]=(Math.random()-.5)*24;pPos[i*3+1]=(Math.random()-.5)*17;pPos[i*3+2]=(Math.random()-.5)*10-4;
+    var c=pal[i%pal.length];pCol[i*3]=c[0];pCol[i*3+1]=c[1];pCol[i*3+2]=c[2];
+  }
+  var pGeo=new THREE.BufferGeometry();
+  pGeo.setAttribute('position',new THREE.BufferAttribute(pPos,3));
+  pGeo.setAttribute('color',new THREE.BufferAttribute(pCol,3));
+  var pSys=new THREE.Points(pGeo,new THREE.PointsMaterial({size:.055,vertexColors:true,transparent:true,opacity:.6,sizeAttenuation:true}));
+  scene.add(pSys);
+
+  /* PARTICLE SYSTEM B (tiny bright specks, sparse) */
+  if(!isMobile){
+    var PBCOUNT=80;var pbPos=new Float32Array(PBCOUNT*3);
+    for(var i=0;i<PBCOUNT;i++){pbPos[i*3]=(Math.random()-.5)*18;pbPos[i*3+1]=(Math.random()-.5)*14;pbPos[i*3+2]=(Math.random()-.5)*6-2;}
+    var pbGeo=new THREE.BufferGeometry();pbGeo.setAttribute('position',new THREE.BufferAttribute(pbPos,3));
+    var pbSys=new THREE.Points(pbGeo,new THREE.PointsMaterial({size:.028,color:0xffffff,transparent:true,opacity:.5,sizeAttenuation:true}));
+    scene.add(pbSys);
+  }
+
+  /* ════════════════════════════════
+     SNEDDS TORUS DROPLETS (rise)
+  ════════════════════════════════ */
+  var dSpec=[
+    {p:[-4.5,-2.5,-2],c:0x5cb85c},{p:[-2,-3.5,-1.5],c:0x7ec8e3},
+    {p:[.5,-4.2,-2],c:0xf0c040},{p:[3,-1.8,-2],c:0xe88a3c},
+    {p:[5,-3.5,-1.5],c:0x9b59b6},{p:[-3.5,-5,-1],c:0x3498db},
+    {p:[1.5,-3,-3],c:0x1abc9c},{p:[4.5,-4.5,-1.5],c:0xe74c3c},
+    {p:[-1.5,-1.5,-2.5],c:0xf39c12},{p:[2.5,-6,-1.5],c:0x2ecc71},
+  ];
+  var droplets=dSpec.map(function(d){
+    var g=new THREE.Group();g.position.set(d.p[0],d.p[1],d.p[2]);
+    var m=new THREE.MeshStandardMaterial({color:d.c,roughness:.15,metalness:.65});
+    g.add(new THREE.Mesh(new THREE.TorusGeometry(.22,.065,8,24),m));
+    var t2=new THREE.Mesh(new THREE.TorusGeometry(.14,.048,8,24),m.clone());t2.rotation.x=Math.PI/2;g.add(t2);
+    g.add(new THREE.Mesh(sphereSmGeo,new THREE.MeshStandardMaterial({color:0xffffff,emissive:new THREE.Color(d.c),emissiveIntensity:.45})));
+    g.userData={sy:d.p[1],speed:.052+Math.random()*.032};
+    scene.add(g);return g;
+  });
+
+  /* ════════════════════════════════
+     GLASS MOLECULES
+  ════════════════════════════════ */
+  var molSpec=[
+    {p:[-3.2,1.2,-1.5],c:0x7ec8e3,sp:.72,r:.22},{p:[3.4,.6,-2],c:0xa8e6cf,sp:1.08,r:.17},
+    {p:[-1.2,2.4,-2.5],c:0xffd3b6,sp:.58,r:.26},{p:[4.2,1.8,-1.5],c:0xd4a4f7,sp:.88,r:.19},
+    {p:[-4.2,-.6,-1.5],c:0xc8f5c8,sp:1.35,r:.13},{p:[1.2,-1.2,-3],c:0xffe0b2,sp:.68,r:.24},
+    {p:[-2.4,-2,-2],c:0xfda4af,sp:.98,r:.16},
+  ];
+  var mols=molSpec.map(function(m){
+    var mesh=new THREE.Mesh(new THREE.SphereGeometry(m.r,isMobile?12:18,isMobile?12:18),
+      new THREE.MeshPhysicalMaterial({color:m.c,roughness:.04,metalness:.08,transmission:.92,thickness:.6,transparent:true,opacity:.88}));
+    mesh.position.set(m.p[0],m.p[1],m.p[2]);mesh.userData={oy:m.p[1],ox:m.p[0],sp:m.sp};
+    scene.add(mesh);return mesh;
+  });
+
+  /* ════════════════════════════════
+     LAB FLASKS
+  ════════════════════════════════ */
+  var flaskPts=[[-4.6,.6,.2],[4.4,-.4,-.6],[.2,-2.8,.6]];
+  var glassM=new THREE.MeshPhysicalMaterial({color:0xe8f4fd,roughness:0,transmission:.96,thickness:.3,transparent:true,opacity:.72});
+  var liqCols=[0xa8d8f0,0xa8f0d0,0xf0d0a8];
+  var flasks=flaskPts.map(function(pos,fi){
+    var g=new THREE.Group();g.position.set(pos[0],pos[1],pos[2]);
+    g.add(new THREE.Mesh(new THREE.SphereGeometry(.46,22,22),glassM));
+    var neck=new THREE.Mesh(new THREE.CylinderGeometry(.12,.19,.52,16),glassM.clone());neck.position.y=.57;g.add(neck);
+    var liq=new THREE.Mesh(new THREE.SphereGeometry(.39,22,22),
+      new THREE.MeshPhysicalMaterial({color:liqCols[fi%3],roughness:.1,transmission:.62,thickness:.9,transparent:true,opacity:.78}));
+    liq.position.y=-.1;g.add(liq);
+    [[.12,-.05,.07],[-.12,.08,.06],[.06,.2,.06]].forEach(function(bp){
+      var b=new THREE.Mesh(new THREE.SphereGeometry(.04,7,7),new THREE.MeshPhysicalMaterial({color:0xffffff,transmission:.96,transparent:true,opacity:.82}));
+      b.position.set(bp[0],bp[1],bp[2]);g.add(b);
+    });
+    g.userData.liq=liq;scene.add(g);return g;
+  });
+
+  /* ════════════════════════════════
+     DNA HELICES (3 strands)
+  ════════════════════════════════ */
+  function buildDNA(px,py,pz){
+    var g=new THREE.Group();g.position.set(px,py,pz);
+    var count=12,mA=new THREE.MeshStandardMaterial({color:0x06b6d4,roughness:.2,metalness:.7,emissive:0x06b6d4,emissiveIntensity:.14}),
+        mB=new THREE.MeshStandardMaterial({color:0x8b5cf6,roughness:.2,metalness:.7,emissive:0x8b5cf6,emissiveIntensity:.14}),
+        mBr=new THREE.MeshStandardMaterial({color:0xffffff,transparent:true,opacity:.25});
+    var bGeo=new THREE.CylinderGeometry(.022,.022,.58,6);
+    for(var i=0;i<count;i++){
+      var t=(i/count)*Math.PI*2,y=(i/count)*2.6-1.3;
+      var x1=Math.cos(t)*.3,z1=Math.sin(t)*.3,x2=Math.cos(t+Math.PI)*.3,z2=Math.sin(t+Math.PI)*.3;
+      var m1=new THREE.Mesh(sphereSmGeo,mA);m1.position.set(x1,y,z1);
+      var m2=new THREE.Mesh(sphereSmGeo,mB);m2.position.set(x2,y,z2);g.add(m1,m2);
+      if(i%3===0){var br=new THREE.Mesh(bGeo,mBr);br.position.set((x1+x2)/2,y,(z1+z2)/2);var dx=x2-x1,dz=z2-z1;br.rotation.z=Math.atan2(Math.sqrt(dx*dx+dz*dz),0);br.rotation.y=Math.atan2(dz,dx)+Math.PI/2;g.add(br);}
+    }
+    return g;
+  }
+  var dna1=buildDNA(-5.8,.2,-2.5),dna2=buildDNA(6.1,-1,-3),dna3=buildDNA(-.2,-4,-2);
+  scene.add(dna1,dna2,dna3);
+
+  /* ════════════════════════════════
+     CRYSTAL OCTAHEDRA
+  ════════════════════════════════ */
+  var octSpec=[{p:[-2.8,2.7,-2],c:0x06b6d4,s:1.2},{p:[3.8,2.4,-2.2],c:0x10b981,s:1},{p:[1.6,3.2,-2.5],c:0xf59e0b,s:.85},{p:[-4.2,2.2,-1.5],c:0x8b5cf6,s:.95}];
+  var octaGeo=new THREE.OctahedronGeometry(.3,0);
+  var octahedra=octSpec.map(function(o){
+    var m=new THREE.Mesh(octaGeo,new THREE.MeshPhysicalMaterial({color:o.c,roughness:0,metalness:.12,transmission:.88,thickness:.55,transparent:true,opacity:.78}));
+    m.position.set(o.p[0],o.p[1],o.p[2]);m.scale.setScalar(o.s);m.userData={oy:o.p[1],ox:o.p[0]};scene.add(m);return m;
+  });
+
+  /* ════════════════════════════════
+     ICOSAHEDRON GEMS
+  ════════════════════════════════ */
+  var icoSpec=[{p:[2.2,-.6,-1.5],c:0xa78bfa},{p:[-2.2,1.8,-2],c:0x34d399},{p:[5.2,1,-1],c:0xf472b6},{p:[-1,-2.2,-1],c:0xfbbf24}];
+  var icoGeo=new THREE.IcosahedronGeometry(.24,0);
+  var icos=icoSpec.map(function(o){
+    var m=new THREE.Mesh(icoGeo,new THREE.MeshPhysicalMaterial({color:o.c,roughness:.04,metalness:.35,transmission:.72,thickness:.32,transparent:true,opacity:.82}));
+    m.position.set(o.p[0],o.p[1],o.p[2]);m.userData={oy:o.p[1],oz:o.p[2]};scene.add(m);return m;
+  });
+
+  /* ════════════════════════════════
+     TETRAHEDRA (new!)
+  ════════════════════════════════ */
+  var tetraSpec=[{p:[-3.8,-1.2,-1.8],c:0x22d3ee,s:.9},{p:[2.6,3.0,-2.2],c:0xf472b6,s:.75},{p:[-1.4,3.5,-2],c:0xfbbf24,s:.7},{p:[4.0,-2.2,-1.8],c:0x34d399,s:.85},{p:[-5,1.4,-2],c:0x818cf8,s:.65},{p:[.8,2.0,-3],c:0xfb923c,s:.6}];
+  var tetraGeo=new THREE.TetrahedronGeometry(.28,0);
+  var tetras=tetraSpec.map(function(o){
+    var m=new THREE.Mesh(tetraGeo,new THREE.MeshPhysicalMaterial({color:o.c,roughness:.05,metalness:.25,transmission:.82,thickness:.4,transparent:true,opacity:.8}));
+    m.position.set(o.p[0],o.p[1],o.p[2]);m.scale.setScalar(o.s);m.userData={oy:o.p[1],ox:o.p[0]};scene.add(m);return m;
+  });
+
+  /* ════════════════════════════════
+     DODECAHEDRA (new!)
+  ════════════════════════════════ */
+  if(!isMobile){
+    var dodecSpec=[{p:[-1.8,-3.2,-2],c:0x06b6d4,s:.7},{p:[3.4,-3.8,-1.5],c:0xec4899,s:.65},{p:[-4.8,3.2,-2],c:0xfbbf24,s:.6},{p:[2,-3.5,-2.5],c:0xa3e635,s:.55}];
+    var dodecGeo=new THREE.DodecahedronGeometry(.28,0);
+    var dodecs=dodecSpec.map(function(o){
+      var m=new THREE.Mesh(dodecGeo,new THREE.MeshPhysicalMaterial({color:o.c,roughness:.02,metalness:.2,transmission:.78,thickness:.5,transparent:true,opacity:.75}));
+      m.position.set(o.p[0],o.p[1],o.p[2]);m.scale.setScalar(o.s);m.userData={oy:o.p[1],ox:o.p[0]};scene.add(m);return m;
+    });
+  }
+
+  /* ════════════════════════════════
+     ENERGY RINGS (new — glowing tori)
+  ════════════════════════════════ */
+  var ringSpec=[
+    {p:[0,.4,-1.2],c:0x06b6d4,ri:1.8,tube:.018,rot:[Math.PI/2,0,0]},
+    {p:[0,.4,-1.2],c:0x8b5cf6,ri:2.2,tube:.014,rot:[Math.PI/3,Math.PI/5,0]},
+    {p:[0,.4,-1.2],c:0x34d399,ri:2.7,tube:.012,rot:[Math.PI/6,Math.PI/4,0]},
+    {p:[-5.8,.2,-2.5],c:0x06b6d4,ri:1.1,tube:.016,rot:[0,Math.PI/2,0]},
+    {p:[6.1,-1,-3],c:0x8b5cf6,ri:1.1,tube:.016,rot:[0,Math.PI/2,0]},
+  ];
+  var energyRings=ringSpec.map(function(r){
+    var m=new THREE.Mesh(new THREE.TorusGeometry(r.ri,r.tube,8,80),
+      new THREE.MeshStandardMaterial({color:r.c,emissive:new THREE.Color(r.c),emissiveIntensity:.75,transparent:true,opacity:.6}));
+    m.position.set(r.p[0],r.p[1],r.p[2]);
+    m.rotation.set(r.rot[0],r.rot[1],r.rot[2]);
+    scene.add(m);return m;
+  });
+
+  /* ════════════════════════════════
+     CENTRAL DISTORTED SPHERE
+  ════════════════════════════════ */
+  var SEG=isMobile?28:44;
+  var sGeo=new THREE.SphereGeometry(1.45,SEG,SEG);
+  var origPos=sGeo.attributes.position.array.slice();
+  var centreSphere=new THREE.Mesh(sGeo,new THREE.MeshPhysicalMaterial({color:0xe8f4fd,roughness:0,metalness:0,transmission:.92,thickness:1.2,transparent:true,opacity:.6}));
+  centreSphere.position.set(0,.4,-1.2);
+  scene.add(centreSphere);
+
+  /* ── Clock & loop ── */
+  var clock=new THREE.Clock();
+  var camTarget=new THREE.Vector3(0,.5,6.5);
+  var camPos=new THREE.Vector3(0,.5,6.5);
+  var frameCount=0;
+
+  function animate(){
+    requestAnimationFrame(animate);
+    var t=clock.getElapsedTime();
+    frameCount++;
+
+    /* Camera parallax */
+    camTarget.x=mouse.x*.42;camTarget.y=.5-mouse.y*.28;
+    camPos.lerp(camTarget,.028);
+    camera.position.x=camPos.x;camera.position.y=camPos.y;
+    camera.lookAt(0,0,0);
+
+    /* Particles */
+    pSys.rotation.y=t*.015;pSys.rotation.x=t*.005;
+    if(!isMobile&&typeof pbSys!=='undefined')pbSys.rotation.y=-t*.011;
+
+    /* Droplets rise */
+    droplets.forEach(function(d){
+      d.position.y=d.userData.sy+(t*d.userData.speed*58%13)-1.5;
+      if(d.position.y>8)d.userData.sy=d.position.y-13;
+      d.rotation.y=t*.42;d.rotation.x=Math.sin(t*.3+d.userData.sy)*.22;
+    });
+
+    /* Molecules */
+    mols.forEach(function(m){
+      m.position.y=m.userData.oy+Math.sin(t*m.userData.sp+m.userData.ox)*.42;
+      m.rotation.x=t*.27*m.userData.sp;m.rotation.z=t*.17*m.userData.sp;
+    });
+
+    /* Flasks */
+    flasks.forEach(function(f,i){
+      f.rotation.z=Math.sin(t*1.15+i*1.1)*.07;
+      if(f.userData.liq)f.userData.liq.position.y=-.1+Math.sin(t*2.4+i)*.055;
+    });
+
+    /* DNA */
+    dna1.rotation.y=t*.36;dna1.position.y=.2+Math.sin(t*.46)*.3;
+    dna2.rotation.y=t*.36;dna2.position.y=-1+Math.sin(t*.46+1.2)*.3;
+    dna3.rotation.y=t*.28;dna3.position.y=-4+Math.sin(t*.5+2)*.28;
+
+    /* Octahedra */
+    octahedra.forEach(function(o,i){
+      o.rotation.x=t*.4+i*.8;o.rotation.y=t*.62+i*.6;
+      o.position.y=o.userData.oy+Math.sin(t*.8+o.userData.ox)*.25;
+    });
+
+    /* Icosahedra */
+    icos.forEach(function(o,i){
+      o.rotation.x=t*.26+i*.5;o.rotation.z=t*.36+i*.7;
+      o.position.y=o.userData.oy+Math.sin(t*.6+o.userData.oz)*.36;
+    });
+
+    /* Tetrahedra */
+    tetras.forEach(function(o,i){
+      o.rotation.x=t*.5+i*.7;o.rotation.y=t*.35+i*.5;
+      o.position.y=o.userData.oy+Math.sin(t*.7+o.userData.ox)*.3;
+    });
+
+    /* Dodecahedra */
+    if(!isMobile&&typeof dodecs!=='undefined'){
+      dodecs.forEach(function(o,i){
+        o.rotation.x=t*.22+i*.4;o.rotation.z=t*.3+i*.6;
+        o.position.y=o.userData.oy+Math.sin(t*.55+o.userData.ox)*.28;
+      });
+    }
+
+    /* Energy rings */
+    energyRings.forEach(function(r,i){
+      r.rotation.z=t*(i%2===0?.14:.11)+i*.4;
+      r.rotation.x+=.002*(i%2===0?1:-1);
+    });
+
+    /* Central sphere distort — skip odd frames for perf */
+    if(frameCount%2===0&&!isMobile){
+      var posArr=sGeo.attributes.position.array;
+      for(var i=0;i<posArr.length;i+=3){
+        var ox=origPos[i],oy=origPos[i+1],oz=origPos[i+2];
+        var len=Math.sqrt(ox*ox+oy*oy+oz*oz);
+        if(len<.0001)continue;
+        var nx=ox/len,ny=oy/len,nz=oz/len;
+        var noise=Math.sin(nx*2.6+t*1.6)*Math.cos(ny*2.6+t*1.2)*Math.sin(nz*1.9+t*.9)*.36;
+        posArr[i]=ox+nx*noise;posArr[i+1]=oy+ny*noise;posArr[i+2]=oz+nz*noise;
+      }
+      sGeo.attributes.position.needsUpdate=true;
+      sGeo.computeVertexNormals();
+    }
+    centreSphere.rotation.y=t*.17;
+    centreSphere.position.y=.4+Math.sin(t*.72)*.2;
+
+    renderer.render(scene,camera);
+  }
+  animate();
+})();
+</script>
+</body>
+</html>
