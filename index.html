@@ -329,7 +329,7 @@ video{display:block;width:100%;object-fit:cover;background:#000}
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════════
+<!-- ═══════════════════════════════════.��══════════════════════
   § 4  SNEDDS VIDEO
 ══════════════════════════════════════════════════════════ -->
 <section style="position:relative;padding:8rem 0;background:#030712;overflow:hidden">
@@ -628,7 +628,128 @@ video{display:block;width:100%;object-fit:cover;background:#000}
 </section>
 
 <!-- ══════════════════════════════════════════════════════════
-  § 9  DISCORD CTA
+  § 9  FAQ
+══════════════════════════════════════════════════════════ -->
+<section style="padding:8rem 0;background:#f9fafb">
+  <div class="wrap-sm" style="max-width:56rem">
+    <div class="reveal" style="margin-bottom:3.5rem">
+      <p class="label" style="color:#9ca3af;margin-bottom:1rem">Got questions?</p>
+      <h2 class="title" style="font-size:clamp(2rem,5vw,3.2rem);color:#111">FAQ</h2>
+    </div>
+    <div id="faq-list" style="display:flex;flex-direction:column;gap:.75rem">
+
+      <div class="faq-item reveal d1" style="background:#fff;border:1px solid #e5e7eb;border-radius:1rem;overflow:hidden;transition:border-color .2s">
+        <button onclick="toggleFaq(this)" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.35rem 1.5rem;text-align:left;cursor:pointer;background:none;border:none;font-family:inherit">
+          <span style="font-size:.98rem;font-weight:700;color:#111;line-height:1.4">Are these products drugs?</span>
+          <span class="faq-icon" style="flex-shrink:0;width:28px;height:28px;border-radius:50%;background:#f3f4f6;display:flex;align-items:center;justify-content:center;transition:transform .3s,background .2s">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="#6b7280" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </span>
+        </button>
+        <div class="faq-body" style="max-height:0;overflow:hidden;transition:max-height .38s cubic-bezier(.22,1,.36,1)">
+          <p style="padding:0 1.5rem 1.35rem;font-size:.9rem;color:#6b7280;line-height:1.72">No. They're dietary supplements, not drugs, and not meant to diagnose, treat, cure, or prevent disease.</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal d2" style="background:#fff;border:1px solid #e5e7eb;border-radius:1rem;overflow:hidden;transition:border-color .2s">
+        <button onclick="toggleFaq(this)" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.35rem 1.5rem;text-align:left;cursor:pointer;background:none;border:none;font-family:inherit">
+          <span style="font-size:.98rem;font-weight:700;color:#111;line-height:1.4">What is a SNEDDS in plain language?</span>
+          <span class="faq-icon" style="flex-shrink:0;width:28px;height:28px;border-radius:50%;background:#f3f4f6;display:flex;align-items:center;justify-content:center;transition:transform .3s,background .2s">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="#6b7280" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </span>
+        </button>
+        <div class="faq-body" style="max-height:0;overflow:hidden;transition:max-height .38s cubic-bezier(.22,1,.36,1)">
+          <p style="padding:0 1.5rem 1.35rem;font-size:.9rem;color:#6b7280;line-height:1.72">A mix of oils and emulsifiers that turns into tiny droplets in your gut so tough ingredients stay dissolved long enough to be absorbed.</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal d3" style="background:#fff;border:1px solid #e5e7eb;border-radius:1rem;overflow:hidden;transition:border-color .2s">
+        <button onclick="toggleFaq(this)" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.35rem 1.5rem;text-align:left;cursor:pointer;background:none;border:none;font-family:inherit">
+          <span style="font-size:.98rem;font-weight:700;color:#111;line-height:1.4">How should I take these?</span>
+          <span class="faq-icon" style="flex-shrink:0;width:28px;height:28px;border-radius:50%;background:#f3f4f6;display:flex;align-items:center;justify-content:center;transition:transform .3s,background .2s">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="#6b7280" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </span>
+        </button>
+        <div class="faq-body" style="max-height:0;overflow:hidden;transition:max-height .38s cubic-bezier(.22,1,.36,1)">
+          <p style="padding:0 1.5rem 1.35rem;font-size:.9rem;color:#6b7280;line-height:1.72">Follow the label. Many lipid systems are taken with food. If you have medical conditions or take meds, ask a healthcare professional first.</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal" style="background:#fff;border:1px solid #e5e7eb;border-radius:1rem;overflow:hidden;transition:border-color .2s">
+        <button onclick="toggleFaq(this)" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.35rem 1.5rem;text-align:left;cursor:pointer;background:none;border:none;font-family:inherit">
+          <span style="font-size:.98rem;font-weight:700;color:#111;line-height:1.4">What kind of improvement should I expect?</span>
+          <span class="faq-icon" style="flex-shrink:0;width:28px;height:28px;border-radius:50%;background:#f3f4f6;display:flex;align-items:center;justify-content:center;transition:transform .3s,background .2s">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="#6b7280" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </span>
+        </button>
+        <div class="faq-body" style="max-height:0;overflow:hidden;transition:max-height .38s cubic-bezier(.22,1,.36,1)">
+          <p style="padding:0 1.5rem 1.35rem;font-size:.9rem;color:#6b7280;line-height:1.72">It depends on the ingredient, dose, and you. We set targets based on studies, but every person is different.</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal d1" style="background:#fff;border:1px solid #e5e7eb;border-radius:1rem;overflow:hidden;transition:border-color .2s">
+        <button onclick="toggleFaq(this)" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.35rem 1.5rem;text-align:left;cursor:pointer;background:none;border:none;font-family:inherit">
+          <span style="font-size:.98rem;font-weight:700;color:#111;line-height:1.4">Do you publish references?</span>
+          <span class="faq-icon" style="flex-shrink:0;width:28px;height:28px;border-radius:50%;background:#f3f4f6;display:flex;align-items:center;justify-content:center;transition:transform .3s,background .2s">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="#6b7280" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </span>
+        </button>
+        <div class="faq-body" style="max-height:0;overflow:hidden;transition:max-height .38s cubic-bezier(.22,1,.36,1)">
+          <p style="padding:0 1.5rem 1.35rem;font-size:.9rem;color:#6b7280;line-height:1.72">Yes — see the <a href="https://ossialabs.com/blogs/news/the-innovation-of-self-emulsifying-drug-delivery-systems-snedds" target="_blank" rel="noopener noreferrer" style="color:#06b6d4;font-weight:600;text-decoration:underline;text-underline-offset:3px">SNEDDS explainer</a> and <a href="https://ossialabs.com/blogs/news" target="_blank" rel="noopener noreferrer" style="color:#06b6d4;font-weight:600;text-decoration:underline;text-underline-offset:3px">blog</a> for citations and background.</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal d2" style="background:#fff;border:1px solid #e5e7eb;border-radius:1rem;overflow:hidden;transition:border-color .2s">
+        <button onclick="toggleFaq(this)" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.35rem 1.5rem;text-align:left;cursor:pointer;background:none;border:none;font-family:inherit">
+          <span style="font-size:.98rem;font-weight:700;color:#111;line-height:1.4">Is Osstivia safe to stack with other supplements?</span>
+          <span class="faq-icon" style="flex-shrink:0;width:28px;height:28px;border-radius:50%;background:#f3f4f6;display:flex;align-items:center;justify-content:center;transition:transform .3s,background .2s">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="#6b7280" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </span>
+        </button>
+        <div class="faq-body" style="max-height:0;overflow:hidden;transition:max-height .38s cubic-bezier(.22,1,.36,1)">
+          <p style="padding:0 1.5rem 1.35rem;font-size:.9rem;color:#6b7280;line-height:1.72">Generally yes, but always consult a healthcare professional if you're on medications or have existing conditions. Our formulas use clean excipients with no known major interactions at label doses.</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal d3" style="background:#fff;border:1px solid #e5e7eb;border-radius:1rem;overflow:hidden;transition:border-color .2s">
+        <button onclick="toggleFaq(this)" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.35rem 1.5rem;text-align:left;cursor:pointer;background:none;border:none;font-family:inherit">
+          <span style="font-size:.98rem;font-weight:700;color:#111;line-height:1.4">How long before I notice results?</span>
+          <span class="faq-icon" style="flex-shrink:0;width:28px;height:28px;border-radius:50%;background:#f3f4f6;display:flex;align-items:center;justify-content:center;transition:transform .3s,background .2s">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="#6b7280" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </span>
+        </button>
+        <div class="faq-body" style="max-height:0;overflow:hidden;transition:max-height .38s cubic-bezier(.22,1,.36,1)">
+          <p style="padding:0 1.5rem 1.35rem;font-size:.9rem;color:#6b7280;line-height:1.72">Bone and structural changes take time — most users report noticing differences between 6–12 weeks of consistent use paired with the right mechanical input. Skin improvements from Bakuchiol typically show within 4–8 weeks.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+function toggleFaq(btn){
+  var item=btn.closest('.faq-item');
+  var body=item.querySelector('.faq-body');
+  var icon=item.querySelector('.faq-icon');
+  var isOpen=body.style.maxHeight&&body.style.maxHeight!=='0px';
+  /* Close all */
+  document.querySelectorAll('.faq-item').forEach(function(el){
+    el.querySelector('.faq-body').style.maxHeight='0px';
+    el.style.borderColor='#e5e7eb';
+    var ic=el.querySelector('.faq-icon');
+    ic.style.transform='rotate(0deg)';ic.style.background='#f3f4f6';
+  });
+  /* Open clicked if it was closed */
+  if(!isOpen){
+    body.style.maxHeight=body.scrollHeight+'px';
+    item.style.borderColor='#06b6d4';
+    icon.style.transform='rotate(180deg)';icon.style.background='rgba(6,182,212,.1)';
+  }
+}
+</script>
+
+<!-- ══════════════════════════════════════════════════════════
+  § 10  DISCORD CTA
 ══════════════════════════════════════════════════════════ -->
 <section style="position:relative;padding:6rem 0;background:#030712;overflow:hidden">
   <div class="discord-glow" style="position:absolute;inset:0;pointer-events:none"></div>
@@ -1068,10 +1189,9 @@ import * as THREE from 'three';
   animate();
 })();
 </script>
-  <script>
-  window.addEventListener('load', function() {
-    window.parent.postMessage({ height: document.body.scrollHeight }, '*');
-  });
+</body>
+</html>
+
 </script>
 </body>
 </html>
