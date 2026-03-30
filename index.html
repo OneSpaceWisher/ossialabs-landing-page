@@ -1068,5 +1068,10 @@ import * as THREE from 'three';
   animate();
 })();
 </script>
+  <script>
+  window.addEventListener('load', function() {
+    window.parent.postMessage({ height: document.body.scrollHeight }, '*');
+  });
+</script>
 </body>
 </html>
