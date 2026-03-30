@@ -54,14 +54,24 @@ a{text-decoration:none;color:inherit}
 @keyframes opulse{0%,100%{transform:scale(1);opacity:.2}50%{transform:scale(1.14);opacity:.4}}
 .orb{animation:opulse ease-in-out infinite}
 
-/* ── Ring: MUCH slower (18–26 s) ── */
+/* ── Ring: very slow (38–60 s) ── */
 @keyframes ring-rise{
   0%  {opacity:0;transform:translateY(0) rotate(0deg)}
-  15% {opacity:.7}
-  85% {opacity:.4}
-  100%{opacity:0;transform:translateY(-320px) rotate(420deg)}
+  12% {opacity:.55}
+  88% {opacity:.28}
+  100%{opacity:0;transform:translateY(-340px) rotate(360deg)}
 }
 .ring{position:absolute;border-radius:50%;border-style:solid;border-width:2px;pointer-events:none;animation:ring-rise linear infinite}
+
+/* ── Mobile tip banner ── */
+.mobile-vid-tip{display:none;align-items:center;gap:.5rem;margin-top:.75rem;padding:.55rem .9rem;border-radius:.65rem;background:rgba(6,182,212,.08);border:1px solid rgba(6,182,212,.18)}
+@media(max-width:860px){.mobile-vid-tip{display:flex}}
+
+/* ── Mobile touch targets ── */
+@media(max-width:600px){
+  .ctrl-btn{width:40px;height:40px}
+  .pcircle{width:72px!important;height:72px!important}
+}
 
 /* ── Particles float ── */
 @keyframes pfloat{0%,100%{opacity:.28;transform:translateY(0)}50%{opacity:.8;transform:translateY(-28px)}}
@@ -329,7 +339,7 @@ video{display:block;width:100%;object-fit:cover;background:#000}
   </div>
 </section>
 
-<!-- ═══════════════════════════════════.��══════════════════════
+<!-- ══════════════════════════════════════════════════════════
   § 4  SNEDDS VIDEO
 ══════════════════════════════════════════════════════════ -->
 <section style="position:relative;padding:8rem 0;background:#030712;overflow:hidden">
@@ -364,8 +374,14 @@ video{display:block;width:100%;object-fit:cover;background:#000}
             <div style="display:flex;gap:.4rem">
               <button id="vb1" class="ctrl-btn" onclick="toggleVid('vid1','vo1','vb1')"><svg width="13" height="13" viewBox="0 0 14 14" fill="white"><path d="M3 2l9 5-9 5V2z"/></svg></button>
               <button id="mb1" class="ctrl-btn" onclick="toggleMute('vid1','mb1')"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><path d="M7 2L4 5H1v4h3l3 3V2z"/><path d="M10 5a3 3 0 010 4M12 3a6 6 0 010 8"/></svg></button>
+              <button class="ctrl-btn" title="Fullscreen" onclick="goFullscreen('vid1')"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 5V1h4M9 1h4v4M13 9v4H9M5 13H1V9"/></svg></button>
             </div>
           </div>
+        </div>
+        <!-- Mobile fullscreen hint -->
+        <div class="mobile-vid-tip">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#06b6d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 5V1h4M9 1h4v4M13 9v4H9M5 13H1V9"/></svg>
+          <span style="font-size:.72rem;font-weight:500;color:#0e7490">Tap the fullscreen button for the best viewing experience on mobile.</span>
         </div>
         <div class="vglow-c"></div>
       </div>
@@ -434,8 +450,14 @@ video{display:block;width:100%;object-fit:cover;background:#000}
             <div style="display:flex;gap:.4rem">
               <button id="vb2" class="ctrl-btn" onclick="event.stopPropagation();toggleVid('vid2','vo2','vb2')"><svg width="13" height="13" viewBox="0 0 14 14" fill="white"><path d="M3 2l9 5-9 5V2z"/></svg></button>
               <button id="mb2" class="ctrl-btn" onclick="event.stopPropagation();toggleMute('vid2','mb2')"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><path d="M7 2L4 5H1v4h3l3 3V2z"/><path d="M10 5a3 3 0 010 4M12 3a6 6 0 010 8"/></svg></button>
+              <button class="ctrl-btn" title="Fullscreen" onclick="event.stopPropagation();goFullscreen('vid2')"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 5V1h4M9 1h4v4M13 9v4H9M5 13H1V9"/></svg></button>
             </div>
           </div>
+        </div>
+        <!-- Mobile fullscreen hint -->
+        <div class="mobile-vid-tip" style="border-color:rgba(245,158,11,.22);background:rgba(245,158,11,.07)">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#d97706" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 5V1h4M9 1h4v4M13 9v4H9M5 13H1V9"/></svg>
+          <span style="font-size:.72rem;font-weight:500;color:#92400e">Tap the fullscreen button for the best viewing experience on mobile.</span>
         </div>
         <div class="vglow-a"></div>
       </div>
@@ -799,10 +821,10 @@ function toggleFaq(btn){
    {t:'50%',l:'35%',c:'#f39c12',s:16,d:4},{t:'30%',l:'48%',c:'#6c5ce7',s:12,d:14}
   ].forEach(function(r){
     var el=document.createElement('div');el.className='ring';
-    /* duration 20–28s, delay spread so they stagger naturally */
+    /* duration 38–60s, staggered delays up to 28 s */
     el.style.cssText='width:'+r.s+'px;height:'+r.s+'px;border-color:'+r.c+
       ';top:'+r.t+';'+(r.l?'left:'+r.l:'')+';'+(r.r?'right:'+r.r:'')+
-      ';animation-duration:'+(20+r.d*.6)+'s;animation-delay:'+(r.d*.8)+'s';
+      ';animation-duration:'+(38+r.d*1.5)+'s;animation-delay:'+(r.d*2.2)+'s';
     rc.appendChild(el);
   });
   var pc=document.getElementById('css-particles');
@@ -837,6 +859,14 @@ function toggleVid(vId,oId,bId){
 function toggleMute(vId,bId){
   var v=document.getElementById(vId),b=document.getElementById(bId);
   v.muted=!v.muted;if(b)b.innerHTML=v.muted?MUTE_I:UNMUTE_I;
+}
+function goFullscreen(vId){
+  var v=document.getElementById(vId);
+  if(!v) return;
+  if(v.requestFullscreen)           v.requestFullscreen();
+  else if(v.webkitRequestFullscreen) v.webkitRequestFullscreen();
+  else if(v.mozRequestFullScreen)    v.mozRequestFullScreen();
+  else if(v.msRequestFullscreen)     v.msRequestFullscreen();
 }
 
 /* ── Radar ── */
@@ -1188,10 +1218,6 @@ import * as THREE from 'three';
   }
   animate();
 })();
-</script>
-</body>
-</html>
-
 </script>
 </body>
 </html>
