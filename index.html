@@ -1001,7 +1001,7 @@ import * as THREE from 'three';
 
   /* ── Renderer ── */
   var renderer=new THREE.WebGLRenderer({canvas,antialias:!isMobile,alpha:true,powerPreference:'high-performance'});
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 0.75 : 1.5));
+  renderer.setPixelRatio(isMobile ? Math.min(window.devicePixelRatio,0.6) : Math.min(window.devicePixelRatio,1.5));
   renderer.setClearColor(0x000000,0);
   if(!isMobile){renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.1;}
   var scene=new THREE.Scene();
@@ -1085,7 +1085,7 @@ import * as THREE from 'three';
   if(isMobile)molSpec=molSpec.slice(0,2);
   var mols=molSpec.map(function(m){
     var mesh=new THREE.Mesh(new THREE.SphereGeometry(m.r,isMobile?10:14,isMobile?10:14),
-      new THREE.MeshPhysicalMaterial({color:m.c,roughness:.04,metalness:.08,transmission:.92,thickness:.6,transparent:true,opacity:.88}));
+      new THREE.MeshStandardMaterial({color:m.c,roughness:.05,metalness:.12,transparent:true,opacity:.82}));
     mesh.position.set(m.p[0],m.p[1],m.p[2]);mesh.userData={oy:m.p[1],ox:m.p[0],sp:m.sp};
     scene.add(mesh);return mesh;
   });
@@ -1096,17 +1096,17 @@ import * as THREE from 'three';
   var flasks=[];
   if(!isMobile){
   var flaskPts=[[-4.6,.6,.2],[4.4,-.4,-.6]];
-  var glassM=new THREE.MeshPhysicalMaterial({color:0xe8f4fd,roughness:0,transmission:.96,thickness:.3,transparent:true,opacity:.72});
+  var glassM=new THREE.MeshStandardMaterial({color:0xe8f4fd,roughness:0,metalness:.05,transparent:true,opacity:.55});
   var liqCols=[0xa8d8f0,0xa8f0d0,0xf0d0a8];
   var flasks=flaskPts.map(function(pos,fi){
     var g=new THREE.Group();g.position.set(pos[0],pos[1],pos[2]);
     g.add(new THREE.Mesh(new THREE.SphereGeometry(.46,16,16),glassM));
     var neck=new THREE.Mesh(new THREE.CylinderGeometry(.12,.19,.52,16),glassM.clone());neck.position.y=.57;g.add(neck);
     var liq=new THREE.Mesh(new THREE.SphereGeometry(.39,16,16),
-      new THREE.MeshPhysicalMaterial({color:liqCols[fi%3],roughness:.1,transmission:.62,thickness:.9,transparent:true,opacity:.78}));
+      new THREE.MeshStandardMaterial({color:liqCols[fi%3],roughness:.1,metalness:.08,transparent:true,opacity:.72}));
     liq.position.y=-.1;g.add(liq);
     [[.12,-.05,.07],[-.12,.08,.06],[.06,.2,.06]].forEach(function(bp){
-      var b=new THREE.Mesh(new THREE.SphereGeometry(.04,7,7),new THREE.MeshPhysicalMaterial({color:0xffffff,transmission:.96,transparent:true,opacity:.82}));
+      var b=new THREE.Mesh(new THREE.SphereGeometry(.04,7,7),new THREE.MeshStandardMaterial({color:0xffffff,transparent:true,opacity:.6}));
       b.position.set(bp[0],bp[1],bp[2]);g.add(b);
     });
     g.userData.liq=liq;scene.add(g);return g;
@@ -1141,7 +1141,7 @@ import * as THREE from 'three';
   var octSpec=[{p:[-2.8,2.7,-2],c:0x06b6d4,s:1.2},{p:[3.8,2.4,-2.2],c:0x10b981,s:1},{p:[1.6,3.2,-2.5],c:0xf59e0b,s:.85}];
   var octaGeo=new THREE.OctahedronGeometry(.3,0);
   var octahedra=octSpec.map(function(o){
-    var m=new THREE.Mesh(octaGeo,new THREE.MeshPhysicalMaterial({color:o.c,roughness:0,metalness:.12,transmission:.88,thickness:.55,transparent:true,opacity:.78}));
+    var m=new THREE.Mesh(octaGeo,new THREE.MeshStandardMaterial({color:o.c,roughness:.1,metalness:.3,transparent:true,opacity:.72}));
     m.position.set(o.p[0],o.p[1],o.p[2]);m.scale.setScalar(o.s);m.userData={oy:o.p[1],ox:o.p[0]};scene.add(m);return m;
     });
 
@@ -1151,7 +1151,7 @@ import * as THREE from 'three';
   var icoSpec=[{p:[2.2,-.6,-1.5],c:0xa78bfa},{p:[-2.2,1.8,-2],c:0x34d399}];
   var icoGeo=new THREE.IcosahedronGeometry(.24,0);
   var icos=icoSpec.map(function(o){
-    var m=new THREE.Mesh(icoGeo,new THREE.MeshPhysicalMaterial({color:o.c,roughness:.04,metalness:.35,transmission:.72,thickness:.32,transparent:true,opacity:.82}));
+    var m=new THREE.Mesh(icoGeo,new THREE.MeshStandardMaterial({color:o.c,roughness:.08,metalness:.45,transparent:true,opacity:.78}));
     m.position.set(o.p[0],o.p[1],o.p[2]);m.userData={oy:o.p[1],oz:o.p[2]};scene.add(m);return m;
   });
 
@@ -1163,7 +1163,7 @@ import * as THREE from 'three';
   var tetraSpec=[{p:[-3.8,-1.2,-1.8],c:0x22d3ee,s:.9},{p:[2.6,3.0,-2.2],c:0xf472b6,s:.75},{p:[-1.4,3.5,-2],c:0xfbbf24,s:.7}];
   var tetraGeo=new THREE.TetrahedronGeometry(.28,0);
   var tetras=tetraSpec.map(function(o){
-    var m=new THREE.Mesh(tetraGeo,new THREE.MeshPhysicalMaterial({color:o.c,roughness:.05,metalness:.25,transmission:.82,thickness:.4,transparent:true,opacity:.8}));
+    var m=new THREE.Mesh(tetraGeo,new THREE.MeshStandardMaterial({color:o.c,roughness:.08,metalness:.35,transparent:true,opacity:.76}));
     m.position.set(o.p[0],o.p[1],o.p[2]);m.scale.setScalar(o.s);m.userData={oy:o.p[1],ox:o.p[0]};scene.add(m);return m;
   });
   } /* end !isMobile tetras */
@@ -1192,8 +1192,7 @@ import * as THREE from 'three';
   ════════════════════════════════ */
   var SEG=isMobile?12:28;
   var sGeo=new THREE.SphereGeometry(isMobile?.85:1.45,SEG,SEG);
-  var origPos=sGeo.attributes.position.array.slice();
-  var centreSphere=new THREE.Mesh(sGeo,new THREE.MeshPhysicalMaterial({color:0xe8f4fd,roughness:0,metalness:0,transmission:.92,thickness:1.2,transparent:true,opacity:.6}));
+  var centreSphere=new THREE.Mesh(sGeo,new THREE.MeshStandardMaterial({color:0xe8f4fd,roughness:.05,metalness:.05,emissive:0xe8f4fd,emissiveIntensity:.08,transparent:true,opacity:.55}));
   centreSphere.position.set(0,.4,isMobile?-2.2:-1.2);
   scene.add(centreSphere);
 
@@ -1201,16 +1200,14 @@ import * as THREE from 'three';
   var clock=new THREE.Clock();
   var camTarget=new THREE.Vector3(0,.5,6.5);
   var camPos=new THREE.Vector3(0,.5,6.5);
-  var frameCount=0;
 
-  var _paused=false,_lastMT=0;
+  var _paused=false;
   document.addEventListener('visibilitychange',function(){if(document.hidden){_paused=true;}else{_paused=false;clock.getDelta();}});
   function animate(){
     requestAnimationFrame(animate);
     if(_paused) return;
-    if(isMobile){var _nt=performance.now();if(_nt-_lastMT<50){return;}_lastMT=_nt;}
+
     var t=clock.getElapsedTime();
-    frameCount++;
 
     /* Camera parallax */
     camTarget.x=mouse.x*.42;camTarget.y=.5-mouse.y*.28;
@@ -1271,34 +1268,11 @@ import * as THREE from 'three';
       r.rotation.x+=.0004*(i%2===0?1:-1);
     });
 
-    /* Central sphere distort — skip odd frames for perf */
-    if(frameCount%6===0&&!isMobile){
-      var posArr=sGeo.attributes.position.array;
-      for(var i=0;i<posArr.length;i+=3){
-        var ox=origPos[i],oy=origPos[i+1],oz=origPos[i+2];
-        var len=Math.sqrt(ox*ox+oy*oy+oz*oz);
-        if(len<.0001)continue;
-        var nx=ox/len,ny=oy/len,nz=oz/len;
-        var noise=Math.sin(nx*2.6+t*1.6)*Math.cos(ny*2.6+t*1.2)*Math.sin(nz*1.9+t*.9)*.36;
-        posArr[i]=ox+nx*noise;posArr[i+1]=oy+ny*noise;posArr[i+2]=oz+nz*noise;
-      }
-      sGeo.attributes.position.needsUpdate=true;
-      sGeo.computeVertexNormals();
-    }
+    /* Central sphere — simple scale pulse */
     centreSphere.rotation.y=t*.17;
     centreSphere.position.y=.4+Math.sin(t*.72)*.2;
 
     renderer.render(scene,camera);
-  }
-  /* ── Downgrade glass materials to Standard on mobile (massive GPU savings) ── */
-  if(isMobile){
-    scene.traverse(function(obj){
-      if(obj.isMesh&&obj.material&&obj.material.isMeshPhysicalMaterial){
-        var o=obj.material;
-        obj.material=new THREE.MeshStandardMaterial({color:o.color,roughness:.3,metalness:.25,transparent:o.transparent,opacity:o.opacity,side:o.side});
-        o.dispose();
-      }
-    });
   }
   animate();
 })();
