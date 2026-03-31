@@ -1101,6 +1101,7 @@ import * as THREE from 'three';
   ════════════════════════════════ */
   var flasks=[];
   if(!isMobile){
+  var flaskPts=[[-4.6,.6,.2],[4.4,-.4,-.6],[.2,-2.8,.6]];
   var glassM=new THREE.MeshPhysicalMaterial({color:0xe8f4fd,roughness:0,transmission:.96,thickness:.3,transparent:true,opacity:.72});
   var liqCols=[0xa8d8f0,0xa8f0d0,0xf0d0a8];
   var flasks=flaskPts.map(function(pos,fi){
