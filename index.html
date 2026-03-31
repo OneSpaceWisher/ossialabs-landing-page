@@ -1223,8 +1223,6 @@ import * as THREE from 'three';
 
   var _paused=false,_lastMT=0;
   document.addEventListener('visibilitychange',function(){if(document.hidden){_paused=true;}else{_paused=false;clock.getDelta();}});
-  var heroObs=new IntersectionObserver(function(e){_paused=!e[0].isIntersecting;},{threshold:0});
-  heroObs.observe(section);
 
   function animate(){
     requestAnimationFrame(animate);
