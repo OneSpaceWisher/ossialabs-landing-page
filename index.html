@@ -1003,10 +1003,9 @@ import * as THREE from 'three';
 
   /* ── Renderer ── */
   var renderer=new THREE.WebGLRenderer({canvas,antialias:!isMobile,alpha:true,powerPreference:'high-performance'});
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1 : 1.5));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 0.75 : 1.5));
   renderer.setClearColor(0x000000,0);
-  renderer.toneMapping=THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure=1.1;
+  if(!isMobile){renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.1;}
 
   var scene=new THREE.Scene();
   var camera=new THREE.PerspectiveCamera(52,1,.1,100);
@@ -1069,6 +1068,7 @@ import * as THREE from 'three';
     {p:[1.5,-3,-3],c:0x1abc9c},{p:[4.5,-4.5,-1.5],c:0xe74c3c},
     {p:[-1.5,-1.5,-2.5],c:0xf39c12},{p:[2.5,-6,-1.5],c:0x2ecc71},
   ];
+  if(isMobile)dSpec=dSpec.slice(0,4);
   var droplets=dSpec.map(function(d){
     var g=new THREE.Group();g.position.set(d.p[0],d.p[1],d.p[2]);
     var m=new THREE.MeshStandardMaterial({color:d.c,roughness:.15,metalness:.65});
@@ -1088,6 +1088,7 @@ import * as THREE from 'three';
     {p:[-4.2,-.6,-1.5],c:0xc8f5c8,sp:1.35,r:.13},{p:[1.2,-1.2,-3],c:0xffe0b2,sp:.68,r:.24},
     {p:[-2.4,-2,-2],c:0xfda4af,sp:.98,r:.16},
   ];
+  if(isMobile)molSpec=molSpec.slice(0,3);
   var mols=molSpec.map(function(m){
     var mesh=new THREE.Mesh(new THREE.SphereGeometry(m.r,isMobile?12:18,isMobile?12:18),
       new THREE.MeshPhysicalMaterial({color:m.c,roughness:.04,metalness:.08,transmission:.92,thickness:.6,transparent:true,opacity:.88}));
@@ -1098,7 +1099,8 @@ import * as THREE from 'three';
   /* ════════════════════════════════
      LAB FLASKS
   ════════════════════════════════ */
-  var flaskPts=[[-4.6,.6,.2],[4.4,-.4,-.6],[.2,-2.8,.6]];
+  var flasks=[];
+  if(!isMobile){
   var glassM=new THREE.MeshPhysicalMaterial({color:0xe8f4fd,roughness:0,transmission:.96,thickness:.3,transparent:true,opacity:.72});
   var liqCols=[0xa8d8f0,0xa8f0d0,0xf0d0a8];
   var flasks=flaskPts.map(function(pos,fi){
@@ -1113,7 +1115,8 @@ import * as THREE from 'three';
       b.position.set(bp[0],bp[1],bp[2]);g.add(b);
     });
     g.userData.liq=liq;scene.add(g);return g;
-  });
+    });
+  } // end !isMobile flasks
 
   /* ════════════════════════════════
      DNA HELICES (3 strands)
@@ -1133,8 +1136,9 @@ import * as THREE from 'three';
     }
     return g;
   }
-  var dna1=buildDNA(-5.8,.2,-2.5),dna2=buildDNA(6.1,-1,-3),dna3=buildDNA(-.2,-4,-2);
-  scene.add(dna1,dna2,dna3);
+  var dna1=buildDNA(-5.8,.2,-2.5),dna2,dna3;
+  if(!isMobile){dna2=buildDNA(6.1,-1,-3);dna3=buildDNA(-.2,-4,-2);scene.add(dna2,dna3);}
+  scene.add(dna1);
 
   /* ════════════════════════════════
      CRYSTAL OCTAHEDRA
@@ -1144,7 +1148,8 @@ import * as THREE from 'three';
   var octahedra=octSpec.map(function(o){
     var m=new THREE.Mesh(octaGeo,new THREE.MeshPhysicalMaterial({color:o.c,roughness:0,metalness:.12,transmission:.88,thickness:.55,transparent:true,opacity:.78}));
     m.position.set(o.p[0],o.p[1],o.p[2]);m.scale.setScalar(o.s);m.userData={oy:o.p[1],ox:o.p[0]};scene.add(m);return m;
-  });
+    });
+  } // end !isMobile tetras
 
   /* ════════════════════════════════
      ICOSAHEDRON GEMS
@@ -1159,6 +1164,8 @@ import * as THREE from 'three';
   /* ════════════════════════════════
      TETRAHEDRA (new!)
   ════════════════════════════════ */
+  var tetras=[];
+  if(!isMobile){
   var tetraSpec=[{p:[-3.8,-1.2,-1.8],c:0x22d3ee,s:.9},{p:[2.6,3.0,-2.2],c:0xf472b6,s:.75},{p:[-1.4,3.5,-2],c:0xfbbf24,s:.7},{p:[4.0,-2.2,-1.8],c:0x34d399,s:.85},{p:[-5,1.4,-2],c:0x818cf8,s:.65},{p:[.8,2.0,-3],c:0xfb923c,s:.6}];
   var tetraGeo=new THREE.TetrahedronGeometry(.28,0);
   var tetras=tetraSpec.map(function(o){
@@ -1188,6 +1195,7 @@ import * as THREE from 'three';
     {p:[-5.8,.2,-2.5],c:0x06b6d4,ri:1.1,tube:.016,rot:[0,Math.PI/2,0]},
     {p:[6.1,-1,-3],c:0x8b5cf6,ri:1.1,tube:.016,rot:[0,Math.PI/2,0]},
   ];
+  if(isMobile)ringSpec=ringSpec.slice(0,2);
   var energyRings=ringSpec.map(function(r){
     var m=new THREE.Mesh(new THREE.TorusGeometry(r.ri,r.tube,6,40),
       new THREE.MeshStandardMaterial({color:r.c,emissive:new THREE.Color(r.c),emissiveIntensity:.75,transparent:true,opacity:.6}));
@@ -1212,7 +1220,7 @@ import * as THREE from 'three';
   var camPos=new THREE.Vector3(0,.5,6.5);
   var frameCount=0;
 
-  var _paused=false;
+  var _paused=false,_lastMT=0;
   document.addEventListener('visibilitychange',function(){if(document.hidden){_paused=true;}else{_paused=false;clock.getDelta();}});
   var heroObs=new IntersectionObserver(function(e){_paused=!e[0].isIntersecting;},{threshold:0});
   heroObs.observe(section);
@@ -1220,7 +1228,7 @@ import * as THREE from 'three';
   function animate(){
     requestAnimationFrame(animate);
     if(_paused) return;
-    if(isMobile&&frameCount%2!==0){frameCount++;return;}
+    if(isMobile){var _nt=performance.now();if(_nt-_lastMT<42){return;}_lastMT=_nt;}
     var t=clock.getElapsedTime();
     frameCount++;
 
@@ -1255,8 +1263,8 @@ import * as THREE from 'three';
 
     /* DNA */
     dna1.rotation.y=t*.36;dna1.position.y=.2+Math.sin(t*.46)*.3;
-    dna2.rotation.y=t*.36;dna2.position.y=-1+Math.sin(t*.46+1.2)*.3;
-    dna3.rotation.y=t*.28;dna3.position.y=-4+Math.sin(t*.5+2)*.28;
+    if(dna2){dna2.rotation.y=t*.36;dna2.position.y=-1+Math.sin(t*.46+1.2)*.3;}
+    if(dna3){dna3.rotation.y=t*.28;dna3.position.y=-4+Math.sin(t*.5+2)*.28;}
 
     /* Octahedra */
     octahedra.forEach(function(o,i){
@@ -1309,6 +1317,17 @@ import * as THREE from 'three';
 
     renderer.render(scene,camera);
   }
+  /* ── Downgrade glass materials to Standard on mobile (massive GPU savings) ── */
+  if(isMobile){
+    scene.traverse(function(obj){
+      if(obj.isMesh&&obj.material&&obj.material.isMeshPhysicalMaterial){
+        var o=obj.material;
+        obj.material=new THREE.MeshStandardMaterial({color:o.color,roughness:.3,metalness:.25,transparent:o.transparent,opacity:o.opacity,side:o.side});
+        o.dispose();
+      }
+    });
+  }
+
   animate();
 })();
 </script>
