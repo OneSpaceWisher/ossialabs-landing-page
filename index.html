@@ -988,7 +988,6 @@ import * as THREE from 'three';
   var canvas  = document.getElementById('three-canvas');
   var section = document.getElementById('hero');
   var isMobile = window.innerWidth < 768;
-
   /* ── WebGL check ── */
   try{
     var tc=document.createElement('canvas');
@@ -996,7 +995,6 @@ import * as THREE from 'three';
     if(!tgl) return;
     var ext=tgl.getExtension('WEBGL_lose_context');if(ext)ext.loseContext();
   }catch(e){return;}
-
   /* Hide CSS fallback */
   var cssBg=document.getElementById('css-bg');
   cssBg.style.opacity='0';cssBg.style.pointerEvents='none';
@@ -1006,7 +1004,6 @@ import * as THREE from 'three';
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 0.75 : 1.5));
   renderer.setClearColor(0x000000,0);
   if(!isMobile){renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.1;}
-
   var scene=new THREE.Scene();
   var camera=new THREE.PerspectiveCamera(52,1,.1,100);
   camera.position.set(0,.5,6.5);
@@ -1150,7 +1147,6 @@ import * as THREE from 'three';
     var m=new THREE.Mesh(octaGeo,new THREE.MeshPhysicalMaterial({color:o.c,roughness:0,metalness:.12,transmission:.88,thickness:.55,transparent:true,opacity:.78}));
     m.position.set(o.p[0],o.p[1],o.p[2]);m.scale.setScalar(o.s);m.userData={oy:o.p[1],ox:o.p[0]};scene.add(m);return m;
     });
-  } // end !isMobile tetras
 
   /* ════════════════════════════════
      ICOSAHEDRON GEMS
@@ -1173,6 +1169,7 @@ import * as THREE from 'three';
     var m=new THREE.Mesh(tetraGeo,new THREE.MeshPhysicalMaterial({color:o.c,roughness:.05,metalness:.25,transmission:.82,thickness:.4,transparent:true,opacity:.8}));
     m.position.set(o.p[0],o.p[1],o.p[2]);m.scale.setScalar(o.s);m.userData={oy:o.p[1],ox:o.p[0]};scene.add(m);return m;
   });
+  } /* end !isMobile tetras */
 
   /* ════════════════════════════════
      DODECAHEDRA (new!)
@@ -1223,7 +1220,6 @@ import * as THREE from 'three';
 
   var _paused=false,_lastMT=0;
   document.addEventListener('visibilitychange',function(){if(document.hidden){_paused=true;}else{_paused=false;clock.getDelta();}});
-
   function animate(){
     requestAnimationFrame(animate);
     if(_paused) return;
@@ -1326,7 +1322,6 @@ import * as THREE from 'three';
       }
     });
   }
-
   animate();
 })();
 </script>
