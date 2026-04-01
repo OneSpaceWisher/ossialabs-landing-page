@@ -582,9 +582,9 @@ video{display:block;width:100%;object-fit:cover;background:#000}
       <p style="color:#9ca3af;font-size:1rem;max-width:28rem;margin:0 auto">Higher score = better. Comparing SNEDDS delivery vs standard forms across key dimensions.</p>
     </div>
     <div class="g2" style="gap:3rem;align-items:start">
-      <div class="reveal" style="background:#fff;border:1px solid #f3f4f6;border-radius:1.5rem;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,.05)">
+      <div class="reveal" style="background:#fff;border:1px solid #f3f4f6;border-radius:1.5rem;padding:clamp(.75rem,4vw,2rem);box-shadow:0 2px 8px rgba(0,0,0,.05);overflow:visible">
         <h3 style="font-weight:700;color:#111;font-size:.95rem;margin-bottom:1.5rem">Profile Comparison (Higher = Better)</h3>
-        <canvas id="radarChart" style="max-height:360px"></canvas>
+        <canvas id="radarChart" style="max-height:360px;overflow:visible"></canvas>
         <div style="display:flex;flex-wrap:wrap;gap:1.2rem;justify-content:center;margin-top:1.25rem;font-size:.75rem;color:#6b7280">
           <span style="display:flex;align-items:center;gap:.4rem"><span class="legend-line" style="background:#06b6d4"></span>OssiaLabs (SNEDDS)</span>
           <span style="display:flex;align-items:center;gap:.4rem"><span class="legend-line" style="background:#94a3b8"></span>Standard oils/powders</span>
@@ -957,6 +957,7 @@ function goFullscreen(vId){
 
 /* ── Radar ── */
 (function(){
+  var isMob=window.innerWidth<768;
   var ctx=document.getElementById('radarChart').getContext('2d');
   new Chart(ctx,{type:'radar',
     data:{labels:['Evidence Depth','Absorption Design','Consistency','Research-Backed','Promise Restraint','Transparency'],
@@ -965,8 +966,12 @@ function goFullscreen(vId){
         {label:'Standard',data:[45,38,50,42,35,40],backgroundColor:'rgba(148,163,184,.1)',borderColor:'#94a3b8',borderWidth:1.5,pointBackgroundColor:'#94a3b8',pointRadius:2.5}
       ]},
     options:{responsive:true,maintainAspectRatio:true,
+      layout:{padding:isMob?{top:28,right:36,bottom:12,left:36}:{top:8,right:8,bottom:8,left:8}},
       plugins:{legend:{display:false},tooltip:{backgroundColor:'#fff',titleColor:'#111',bodyColor:'#6b7280',borderColor:'#e5e7eb',borderWidth:1,padding:10,cornerRadius:8}},
-      scales:{r:{min:0,max:100,ticks:{stepSize:25,font:{size:9},color:'#cbd5e1',backdropColor:'transparent'},grid:{color:'#e5e7eb'},angleLines:{color:'#e5e7eb'},pointLabels:{font:{size:11,weight:'600'},color:'#6b7280'}}}}
+      scales:{r:{min:0,max:100,
+        ticks:{stepSize:25,font:{size:isMob?7:9},color:'#cbd5e1',backdropColor:'transparent'},
+        grid:{color:'#e5e7eb'},angleLines:{color:'#e5e7eb'},
+        pointLabels:{font:{size:isMob?9:11,weight:'600'},color:'#6b7280'}}}}
   });
 })();
 </script>
