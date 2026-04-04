@@ -153,6 +153,14 @@ video{display:block;width:100%;object-fit:cover;background:#000}
 .cgrn{background:#f0fdf4;color:#16a34a;border:1px solid #bbf7d0;padding:.2rem .65rem;border-radius:999px;font-size:.67rem;font-weight:600;white-space:nowrap}
 .legend-line{width:14px;height:3px;border-radius:2px;display:inline-block}
 
+
+/* ── Coming Soon badge ── */
+.coming-soon-badge{display:inline-flex;align-items:center;gap:.38rem;background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.28);color:#6366f1;font-size:.68rem;font-weight:700;padding:.3rem .75rem;border-radius:999px;letter-spacing:.08em;text-transform:uppercase}
+
+
+/* ── FAQ ── */
+.faq-item{transition:border-color .2s}
+
 /* ── Discord ── */
 .discord-glow{background:radial-gradient(ellipse at 50% 40%,rgba(99,102,241,.14) 0%,transparent 65%)}
 
@@ -175,11 +183,6 @@ video{display:block;width:100%;object-fit:cover;background:#000}
 </head>
 <body>
 
-<!-- ══════ PROMO BAR ══════ -->
-<div id="promo-bar" style="background:linear-gradient(90deg,#0f172a 0%,#1e3a8a 50%,#0f172a 100%);padding:.65rem 3rem .65rem 1.5rem;text-align:center;position:relative;z-index:200">
-  <p style="color:#e2e8f0;font-size:.82rem;margin:0;line-height:1.5">Get <strong style="color:#22d3ee">15% off</strong> your first order — visit <a href="https://ossialabs.com" target="_blank" rel="noopener noreferrer" style="color:#22d3ee;font-weight:700;text-decoration:underline;text-underline-offset:2px">ossialabs.com</a> and subscribe to our emails for your discount code.</p>
-  <button onclick="document.getElementById('promo-bar').style.display='none'" style="position:absolute;right:.85rem;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#94a3b8;font-size:1rem;line-height:1;padding:.3rem .4rem;transition:color .15s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#94a3b8'" aria-label="Dismiss">✕</button>
-</div>
 
 <!-- ══════════════════════════════════════════════════════════
   § 1  HERO
@@ -256,7 +259,7 @@ video{display:block;width:100%;object-fit:cover;background:#000}
       SNEDDS formulas that keep tough plant actives dissolved and bioavailable — breakthrough delivery for results you can actually feel.
     </p>
     <div style="display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center;margin-bottom:4.5rem">
-      <a href="https://ossialabs.com/" target="_blank" rel="noopener noreferrer"
+      <a href="https://ossialabs.com/collections/all" target="_blank" rel="noopener noreferrer"
          style="display:inline-block;background:#111;color:#fff;font-weight:600;font-size:1rem;padding:1rem 2rem;border-radius:999px;box-shadow:0 12px 38px rgba(0,0,0,.22);transition:all .24s"
          onmouseover="this.style.cssText=this.dataset.on" onmouseout="this.style.cssText=this.dataset.off"
          data-on="display:inline-block;color:#fff;font-weight:600;font-size:1rem;padding:1rem 2rem;border-radius:999px;box-shadow:0 16px 46px rgba(37,99,235,.32);transition:all .24s;background:linear-gradient(90deg,#2563eb,#06b6d4)"
@@ -385,39 +388,27 @@ video{display:block;width:100%;object-fit:cover;background:#000}
         <span style="display:inline-flex;align-items:center;gap:.5rem;font-size:.85rem;font-weight:700;color:#111">Learn More <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 3l4 4-4 4" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg></span>
       </a>
 
-    </div>
+      <!-- Dioscorea — Coming Soon -->
+      <div class="product-card reveal d4" style="background:linear-gradient(160deg,#eef2ff,#e0e7ff);border-radius:1.5rem;padding:2rem;border:1px solid rgba(99,102,241,.12);position:relative;overflow:hidden;cursor:default">
+        <div style="position:absolute;top:0;right:0;width:200px;height:200px;background:#6366f1;border-radius:50%;opacity:.07;filter:blur(50px);transform:translate(50%,-50%)"></div>
+        <div style="position:absolute;top:1rem;right:1rem">
+          <span style="display:inline-flex;align-items:center;gap:.38rem;background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.28);color:#6366f1;font-size:.68rem;font-weight:700;padding:.3rem .75rem;border-radius:999px;letter-spacing:.08em;text-transform:uppercase"><svg width="8" height="8" viewBox="0 0 8 8" fill="none"><circle cx="4" cy="4" r="3" fill="#6366f1"/></svg>Coming Soon</span>
+        </div>
+        <div style="display:inline-flex;padding:.75rem;border-radius:1rem;background:rgba(99,102,241,.13);margin-bottom:1.25rem">
+          <svg width="36" height="36" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="pr4" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs><path d="M24 6 C14 6 8 14 8 24 C8 34 14 42 24 42" stroke="url(#pr4)" stroke-width="2.5" stroke-linecap="round" fill="none"/><path d="M24 6 C34 6 40 14 40 24 C40 34 34 42 24 42" stroke="url(#pr4)" stroke-width="2.5" stroke-linecap="round" fill="none"/><ellipse cx="24" cy="24" rx="8" ry="18" stroke="url(#pr4)" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="4" fill="url(#pr4)"/></svg>
+        </div>
+        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1rem"><span class="dot" style="background:#6366f1"></span><span class="label" style="color:#9ca3af;font-size:.6rem">Cognitive &amp; Neuroprotective</span></div>
+        <h3 style="font-size:1.42rem;font-weight:900;color:#111;margin-bottom:.72rem">Dioscorea</h3>
+        <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">Diosgenin-rich Dioscorea SNEDDS — demonstrating remarkable neuroprotective potential with dramatically increased brain bioavailability. Placebo-controlled human trials show meaningful improvements in cognitive performance. Indirect muscle effects may also occur through neurological pathways.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.5rem"><span class="tag">Neuroprotective</span><span class="tag">SNEDDS</span><span class="tag">Cognitive Support</span><span class="tag">Brain Bioavailability</span></div>
+        <a href="https://ossialabs.com/blogs/news/diosgenin-protodioscin-and-diosgenin-snedds-comparative-anabolic-potential-pharmacokinetics-safety-and-implications-for-human-trials"
+          target="_blank" rel="noopener noreferrer"
+          style="display:inline-flex;align-items:center;gap:.5rem;font-size:.85rem;font-weight:700;color:#6366f1;text-decoration:none"
+          onmouseover="this.style.color='#4f46e5'" onmouseout="this.style.color='#6366f1'">
+          Learn More <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 3l4 4-4 4" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </a>
+      </div>
 
-    <!-- ── Shopify Buy Buttons ── -->
-    <div class="reveal" style="margin-top:4rem;text-align:center">
-      <p class="label" style="color:#9ca3af;margin-bottom:2rem;font-size:.7rem;letter-spacing:.16em">Add to cart directly — powered by Shopify</p>
-      <div id="collection-component-1774910834494"></div>
-      <script type="text/javascript">
-      /*<![CDATA[*/
-      (function(){
-        var scriptURL='https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
-        if(window.ShopifyBuy){if(window.ShopifyBuy.UI){ShopifyBuyInit();}else{loadScript();}}else{loadScript();}
-        function loadScript(){var s=document.createElement('script');s.async=true;s.src=scriptURL;(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(s);s.onload=ShopifyBuyInit;}
-        function ShopifyBuyInit(){
-          var client=ShopifyBuy.buildClient({domain:'0kwwfr-rk.myshopify.com',storefrontAccessToken:'b6277bd6dcf332bb7d6f6d65f1a51895'});
-          ShopifyBuy.UI.onReady(client).then(function(ui){
-            ui.createComponent('collection',{
-              id:'454338150618',
-              node:document.getElementById('collection-component-1774910834494'),
-              moneyFormat:'%24%7B%7Bamount%7D%7D',
-              options:{
-                "product":{"styles":{"product":{"@media (min-width: 601px)":{"max-width":"calc(25% - 20px)","margin-left":"20px","margin-bottom":"50px","width":"calc(25% - 20px)"},"img":{"height":"calc(100% - 15px)","position":"absolute","left":"0","right":"0","top":"0"},"imgWrapper":{"padding-top":"calc(75% + 15px)","position":"relative","height":"0"}},"button":{":hover":{"background-color":"#000000"},"background-color":"#000000",":focus":{"background-color":"#000000"},"border-radius":"11px"}},"text":{"button":"Add to cart"}},
-                "productSet":{"styles":{"products":{"@media (min-width: 601px)":{"margin-left":"-20px"}}}},
-                "modalProduct":{"contents":{"img":false,"imgWithCarousel":true,"button":false,"buttonWithQuantity":true},"styles":{"product":{"@media (min-width: 601px)":{"max-width":"100%","margin-left":"0px","margin-bottom":"0px"}},"button":{":hover":{"background-color":"#000000"},"background-color":"#000000",":focus":{"background-color":"#000000"},"border-radius":"11px"}},"text":{"button":"Add to cart"}},
-                "option":{},
-                "cart":{"styles":{"button":{":hover":{"background-color":"#000000"},"background-color":"#000000",":focus":{"background-color":"#000000"},"border-radius":"11px"}},"text":{"total":"Subtotal","button":"Checkout"},"contents":{"note":true}},
-                "toggle":{"styles":{"toggle":{"background-color":"#000000",":hover":{"background-color":"#000000"},":focus":{"background-color":"#000000"}}}}
-              }
-            });
-          });
-        }
-      })();
-      /*]]>*/
-      </script>
     </div>
 
   </div>
