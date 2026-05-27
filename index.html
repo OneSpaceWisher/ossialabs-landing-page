@@ -304,41 +304,74 @@ video{display:block;width:100%;object-fit:cover;background:#000}
 
 <script>
 (function(){
-  /* Delivery carousel: native scroll-snap on mobile, CSS-anim + mouse-drag on desktop */
   var isMobile = ('ontouchstart' in window) || window.innerWidth < 700;
 
-  var rows = [
-    { row: document.getElementById('caro-row1'), track: document.getElementById('caro-track1') },
-    { row: document.getElementById('caro-row2'), track: document.getElementById('caro-track2') }
-  ];
-
   if (isMobile) {
-    /* ── Mobile: disable animation, use native overflow scroll with snap ── */
-    rows.forEach(function(r){
-      if (!r.row || !r.track) return;
-      /* Make the row a scroll container */
-      r.row.style.overflowX = 'auto';
-      r.row.style.overflowY = 'hidden';
-      r.row.style.webkitOverflowScrolling = 'touch';
-      r.row.style.scrollSnapType = 'x mandatory';
-      r.row.style.scrollbarWidth = 'none';
-      /* Stop the CSS animation */
-      r.track.style.animation = 'none';
-      r.track.style.transform = 'none';
-      /* Snap each image */
-      r.track.querySelectorAll('.caro-img').forEach(function(img){
-        img.style.scrollSnapAlign = 'start';
-      });
+    /* ─────────────────────────────────────────────────────────────
+       MOBILE: RAF-driven auto-scroll on the ROW (overflow-x:auto).
+       Touch drag uses native browser scroll — no conflict at all.
+       After finger lifts, auto-scroll resumes after 1.5 s.
+    ───────────────────────────────────────────────────────────── */
+    var cfgs = [
+      { rowId:'caro-row1', trackId:'caro-track1', speed: 0.55 },
+      { rowId:'caro-row2', trackId:'caro-track2', speed:-0.50 }
+    ];
+
+    cfgs.forEach(function(cfg){
+      var row   = document.getElementById(cfg.rowId);
+      var track = document.getElementById(cfg.trackId);
+      if (!row || !track) return;
+
+      /* Convert row into a native scroll container */
+      row.style.overflowX          = 'auto';
+      row.style.overflowY          = 'hidden';
+      row.style.webkitOverflowScrolling = 'touch';
+      row.style.scrollbarWidth     = 'none';
+
+      /* Kill the CSS animation so it doesn't fight scrollLeft */
+      track.style.animation  = 'none';
+      track.style.transform  = 'none';
+
+      /* For backward row: start halfway so loop works both ways */
+      var half = track.scrollWidth / 2;
+      if (cfg.speed < 0) row.scrollLeft = half;
+
+      var paused = false;
+      var resumeTimer;
+
+      /* Auto-scroll loop */
+      (function tick(){
+        if (!paused) {
+          row.scrollLeft += cfg.speed;
+          /* Infinite loop: clamp and wrap */
+          if (cfg.speed > 0 && row.scrollLeft >= half) row.scrollLeft -= half;
+          if (cfg.speed < 0 && row.scrollLeft <= 0)   row.scrollLeft += half;
+        }
+        requestAnimationFrame(tick);
+      })();
+
+      /* Pause while finger is down, resume 1.5 s after lift */
+      row.addEventListener('touchstart', function(){
+        paused = true;
+        clearTimeout(resumeTimer);
+      }, {passive:true});
+
+      row.addEventListener('touchend', function(){
+        resumeTimer = setTimeout(function(){ paused = false; }, 1500);
+      }, {passive:true});
     });
+
   } else {
-    /* ── Desktop: CSS animation + mouse drag ── */
-    rows.forEach(function(r){
-      var el = r.track;
+    /* ─────────────────────────────────────────────────────────────
+       DESKTOP: CSS keyframe animation + mouse drag to scrub
+    ───────────────────────────────────────────────────────────── */
+    ['caro-track1','caro-track2'].forEach(function(id){
+      var el = document.getElementById(id);
       if (!el) return;
-      var isDragging = false, startX = 0, baseOffset = 0;
+      var dragging = false, startX = 0, baseOffset = 0;
+
       el.addEventListener('mousedown', function(e){
-        isDragging = true;
-        startX = e.clientX;
+        dragging = true; startX = e.clientX;
         var m = new (window.DOMMatrix || window.WebKitCSSMatrix)(getComputedStyle(el).transform);
         baseOffset = m.m41;
         el.style.animationPlayState = 'paused';
@@ -346,12 +379,12 @@ video{display:block;width:100%;object-fit:cover;background:#000}
         e.preventDefault();
       });
       document.addEventListener('mousemove', function(e){
-        if (!isDragging) return;
+        if (!dragging) return;
         el.style.transform = 'translateX(' + (baseOffset + e.clientX - startX) + 'px)';
       });
       document.addEventListener('mouseup', function(){
-        if (!isDragging) return;
-        isDragging = false;
+        if (!dragging) return;
+        dragging = false;
         el.style.animationPlayState = 'running';
       });
     });
