@@ -191,7 +191,7 @@ video{display:block;width:100%;object-fit:cover;background:#000}
 .prod-arr-l{left:-22px}.prod-arr-r{right:-22px}
 /* ── Delivery carousel mobile ── */
 @media(max-width:600px){
-  .caro-img{height:148px;width:110px}
+  .caro-img{height:172px;width:130px}
   .caro-l,.caro-r{gap:.5rem}
   #caro-row2{display:none}
   #sp-section{padding:2.5rem 0 2rem}
@@ -304,52 +304,58 @@ video{display:block;width:100%;object-fit:cover;background:#000}
 
 <script>
 (function(){
-  /* Pause-on-hover + touch/drag scrub for both carousel tracks */
-  ['caro-track1','caro-track2'].forEach(function(id){
-    var el = document.getElementById(id);
-    if(!el) return;
-    var isDragging = false, startX = 0, startScroll = 0, baseOffset = 0;
+  /* Delivery carousel: native scroll-snap on mobile, CSS-anim + mouse-drag on desktop */
+  var isMobile = ('ontouchstart' in window) || window.innerWidth < 700;
 
-    function pauseAnim(){ el.style.animationPlayState = 'paused'; }
-    function resumeAnim(){ if(!isDragging) el.style.animationPlayState = 'running'; }
+  var rows = [
+    { row: document.getElementById('caro-row1'), track: document.getElementById('caro-track1') },
+    { row: document.getElementById('caro-row2'), track: document.getElementById('caro-track2') }
+  ];
 
-    /* Mouse drag */
-    el.addEventListener('mousedown', function(e){
-      isDragging = true;
-      startX = e.clientX;
-      var m = new WebKitCSSMatrix(getComputedStyle(el).transform);
-      baseOffset = m.m41;
-      el.style.animationPlayState = 'paused';
-      el.style.transition = 'none';
-      e.preventDefault();
+  if (isMobile) {
+    /* ── Mobile: disable animation, use native overflow scroll with snap ── */
+    rows.forEach(function(r){
+      if (!r.row || !r.track) return;
+      /* Make the row a scroll container */
+      r.row.style.overflowX = 'auto';
+      r.row.style.overflowY = 'hidden';
+      r.row.style.webkitOverflowScrolling = 'touch';
+      r.row.style.scrollSnapType = 'x mandatory';
+      r.row.style.scrollbarWidth = 'none';
+      /* Stop the CSS animation */
+      r.track.style.animation = 'none';
+      r.track.style.transform = 'none';
+      /* Snap each image */
+      r.track.querySelectorAll('.caro-img').forEach(function(img){
+        img.style.scrollSnapAlign = 'start';
+      });
     });
-    document.addEventListener('mousemove', function(e){
-      if(!isDragging) return;
-      var dx = e.clientX - startX;
-      el.style.transform = 'translateX(' + (baseOffset + dx) + 'px)';
+  } else {
+    /* ── Desktop: CSS animation + mouse drag ── */
+    rows.forEach(function(r){
+      var el = r.track;
+      if (!el) return;
+      var isDragging = false, startX = 0, baseOffset = 0;
+      el.addEventListener('mousedown', function(e){
+        isDragging = true;
+        startX = e.clientX;
+        var m = new (window.DOMMatrix || window.WebKitCSSMatrix)(getComputedStyle(el).transform);
+        baseOffset = m.m41;
+        el.style.animationPlayState = 'paused';
+        el.style.transition = 'none';
+        e.preventDefault();
+      });
+      document.addEventListener('mousemove', function(e){
+        if (!isDragging) return;
+        el.style.transform = 'translateX(' + (baseOffset + e.clientX - startX) + 'px)';
+      });
+      document.addEventListener('mouseup', function(){
+        if (!isDragging) return;
+        isDragging = false;
+        el.style.animationPlayState = 'running';
+      });
     });
-    document.addEventListener('mouseup', function(){
-      if(!isDragging) return;
-      isDragging = false;
-      resumeAnim();
-    });
-
-    /* Touch drag */
-    el.addEventListener('touchstart', function(e){
-      startX = e.touches[0].clientX;
-      var m = new WebKitCSSMatrix(getComputedStyle(el).transform);
-      baseOffset = m.m41;
-      el.style.animationPlayState = 'paused';
-      el.style.transition = 'none';
-    }, {passive:true});
-    el.addEventListener('touchmove', function(e){
-      var dx = e.touches[0].clientX - startX;
-      el.style.transform = 'translateX(' + (baseOffset + dx) + 'px)';
-    }, {passive:true});
-    el.addEventListener('touchend', function(){
-      el.style.animationPlayState = 'running';
-    });
-  });
+  }
 })();
 </script>
 
@@ -742,7 +748,7 @@ video{display:block;width:100%;object-fit:cover;background:#000}
   </div>
 </section>
 
-<!-- ═26�════════════════════════════════════════════════════════
+<!-- ══════════════════════════════════════════════════════════
   § 7  RADAR CHART
 ══════════════════════════════════════════════════════════ -->
 <section style="padding:8rem 0;background:#f9fafb;overflow:hidden">
