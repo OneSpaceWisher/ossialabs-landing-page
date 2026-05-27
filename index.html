@@ -181,6 +181,22 @@ video{display:block;width:100%;object-fit:cover;background:#000}
 .caro-img{height:195px;width:148px;object-fit:cover;border-radius:.9rem;flex-shrink:0;border:2px solid #f3f4f6;display:block;transition:transform .2s,box-shadow .2s;cursor:grab}
 .caro-img:hover{transform:scale(1.03);box-shadow:0 8px 24px rgba(0,0,0,.12)}
 .caro-img:active{cursor:grabbing}
+
+/* ── Product card carousel ── */
+#prod-caro::-webkit-scrollbar{display:none}
+.pdot{width:8px;height:8px;border-radius:50%;background:#d1d5db;cursor:pointer;transition:background .2s,transform .2s;border:none;padding:0}
+.pdot-a{background:#111;transform:scale(1.25)}
+.prod-arr{position:absolute;top:50%;transform:translateY(-50%);z-index:4;background:#fff;border:1px solid #e5e7eb;border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.09);transition:box-shadow .2s}
+.prod-arr:hover{box-shadow:0 4px 18px rgba(0,0,0,.15)}
+.prod-arr-l{left:-22px}.prod-arr-r{right:-22px}
+/* ── Delivery carousel mobile ── */
+@media(max-width:600px){
+  .caro-img{height:148px;width:110px}
+  .caro-l,.caro-r{gap:.5rem}
+  #caro-row2{display:none}
+  #sp-section{padding:2.5rem 0 2rem}
+  #sp-section .sp-head{padding:0 1rem}
+}
 </style>
 </head>
 <body>
@@ -189,9 +205,9 @@ video{display:block;width:100%;object-fit:cover;background:#000}
 <!-- ══════════════════════════════════════════════════════════
   § 0  SOCIAL PROOF CAROUSEL
 ══════════════════════════════════════════════════════════ -->
-<section style="padding:4.5rem 0 3.5rem;background:#fff;overflow:hidden">
+<section id="sp-section" style="padding:4.5rem 0 3.5rem;background:#fff;overflow:hidden">
   <!-- Header -->
-  <div style="text-align:center;margin-bottom:2.2rem;padding:0 1.5rem">
+  <div class="sp-head" style="text-align:center;margin-bottom:2.2rem;padding:0 1.5rem">
     <div style="display:inline-flex;align-items:center;gap:.45rem;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:999px;padding:.42rem .95rem;margin-bottom:1rem">
       <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <span style="font-size:.68rem;font-weight:700;color:#15803d;letter-spacing:.1em">VERIFIED DELIVERIES</span>
@@ -497,11 +513,20 @@ video{display:block;width:100%;object-fit:cover;background:#000}
       <h2 class="title" style="font-size:clamp(2rem,5vw,3.6rem);color:#111;margin-bottom:1.3rem">Engineered for absorption.</h2>
       <p style="color:#9ca3af;font-size:1.05rem;max-width:36rem;margin:0 auto;line-height:1.75">Every product is built around SNEDDS technology, self-nanoemulsifying systems that maximize bioavailability of lipophilic compounds.</p>
     </div>
-    <div class="gauto">
+    <div style="position:relative;margin:0 -.5rem">
+      <!-- Arrows (visible on wider screens) -->
+      <button class="prod-arr prod-arr-l" onclick="document.getElementById('prod-caro').scrollBy({left:-370,behavior:'smooth'})" aria-label="Previous">
+        <svg width="16" height="16" viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7l5 5" stroke="#111" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="prod-arr prod-arr-r" onclick="document.getElementById('prod-caro').scrollBy({left:370,behavior:'smooth'})" aria-label="Next">
+        <svg width="16" height="16" viewBox="0 0 14 14" fill="none"><path d="M5 2l5 5-5 5" stroke="#111" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <!-- Scroll track -->
+      <div id="prod-caro" style="overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;display:flex;gap:1.5rem;padding:.5rem .5rem 1.5rem;scrollbar-width:none;-ms-overflow-style:none">
 
       <!-- Osstivia -->
       <a href="https://ossialabs.com/products/ossialabs-osteva?variant=46668118655194" target="_blank" rel="noopener noreferrer"
-         class="product-card reveal d1" style="background:linear-gradient(160deg,#fffbeb,#fff7ed);border-radius:1.5rem;padding:2rem;border:1px solid rgba(0,0,0,.04);position:relative;overflow:hidden;display:block">
+         class="product-card reveal d1" style="background:linear-gradient(160deg,#fffbeb,#fff7ed);border-radius:1.5rem;padding:2rem;border:1px solid rgba(0,0,0,.04);position:relative;overflow:hidden;display:block;min-width:min(340px,82vw);scroll-snap-align:start;flex-shrink:0">
         <div style="position:absolute;top:0;right:0;width:200px;height:200px;background:#f59e0b;border-radius:50%;opacity:.06;filter:blur(50px);transform:translate(50%,-50%)"></div>
         <div style="display:inline-flex;padding:.75rem;border-radius:1rem;background:rgba(245,158,11,.13);margin-bottom:1.25rem">
           <svg width="36" height="36" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="pr1" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f59e0b"/><stop offset="1" stop-color="#ef4444"/></linearGradient></defs><circle cx="24" cy="24" r="5" fill="url(#pr1)"/><circle cx="24" cy="8" r="3" fill="#f59e0b" opacity=".85"/><circle cx="24" cy="40" r="3" fill="#f59e0b" opacity=".85"/><circle cx="8" cy="24" r="3" fill="#ef4444" opacity=".85"/><circle cx="40" cy="24" r="3" fill="#ef4444" opacity=".85"/><circle cx="12" cy="12" r="2.5" fill="#fbbf24" opacity=".75"/><circle cx="36" cy="12" r="2.5" fill="#fbbf24" opacity=".75"/><circle cx="12" cy="36" r="2.5" fill="#fbbf24" opacity=".75"/><circle cx="36" cy="36" r="2.5" fill="#fbbf24" opacity=".75"/><line x1="24" y1="19" x2="24" y2="11" stroke="#f59e0b" stroke-width="1.5"/><line x1="24" y1="29" x2="24" y2="37" stroke="#f59e0b" stroke-width="1.5"/><line x1="19" y1="24" x2="11" y2="24" stroke="#ef4444" stroke-width="1.5"/><line x1="29" y1="24" x2="37" y2="24" stroke="#ef4444" stroke-width="1.5"/><line x1="20.5" y1="20.5" x2="15" y2="15" stroke="#fbbf24" stroke-width="1.5"/><line x1="27.5" y1="20.5" x2="33" y2="15" stroke="#fbbf24" stroke-width="1.5"/><line x1="20.5" y1="27.5" x2="15" y2="33" stroke="#fbbf24" stroke-width="1.5"/><line x1="27.5" y1="27.5" x2="33" y2="33" stroke="#fbbf24" stroke-width="1.5"/></svg>
@@ -515,7 +540,7 @@ video{display:block;width:100%;object-fit:cover;background:#000}
 
       <!-- H. Japonicus -->
       <a href="https://ossialabs.com/products/humulus-japonicus-snedds?variant=46668547522778" target="_blank" rel="noopener noreferrer"
-         class="product-card reveal d2" style="background:linear-gradient(160deg,#ecfdf5,#f0fdfa);border-radius:1.5rem;padding:2rem;border:1px solid rgba(0,0,0,.04);position:relative;overflow:hidden;display:block">
+         class="product-card reveal d2" style="background:linear-gradient(160deg,#ecfdf5,#f0fdfa);border-radius:1.5rem;padding:2rem;border:1px solid rgba(0,0,0,.04);position:relative;overflow:hidden;display:block;min-width:min(340px,82vw);scroll-snap-align:start;flex-shrink:0">
         <div style="position:absolute;top:0;right:0;width:200px;height:200px;background:#10b981;border-radius:50%;opacity:.06;filter:blur(50px);transform:translate(50%,-50%)"></div>
         <div style="display:inline-flex;padding:.75rem;border-radius:1rem;background:rgba(16,185,129,.13);margin-bottom:1.25rem">
           <svg width="36" height="36" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="pr2" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#8b5cf6"/><stop offset="1" stop-color="#ec4899"/></linearGradient></defs><path d="M16 4C16 4 32 12 32 24C32 36 16 44 16 44" stroke="url(#pr2)" stroke-width="2.5" stroke-linecap="round" fill="none"/><path d="M32 4C32 4 16 12 16 24C16 36 32 44 32 44" stroke="url(#pr2)" stroke-width="2.5" stroke-linecap="round" fill="none"/><line x1="18" y1="14" x2="30" y2="14" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round"/><line x1="14" y1="24" x2="34" y2="24" stroke="#ec4899" stroke-width="2" stroke-linecap="round"/><line x1="18" y1="34" x2="30" y2="34" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round"/></svg>
@@ -529,7 +554,7 @@ video{display:block;width:100%;object-fit:cover;background:#000}
 
       <!-- Bakuchiol -->
       <a href="https://ossialabs.com/products/bakuchiol-nanoemulgel?variant=47223711924442" target="_blank" rel="noopener noreferrer"
-         class="product-card reveal d3" style="background:linear-gradient(160deg,#f5f3ff,#faf5ff);border-radius:1.5rem;padding:2rem;border:1px solid rgba(0,0,0,.04);position:relative;overflow:hidden;display:block">
+         class="product-card reveal d3" style="background:linear-gradient(160deg,#f5f3ff,#faf5ff);border-radius:1.5rem;padding:2rem;border:1px solid rgba(0,0,0,.04);position:relative;overflow:hidden;display:block;min-width:min(340px,82vw);scroll-snap-align:start;flex-shrink:0">
         <div style="position:absolute;top:0;right:0;width:200px;height:200px;background:#8b5cf6;border-radius:50%;opacity:.06;filter:blur(50px);transform:translate(50%,-50%)"></div>
         <div style="display:inline-flex;padding:.75rem;border-radius:1rem;background:rgba(139,92,246,.13);margin-bottom:1.25rem">
           <svg width="36" height="36" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="pr3" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#06b6d4"/><stop offset="1" stop-color="#10b981"/></linearGradient></defs><path d="M17 6h14M19 6v14L8 38a4 4 0 003.4 6h25.2A4 4 0 0040 38L29 20V6" stroke="url(#pr3)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 32h26" stroke="url(#pr3)" stroke-width="2" stroke-linecap="round"/><circle cx="16" cy="38" r="2" fill="#06b6d4" opacity=".75"/><circle cx="24" cy="36" r="1.5" fill="#10b981" opacity=".65"/><circle cx="32" cy="39" r="1.5" fill="#3b82f6" opacity=".75"/></svg>
@@ -543,19 +568,27 @@ video{display:block;width:100%;object-fit:cover;background:#000}
 
       <!-- Dioscorea -->
       <a href="https://ossialabs.com/products/dioscorea-snedds?variant=47332489101530" target="_blank" rel="noopener noreferrer"
-         class="product-card reveal d1" style="background:linear-gradient(160deg,#f0fdf4,#ecfdf5);border-radius:1.5rem;padding:2rem;border:1px solid rgba(0,0,0,.04);position:relative;overflow:hidden;display:block">
-        <div style="position:absolute;top:0;right:0;width:200px;height:200px;background:#0ea5e9;border-radius:50%;opacity:.06;filter:blur(50px);transform:translate(50%,-50%)"></div>
-        <div style="display:inline-flex;padding:.75rem;border-radius:1rem;background:rgba(14,165,233,.13);margin-bottom:1.25rem">
-          <svg width="36" height="36" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="pr4" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0ea5e9"/><stop offset="1" stop-color="#10b981"/></linearGradient></defs><path d="M24 6C14 6 8 14 8 22c0 10 8 18 16 20 8-2 16-10 16-20 0-8-6-16-16-16z" stroke="url(#pr4)" stroke-width="2.5" fill="none"/><path d="M16 24c4-4 12-4 16 0" stroke="url(#pr4)" stroke-width="2" stroke-linecap="round" fill="none"/><path d="M20 18c0 0 2 4 4 4s4-4 4-4" stroke="url(#pr4)" stroke-width="2" stroke-linecap="round" fill="none"/><circle cx="24" cy="30" r="3" fill="#0ea5e9" opacity=".5"/><line x1="24" y1="6" x2="24" y2="12" stroke="url(#pr4)" stroke-width="2" stroke-linecap="round"/></svg>
+         class="product-card reveal d1" style="background:linear-gradient(160deg,#fdf4ff,#f5f3ff);border-radius:1.5rem;padding:2rem;border:1px solid rgba(0,0,0,.04);position:relative;overflow:hidden;display:block;min-width:min(340px,82vw);scroll-snap-align:start;flex-shrink:0">
+        <div style="position:absolute;top:0;right:0;width:200px;height:200px;background:#7c3aed;border-radius:50%;opacity:.06;filter:blur(50px);transform:translate(50%,-50%)"></div>
+        <div style="display:inline-flex;padding:.75rem;border-radius:1rem;background:rgba(124,58,237,.13);margin-bottom:1.25rem">
+          <svg width="36" height="36" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="pr4" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#8b5cf6"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs><path d="M24 6C14 6 8 14 8 22c0 10 8 18 16 20 8-2 16-10 16-20 0-8-6-16-16-16z" stroke="url(#pr4)" stroke-width="2.5" fill="none"/><path d="M16 24c4-4 12-4 16 0" stroke="url(#pr4)" stroke-width="2" stroke-linecap="round" fill="none"/><path d="M20 18c0 0 2 4 4 4s4-4 4-4" stroke="url(#pr4)" stroke-width="2" stroke-linecap="round" fill="none"/><circle cx="24" cy="30" r="3" fill="#0ea5e9" opacity=".5"/><line x1="24" y1="6" x2="24" y2="12" stroke="url(#pr4)" stroke-width="2" stroke-linecap="round"/></svg>
         </div>
-        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1rem"><span class="dot" style="background:#0ea5e9"></span><span class="label" style="color:#9ca3af;font-size:.6rem">Cognitive &amp; Neuroprotective</span></div>
+        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1rem"><span class="dot" style="background:#7c3aed"></span><span class="label" style="color:#9ca3af;font-size:.6rem">Cognitive &amp; Neuroprotective</span></div>
         <h3 style="font-size:1.42rem;font-weight:900;color:#111;margin-bottom:.72rem">Dioscorea</h3>
         <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">Diosgenin-rich Dioscorea SNEDDS, demonstrating remarkable neuroprotective potential with dramatically increased brain bioavailability. Placebo-controlled human trials show meaningful improvements in cognitive performance. Diosgenin also carries strong theoretical potential as a <strong style="color:#374151">natural anabolic for muscle.</strong> It's a steroidal sapogenin with meaningful anabolic signaling properties. Osstivia currently holds more published muscle data (Ursolic Acid, Oleanolic Acid, Salidroside), but Diosgenin's ceiling may be higher.</p>
         <div style="display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.5rem"><span class="tag">Neuroprotective</span><span class="tag">SNEDDS</span><span class="tag">Cognitive Support</span><span class="tag">Brain Bioavailability</span><span class="tag">Anabolic Potential</span><span class="tag">Muscle</span></div>
         <span style="display:inline-flex;align-items:center;gap:.5rem;font-size:.85rem;font-weight:700;color:#111">Learn More <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 3l4 4-4 4" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg></span>
       </a>
 
-    </div>
+      </div><!-- /prod-caro track -->
+      <!-- Dot indicators -->
+      <div id="prod-dots" style="display:flex;justify-content:center;gap:.6rem;padding-top:1.75rem;list-style:none;margin:0">
+        <button class="pdot pdot-a" data-idx="0" aria-label="Card 1"></button>
+        <button class="pdot" data-idx="1" aria-label="Card 2"></button>
+        <button class="pdot" data-idx="2" aria-label="Card 3"></button>
+        <button class="pdot" data-idx="3" aria-label="Card 4"></button>
+      </div>
+    </div><!-- /prod carousel wrapper -->
 
 
   </div>
@@ -1420,5 +1453,51 @@ import * as THREE from 'three';
   animate();
 })();
 </script>
+
+<script>
+(function(){
+  var caro = document.getElementById('prod-caro');
+  var dots = document.querySelectorAll('#prod-dots .pdot');
+  if(!caro || !dots.length) return;
+
+  function setDot(i){
+    dots.forEach(function(d,j){ d.classList.toggle('pdot-a', j===i); });
+  }
+
+  /* Scroll dots to click */
+  dots.forEach(function(d){
+    d.addEventListener('click', function(){
+      var idx = parseInt(d.getAttribute('data-idx'));
+      var card = caro.children[idx];
+      if(card) caro.scrollTo({left: card.offsetLeft - caro.offsetLeft, behavior:'smooth'});
+    });
+  });
+
+  /* Update active dot on scroll */
+  var timer;
+  caro.addEventListener('scroll', function(){
+    clearTimeout(timer);
+    timer = setTimeout(function(){
+      var closest = 0, minDist = Infinity;
+      Array.from(caro.children).forEach(function(c, i){
+        var dist = Math.abs(c.offsetLeft - caro.offsetLeft - caro.scrollLeft);
+        if(dist < minDist){ minDist = dist; closest = i; }
+      });
+      setDot(closest);
+    }, 60);
+  });
+
+  /* Hide arrows on mobile */
+  function checkArrows(){
+    var isMobile = window.innerWidth < 640;
+    document.querySelectorAll('.prod-arr').forEach(function(a){
+      a.style.display = isMobile ? 'none' : 'flex';
+    });
+  }
+  checkArrows();
+  window.addEventListener('resize', checkArrows);
+})();
+</script>
+
 </body>
 </html>
