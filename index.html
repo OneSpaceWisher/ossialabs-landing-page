@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>OssiaLabs — Science that your body actually feels.</title>
+<title>OssiaLabs. Science that your body actually feels.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
@@ -153,14 +153,6 @@ video{display:block;width:100%;object-fit:cover;background:#000}
 .cgrn{background:#f0fdf4;color:#16a34a;border:1px solid #bbf7d0;padding:.2rem .65rem;border-radius:999px;font-size:.67rem;font-weight:600;white-space:nowrap}
 .legend-line{width:14px;height:3px;border-radius:2px;display:inline-block}
 
-
-/* ── Coming Soon badge ── */
-.coming-soon-badge{display:inline-flex;align-items:center;gap:.38rem;background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.28);color:#6366f1;font-size:.68rem;font-weight:700;padding:.3rem .75rem;border-radius:999px;letter-spacing:.08em;text-transform:uppercase}
-
-
-/* ── FAQ ── */
-.faq-item{transition:border-color .2s}
-
 /* ── Discord ── */
 .discord-glow{background:radial-gradient(ellipse at 50% 40%,rgba(99,102,241,.14) 0%,transparent 65%)}
 
@@ -183,6 +175,11 @@ video{display:block;width:100%;object-fit:cover;background:#000}
 </head>
 <body>
 
+<!-- ══════ PROMO BAR ══════ -->
+<div id="promo-bar" style="background:linear-gradient(90deg,#0f172a 0%,#1e3a8a 50%,#0f172a 100%);padding:.65rem 3rem .65rem 1.5rem;text-align:center;position:relative;z-index:200">
+  <p style="color:#e2e8f0;font-size:.82rem;margin:0;line-height:1.5">Get <strong style="color:#22d3ee">15% off</strong> your first order. Visit <a href="https://ossialabs.com" target="_blank" rel="noopener noreferrer" style="color:#22d3ee;font-weight:700;text-decoration:underline;text-underline-offset:2px">ossialabs.com</a> and subscribe to our emails for your discount code.</p>
+  <button onclick="document.getElementById('promo-bar').style.display='none'" style="position:absolute;right:.85rem;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#94a3b8;font-size:1rem;line-height:1;padding:.3rem .4rem;transition:color .15s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#94a3b8'" aria-label="Dismiss">✕</button>
+</div>
 
 <!-- ══════════════════════════════════════════════════════════
   § 1  HERO
@@ -256,10 +253,10 @@ video{display:block;width:100%;object-fit:cover;background:#000}
       Science that your<br><span class="g-blue">body actually feels.</span>
     </h1>
     <p style="font-size:clamp(1rem,2vw,1.2rem);color:#6b7280;max-width:38rem;margin:0 auto 2.7rem;line-height:1.77;font-weight:300">
-      SNEDDS formulas that keep tough plant actives dissolved and bioavailable — breakthrough delivery for results you can actually feel.
+      SNEDDS formulas that keep tough plant actives dissolved and bioavailable. Breakthrough delivery for results you can actually feel.
     </p>
     <div style="display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center;margin-bottom:4.5rem">
-      <a href="https://ossialabs.com/collections/all" target="_blank" rel="noopener noreferrer"
+      <a href="https://ossialabs.com/" target="_blank" rel="noopener noreferrer"
          style="display:inline-block;background:#111;color:#fff;font-weight:600;font-size:1rem;padding:1rem 2rem;border-radius:999px;box-shadow:0 12px 38px rgba(0,0,0,.22);transition:all .24s"
          onmouseover="this.style.cssText=this.dataset.on" onmouseout="this.style.cssText=this.dataset.off"
          data-on="display:inline-block;color:#fff;font-weight:600;font-size:1rem;padding:1rem 2rem;border-radius:999px;box-shadow:0 16px 46px rgba(37,99,235,.32);transition:all .24s;background:linear-gradient(90deg,#2563eb,#06b6d4)"
@@ -292,14 +289,14 @@ video{display:block;width:100%;object-fit:cover;background:#000}
 <!-- ══════════════════════════════════════════════════════════
   § 2  MISSION
 ══════════════════════════════════════════════════════════ -->
-<section style="position:relative;padding:8rem 0;overflow:hidden;background:#030712">
+<section style="position:relative;padding:8rem 0;overflow:hidden;background:linear-gradient(145deg,#060218 0%,#08031e 100%)">
   <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:900px;height:320px;background:rgba(59,130,246,.08);filter:blur(95px);border-radius:50%;pointer-events:none"></div>
   <div style="position:absolute;bottom:0;right:0;width:280px;height:280px;background:rgba(16,185,129,.06);filter:blur(75px);border-radius:50%;pointer-events:none"></div>
   <div class="wrap" style="position:relative;z-index:1">
     <div class="reveal" style="text-align:center;margin-bottom:5rem">
       <p class="label" style="color:#22d3ee;margin-bottom:1.25rem">Our Mission</p>
       <h2 class="title" style="font-size:clamp(2rem,5vw,3.6rem);color:#fff;margin-bottom:1.3rem">Advancing the<br><span class="g-cyan">supplement frontier.</span></h2>
-      <p style="color:#9ca3af;font-size:1.05rem;max-width:36rem;margin:0 auto;line-height:1.75">The industry has been coasting on outdated delivery for decades. We're changing that — one nanodroplet at a time.</p>
+      <p style="color:#9ca3af;font-size:1.05rem;max-width:36rem;margin:0 auto;line-height:1.75">The industry has been coasting on outdated delivery for decades. We're changing that, one nanodroplet at a time.</p>
     </div>
     <div class="gauto" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
       <div class="mission-card reveal d1" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:1.5rem;padding:2rem"
@@ -307,7 +304,7 @@ video{display:block;width:100%;object-fit:cover;background:#000}
            onmouseout="this.style.background='rgba(255,255,255,.04)';this.style.borderColor='rgba(255,255,255,.08)'">
         <svg style="margin-bottom:1.2rem" width="44" height="44" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="mi1" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#3b82f6"/><stop offset="1" stop-color="#06b6d4"/></linearGradient></defs><ellipse cx="24" cy="24" rx="20" ry="8" stroke="url(#mi1)" stroke-width="2" fill="none"/><ellipse cx="24" cy="24" rx="20" ry="8" stroke="url(#mi1)" stroke-width="2" fill="none" transform="rotate(60 24 24)"/><ellipse cx="24" cy="24" rx="20" ry="8" stroke="url(#mi1)" stroke-width="2" fill="none" transform="rotate(120 24 24)"/><circle cx="24" cy="24" r="4" fill="url(#mi1)"/><circle cx="44" cy="24" r="2.5" fill="#3b82f6"/><circle cx="14" cy="8" r="2.5" fill="#06b6d4"/><circle cx="14" cy="40" r="2.5" fill="#10b981"/></svg>
         <h3 style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:.65rem">Redefining Delivery</h3>
-        <p class="body-sm" style="color:#6b7280">We reject the status quo of poorly absorbed supplements. Every formula is built from the ground up with SNEDDS technology — the same nanoemulsifying approach used in pharmaceutical research.</p>
+        <p class="body-sm" style="color:#6b7280">We reject the status quo of poorly absorbed supplements. Every formula is built from the ground up with SNEDDS technology, the same nanoemulsifying approach used in pharmaceutical research.</p>
       </div>
       <div class="mission-card reveal d1" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:1.5rem;padding:2rem"
            onmouseover="this.style.background='rgba(255,255,255,.072)';this.style.borderColor='rgba(255,255,255,.16)'"
@@ -321,14 +318,14 @@ video{display:block;width:100%;object-fit:cover;background:#000}
            onmouseout="this.style.background='rgba(255,255,255,.04)';this.style.borderColor='rgba(255,255,255,.08)'">
         <svg style="margin-bottom:1.2rem" width="44" height="44" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="mi3" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs><rect x="19" y="4" width="10" height="18" rx="2" stroke="url(#mi3)" stroke-width="2.5" fill="none"/><path d="M14 22h20M24 22v8" stroke="url(#mi3)" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="24" cy="36" rx="12" ry="5" stroke="url(#mi3)" stroke-width="2" fill="none"/><circle cx="24" cy="12" r="4" fill="#6366f1" opacity=".28"/><circle cx="24" cy="12" r="2" fill="#8b5cf6"/><line x1="10" y1="44" x2="38" y2="44" stroke="url(#mi3)" stroke-width="2.5" stroke-linecap="round"/></svg>
         <h3 style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:.65rem">Evidence-Aligned</h3>
-        <p class="body-sm" style="color:#6b7280">Every active we choose has a research basis. We map our targets to published data and never overclaim — you get transparency, not marketing fluff.</p>
+        <p class="body-sm" style="color:#6b7280">Every active we choose has a research basis. We map our targets to published data and never overclaim. You get transparency, not marketing fluff.</p>
       </div>
       <div class="mission-card reveal d3" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:1.5rem;padding:2rem"
            onmouseover="this.style.background='rgba(255,255,255,.072)';this.style.borderColor='rgba(255,255,255,.16)'"
            onmouseout="this.style.background='rgba(255,255,255,.04)';this.style.borderColor='rgba(255,255,255,.08)'">
         <svg style="margin-bottom:1.2rem" width="44" height="44" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="mi4" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#10b981"/><stop offset="1" stop-color="#3b82f6"/></linearGradient></defs><path d="M24 4L8 12v12c0 10 7 19 16 22 9-3 16-12 16-22V12L24 4z" stroke="url(#mi4)" stroke-width="2.5" stroke-linejoin="round" fill="none"/><path d="M16 24l5 5 11-11" stroke="url(#mi4)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <h3 style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:.65rem">Advancing the Industry</h3>
-        <p class="body-sm" style="color:#6b7280">The supplement industry is rife with poor absorption and empty promises. We're here to push the frontier — bringing pharmaceutical-grade delivery to botanical science.</p>
+        <p class="body-sm" style="color:#6b7280">The supplement industry is rife with poor absorption and empty promises. We're here to push the frontier, bringing pharmaceutical-grade delivery to botanical science.</p>
       </div>
     </div>
   </div>
@@ -342,7 +339,7 @@ video{display:block;width:100%;object-fit:cover;background:#000}
     <div class="reveal" style="text-align:center;margin-bottom:5rem">
       <p class="label" style="color:#9ca3af;margin-bottom:1rem">Our Formulas</p>
       <h2 class="title" style="font-size:clamp(2rem,5vw,3.6rem);color:#111;margin-bottom:1.3rem">Engineered for absorption.</h2>
-      <p style="color:#9ca3af;font-size:1.05rem;max-width:36rem;margin:0 auto;line-height:1.75">Every product is built around SNEDDS technology — self-nanoemulsifying systems that maximize bioavailability of lipophilic compounds.</p>
+      <p style="color:#9ca3af;font-size:1.05rem;max-width:36rem;margin:0 auto;line-height:1.75">Every product is built around SNEDDS technology, self-nanoemulsifying systems that maximize bioavailability of lipophilic compounds.</p>
     </div>
     <div class="gauto">
 
@@ -355,8 +352,8 @@ video{display:block;width:100%;object-fit:cover;background:#000}
         </div>
         <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1rem"><span class="dot" style="background:#f59e0b"></span><span class="label" style="color:#9ca3af;font-size:.6rem">Bone Modulation Formula</span></div>
         <h3 style="font-size:1.42rem;font-weight:900;color:#111;margin-bottom:.72rem">Osstivia</h3>
-        <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">SNEDDS formula of Daemonorops Draco + Fructus Ligustri Lucidi — researched for bone density, remodeling, and growth. Acts on BMP2, RUNX2, WNT/β-catenin, and RANKL pathways. Pairs powerfully with a hard-chewing regimen for facial aesthetic results. Also a <strong style="color:#111">natural anabolic for muscle</strong> — Ursolic Acid, Oleanolic Acid, and Salidroside each carry research-backed data on muscle protein synthesis, anti-atrophy signaling, and anabolic support.</p>
-        <div style="display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.5rem"><span class="tag">Bone Health</span><span class="tag">SNEDDS</span><span class="tag">Osteoblast Support</span><span class="tag">Wnt Pathway</span><span class="tag">Natural Anabolic</span><span class="tag">Muscle Support</span></div>
+        <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">SNEDDS formula of Fructus Ligustri Lucidi, now at 3× concentration since April 2026, researched for bone density, remodeling, and growth. Acts on BMP2, RUNX2, WNT/β-catenin, and RANKL pathways. Pairs powerfully with a hard-chewing regimen for facial aesthetic results.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.5rem"><span class="tag">Bone Health</span><span class="tag">SNEDDS</span><span class="tag">Osteoblast Support</span><span class="tag">Wnt Pathway</span></div>
         <span style="display:inline-flex;align-items:center;gap:.5rem;font-size:.85rem;font-weight:700;color:#111">Learn More <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 3l4 4-4 4" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg></span>
       </a>
 
@@ -369,7 +366,7 @@ video{display:block;width:100%;object-fit:cover;background:#000}
         </div>
         <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1rem"><span class="dot" style="background:#10b981"></span><span class="label" style="color:#9ca3af;font-size:.6rem">Height &amp; Growth Support</span></div>
         <h3 style="font-size:1.42rem;font-weight:900;color:#111;margin-bottom:.72rem">H. Japonicus</h3>
-        <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">Humulus japonicus in SNEDDS formulation — acting on IGF-1, GH, and JAK3/STAT5 pathways. Most beneficial during puberty with open growth plates. Also delivers potent anti-inflammatory, antioxidant, neuroprotective, and anti-aging effects.</p>
+        <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">Humulus japonicus in SNEDDS formulation, acting on IGF-1, GH, and JAK3/STAT5 pathways. Most beneficial during puberty with open growth plates. Also delivers potent anti-inflammatory, antioxidant, neuroprotective, and anti-aging effects.</p>
         <div style="display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.5rem"><span class="tag">IGF-1 / GH Pathways</span><span class="tag">SNEDDS</span><span class="tag">Growth Support</span><span class="tag">JAK3/STAT5</span></div>
         <span style="display:inline-flex;align-items:center;gap:.5rem;font-size:.85rem;font-weight:700;color:#111">Learn More <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 3l4 4-4 4" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg></span>
       </a>
@@ -383,32 +380,58 @@ video{display:block;width:100%;object-fit:cover;background:#000}
         </div>
         <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1rem"><span class="dot" style="background:#8b5cf6"></span><span class="label" style="color:#9ca3af;font-size:.6rem">Plant-Based Anti-Aging</span></div>
         <h3 style="font-size:1.42rem;font-weight:900;color:#111;margin-bottom:.72rem">Bakuchiol Nanoemulgel</h3>
-        <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">1% Bakuchiol in a precision nanotechnology emulgel that penetrates the skin barrier for deep collagen stimulation and cell turnover — all without retinol's harsh side effects. Gentle for all skin types.</p>
+        <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">1% Bakuchiol in a precision nanotechnology emulgel that penetrates the skin barrier for deep collagen stimulation and cell turnover, all without retinol's harsh side effects. Gentle for all skin types.</p>
         <div style="display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.5rem"><span class="tag">Nano Delivery</span><span class="tag">Topical</span><span class="tag">Anti-Aging</span><span class="tag">Collagen Synthesis</span></div>
         <span style="display:inline-flex;align-items:center;gap:.5rem;font-size:.85rem;font-weight:700;color:#111">Learn More <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 3l4 4-4 4" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg></span>
       </a>
 
-      <!-- Dioscorea — Coming Soon -->
-      <div class="product-card reveal d4" style="background:linear-gradient(160deg,#eef2ff,#e0e7ff);border-radius:1.5rem;padding:2rem;border:1px solid rgba(99,102,241,.12);position:relative;overflow:hidden;cursor:default">
-        <div style="position:absolute;top:0;right:0;width:200px;height:200px;background:#6366f1;border-radius:50%;opacity:.07;filter:blur(50px);transform:translate(50%,-50%)"></div>
-        <div style="position:absolute;top:1rem;right:1rem">
-          <span style="display:inline-flex;align-items:center;gap:.38rem;background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.28);color:#6366f1;font-size:.68rem;font-weight:700;padding:.3rem .75rem;border-radius:999px;letter-spacing:.08em;text-transform:uppercase"><svg width="8" height="8" viewBox="0 0 8 8" fill="none"><circle cx="4" cy="4" r="3" fill="#6366f1"/></svg>Coming Soon</span>
+      <!-- Dioscorea -->
+      <a href="https://ossialabs.com/products/dioscorea-snedds?variant=47332489101530" target="_blank" rel="noopener noreferrer"
+         class="product-card reveal d1" style="background:linear-gradient(160deg,#f0fdf4,#ecfdf5);border-radius:1.5rem;padding:2rem;border:1px solid rgba(0,0,0,.04);position:relative;overflow:hidden;display:block">
+        <div style="position:absolute;top:0;right:0;width:200px;height:200px;background:#0ea5e9;border-radius:50%;opacity:.06;filter:blur(50px);transform:translate(50%,-50%)"></div>
+        <div style="display:inline-flex;padding:.75rem;border-radius:1rem;background:rgba(14,165,233,.13);margin-bottom:1.25rem">
+          <svg width="36" height="36" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="pr4" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0ea5e9"/><stop offset="1" stop-color="#10b981"/></linearGradient></defs><path d="M24 6C14 6 8 14 8 22c0 10 8 18 16 20 8-2 16-10 16-20 0-8-6-16-16-16z" stroke="url(#pr4)" stroke-width="2.5" fill="none"/><path d="M16 24c4-4 12-4 16 0" stroke="url(#pr4)" stroke-width="2" stroke-linecap="round" fill="none"/><path d="M20 18c0 0 2 4 4 4s4-4 4-4" stroke="url(#pr4)" stroke-width="2" stroke-linecap="round" fill="none"/><circle cx="24" cy="30" r="3" fill="#0ea5e9" opacity=".5"/><line x1="24" y1="6" x2="24" y2="12" stroke="url(#pr4)" stroke-width="2" stroke-linecap="round"/></svg>
         </div>
-        <div style="display:inline-flex;padding:.75rem;border-radius:1rem;background:rgba(99,102,241,.13);margin-bottom:1.25rem">
-          <svg width="36" height="36" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="pr4" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs><path d="M24 6 C14 6 8 14 8 24 C8 34 14 42 24 42" stroke="url(#pr4)" stroke-width="2.5" stroke-linecap="round" fill="none"/><path d="M24 6 C34 6 40 14 40 24 C40 34 34 42 24 42" stroke="url(#pr4)" stroke-width="2.5" stroke-linecap="round" fill="none"/><ellipse cx="24" cy="24" rx="8" ry="18" stroke="url(#pr4)" stroke-width="2" fill="none"/><circle cx="24" cy="24" r="4" fill="url(#pr4)"/></svg>
-        </div>
-        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1rem"><span class="dot" style="background:#6366f1"></span><span class="label" style="color:#9ca3af;font-size:.6rem">Cognitive &amp; Neuroprotective</span></div>
-        <h3 style="font-size:1.42rem;font-weight:900;color:#111;margin-bottom:.72rem">Dioscorea</h3>
-        <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">Diosgenin-rich Dioscorea SNEDDS — demonstrating remarkable neuroprotective potential with dramatically increased brain bioavailability. Placebo-controlled human trials show meaningful improvements in cognitive performance. Diosgenin also carries strong theoretical potential as a <strong style="color:#111">natural anabolic for muscle</strong> — it's a steroidal sapogenin with meaningful anabolic signaling properties. Osstivia currently holds more published muscle data (Ursolic Acid, Oleanolic Acid, Salidroside), but Diosgenin's ceiling may be higher.</p>
-        <div style="display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.5rem"><span class="tag">Neuroprotective</span><span class="tag">SNEDDS</span><span class="tag">Cognitive Support</span><span class="tag">Brain Bioavailability</span><span class="tag">Anabolic Potential</span><span class="tag">Muscle</span></div>
-        <a href="https://ossialabs.com/blogs/news/diosgenin-protodioscin-and-diosgenin-snedds-comparative-anabolic-potential-pharmacokinetics-safety-and-implications-for-human-trials"
-          target="_blank" rel="noopener noreferrer"
-          style="display:inline-flex;align-items:center;gap:.5rem;font-size:.85rem;font-weight:700;color:#6366f1;text-decoration:none"
-          onmouseover="this.style.color='#4f46e5'" onmouseout="this.style.color='#6366f1'">
-          Learn More <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 3l4 4-4 4" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round"/></svg>
-        </a>
-      </div>
+        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1rem"><span class="dot" style="background:#0ea5e9"></span><span class="label" style="color:#9ca3af;font-size:.6rem">Hormonal &amp; Metabolic Support</span></div>
+        <h3 style="font-size:1.42rem;font-weight:900;color:#111;margin-bottom:.72rem">Dioscorea SNEDDS</h3>
+        <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">Wild yam SNEDDS extract delivering diosgenin for hormonal support and metabolic health. Enhanced bioavailability through our nanoemulsifying system for superior uptake you can actually feel.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.5rem"><span class="tag">Hormonal Support</span><span class="tag">SNEDDS</span><span class="tag">Diosgenin</span><span class="tag">Metabolic Health</span></div>
+        <span style="display:inline-flex;align-items:center;gap:.5rem;font-size:.85rem;font-weight:700;color:#111">Learn More <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 3l4 4-4 4" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+      </a>
 
+    </div>
+
+    <!-- ── Shopify Buy Buttons ── -->
+    <div class="reveal" style="margin-top:4rem;text-align:center">
+      <p class="label" style="color:#9ca3af;margin-bottom:2rem;font-size:.7rem;letter-spacing:.16em">Add to cart directly, powered by Shopify</p>
+      <div id="collection-component-1774910834494"></div>
+      <script type="text/javascript">
+      /*<![CDATA[*/
+      (function(){
+        var scriptURL='https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+        if(window.ShopifyBuy){if(window.ShopifyBuy.UI){ShopifyBuyInit();}else{loadScript();}}else{loadScript();}
+        function loadScript(){var s=document.createElement('script');s.async=true;s.src=scriptURL;(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(s);s.onload=ShopifyBuyInit;}
+        function ShopifyBuyInit(){
+          var client=ShopifyBuy.buildClient({domain:'0kwwfr-rk.myshopify.com',storefrontAccessToken:'b6277bd6dcf332bb7d6f6d65f1a51895'});
+          ShopifyBuy.UI.onReady(client).then(function(ui){
+            ui.createComponent('collection',{
+              id:'454338150618',
+              node:document.getElementById('collection-component-1774910834494'),
+              moneyFormat:'%24%7B%7Bamount%7D%7D',
+              options:{
+                "product":{"styles":{"product":{"@media (min-width: 601px)":{"max-width":"calc(25% - 20px)","margin-left":"20px","margin-bottom":"50px","width":"calc(25% - 20px)"},"img":{"height":"calc(100% - 15px)","position":"absolute","left":"0","right":"0","top":"0"},"imgWrapper":{"padding-top":"calc(75% + 15px)","position":"relative","height":"0"}},"button":{":hover":{"background-color":"#000000"},"background-color":"#000000",":focus":{"background-color":"#000000"},"border-radius":"11px"}},"text":{"button":"Add to cart"}},
+                "productSet":{"styles":{"products":{"@media (min-width: 601px)":{"margin-left":"-20px"}}}},
+                "modalProduct":{"contents":{"img":false,"imgWithCarousel":true,"button":false,"buttonWithQuantity":true},"styles":{"product":{"@media (min-width: 601px)":{"max-width":"100%","margin-left":"0px","margin-bottom":"0px"}},"button":{":hover":{"background-color":"#000000"},"background-color":"#000000",":focus":{"background-color":"#000000"},"border-radius":"11px"}},"text":{"button":"Add to cart"}},
+                "option":{},
+                "cart":{"styles":{"button":{":hover":{"background-color":"#000000"},"background-color":"#000000",":focus":{"background-color":"#000000"},"border-radius":"11px"}},"text":{"total":"Subtotal","button":"Checkout"},"contents":{"note":true}},
+                "toggle":{"styles":{"toggle":{"background-color":"#000000",":hover":{"background-color":"#000000"},":focus":{"background-color":"#000000"}}}}
+              }
+            });
+          });
+        }
+      })();
+      /*]]>*/
+      </script>
     </div>
 
   </div>
@@ -417,7 +440,7 @@ video{display:block;width:100%;object-fit:cover;background:#000}
 <!-- ══════════════════════════════════════════════════════════
   § 4  SNEDDS VIDEO
 ══════════════════════════════════════════════════════════ -->
-<section style="position:relative;padding:8rem 0;background:#030712;overflow:hidden">
+<section style="position:relative;padding:8rem 0;background:linear-gradient(145deg,#020e1c 0%,#031220 100%);overflow:hidden">
   <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:960px;height:560px;background:rgba(59,130,246,.07);filter:blur(110px);border-radius:50%;pointer-events:none"></div>
   <div class="wrap" style="position:relative;z-index:1">
     <div class="g2">
@@ -425,7 +448,7 @@ video{display:block;width:100%;object-fit:cover;background:#000}
       <div class="reveal">
         <p class="label" style="color:#22d3ee;margin-bottom:1.5rem">The Science</p>
         <h2 class="title" style="font-size:clamp(1.9rem,4vw,3rem);color:#fff;margin-bottom:2rem">UNMATCHED<br>ABSORPTION &amp;<br><span class="g-cyan">BIOAVAILABILITY</span></h2>
-        <p style="color:#9ca3af;font-size:1rem;line-height:1.77;margin-bottom:2.5rem">Your body can't use what it can't absorb. Traditional fat-soluble supplements often struggle to mix with your body's chemistry. SNEDDS technology breaks lipophilic compounds into microscopic particles for rapid, efficient uptake — delivering potency you can actually feel.</p>
+        <p style="color:#9ca3af;font-size:1rem;line-height:1.77;margin-bottom:2.5rem">Your body can't use what it can't absorb. Traditional fat-soluble supplements often struggle to mix with your body's chemistry. SNEDDS technology breaks lipophilic compounds into microscopic particles for rapid, efficient uptake, delivering potency you can actually feel.</p>
         <div class="g2stat" style="margin-bottom:1.5rem">
           <div class="statcard"><p style="font-size:1.75rem;font-weight:900;background:linear-gradient(90deg,#3b82f6,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.2rem">~14×</p><p style="font-size:.7rem;font-weight:600;color:#d1d5db;margin-bottom:.1rem">Curcumin Absorption</p><p style="font-size:.67rem;color:#4b5563">vs. standard powders</p></div>
           <div class="statcard"><p style="font-size:1.75rem;font-weight:900;background:linear-gradient(90deg,#06b6d4,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.2rem">~22×</p><p style="font-size:.7rem;font-weight:600;color:#d1d5db;margin-bottom:.1rem">CBD Bioavailability</p><p style="font-size:.67rem;color:#4b5563">vs. raw powder</p></div>
@@ -478,19 +501,19 @@ video{display:block;width:100%;object-fit:cover;background:#000}
         <span style="position:absolute;top:.6rem;right:1.2rem;font-size:5rem;font-weight:900;color:rgba(0,0,0,.044);line-height:1;pointer-events:none">01</span>
         <div style="display:inline-flex;padding:.75rem;border-radius:1rem;background:rgba(59,130,246,.1);margin-bottom:1.25rem"><svg width="28" height="28" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="hw1" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#06b6d4"/><stop offset="1" stop-color="#10b981"/></linearGradient></defs><path d="M17 6h14M19 6v14L8 38a4 4 0 003.4 6h25.2A4 4 0 0040 38L29 20V6" stroke="url(#hw1)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 32h26" stroke="url(#hw1)" stroke-width="2" stroke-linecap="round"/></svg></div>
         <h3 style="font-size:1.05rem;font-weight:700;color:#111;margin-bottom:.72rem">Formulate to Dissolve</h3>
-        <p class="body-sm" style="color:#6b7280">Lipids and emulsifiers keep hydrophobic actives in stable solution — bypassing first-pass metabolism for direct bloodstream uptake.</p>
+        <p class="body-sm" style="color:#6b7280">Lipids and emulsifiers keep hydrophobic actives in stable solution, bypassing first-pass metabolism for direct bloodstream uptake.</p>
       </div>
       <div class="step-card reveal d2" style="background:linear-gradient(160deg,#ecfdf5,#f0fdfa);border-radius:1.5rem;padding:2rem;border:1px solid rgba(255,255,255,.9);position:relative;overflow:hidden">
         <span style="position:absolute;top:.6rem;right:1.2rem;font-size:5rem;font-weight:900;color:rgba(0,0,0,.044);line-height:1;pointer-events:none">02</span>
         <div style="display:inline-flex;padding:.75rem;border-radius:1rem;background:rgba(16,185,129,.1);margin-bottom:1.25rem"><svg width="28" height="28" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="hw2" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f59e0b"/><stop offset="1" stop-color="#ef4444"/></linearGradient></defs><circle cx="24" cy="24" r="5" fill="url(#hw2)"/><circle cx="24" cy="8" r="3" fill="#f59e0b" opacity=".85"/><circle cx="24" cy="40" r="3" fill="#f59e0b" opacity=".85"/><circle cx="8" cy="24" r="3" fill="#ef4444" opacity=".85"/><circle cx="40" cy="24" r="3" fill="#ef4444" opacity=".85"/><line x1="24" y1="19" x2="24" y2="11" stroke="#f59e0b" stroke-width="2"/><line x1="24" y1="29" x2="24" y2="37" stroke="#f59e0b" stroke-width="2"/><line x1="19" y1="24" x2="11" y2="24" stroke="#ef4444" stroke-width="2"/><line x1="29" y1="24" x2="37" y2="24" stroke="#ef4444" stroke-width="2"/></svg></div>
         <h3 style="font-size:1.05rem;font-weight:700;color:#111;margin-bottom:.72rem">Nano-Disperse on Contact</h3>
-        <p class="body-sm" style="color:#6b7280">Contact with aqueous fluid spontaneously forms nanodroplets — massively increasing interfacial surface area for absorption.</p>
+        <p class="body-sm" style="color:#6b7280">Contact with aqueous fluid spontaneously forms nanodroplets, massively increasing interfacial surface area for absorption.</p>
       </div>
       <div class="step-card reveal d3" style="background:linear-gradient(160deg,#f5f3ff,#faf5ff);border-radius:1.5rem;padding:2rem;border:1px solid rgba(255,255,255,.9);position:relative;overflow:hidden">
         <span style="position:absolute;top:.6rem;right:1.2rem;font-size:5rem;font-weight:900;color:rgba(0,0,0,.044);line-height:1;pointer-events:none">03</span>
         <div style="display:inline-flex;padding:.75rem;border-radius:1rem;background:rgba(139,92,246,.1);margin-bottom:1.25rem"><svg width="28" height="28" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="hw3" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#3b82f6"/><stop offset="1" stop-color="#06b6d4"/></linearGradient></defs><ellipse cx="24" cy="24" rx="20" ry="8" stroke="url(#hw3)" stroke-width="2" fill="none"/><ellipse cx="24" cy="24" rx="20" ry="8" stroke="url(#hw3)" stroke-width="2" fill="none" transform="rotate(60 24 24)"/><ellipse cx="24" cy="24" rx="20" ry="8" stroke="url(#hw3)" stroke-width="2" fill="none" transform="rotate(120 24 24)"/><circle cx="24" cy="24" r="4" fill="url(#hw3)"/></svg></div>
         <h3 style="font-size:1.05rem;font-weight:700;color:#111;margin-bottom:.72rem">Potency You Can Feel</h3>
-        <p class="body-sm" style="color:#6b7280">Microscopic particles are taken up rapidly and efficiently — delivering the compounds your body can actually use, not waste.</p>
+        <p class="body-sm" style="color:#6b7280">Microscopic particles are taken up rapidly and efficiently, delivering the compounds your body can actually use, not waste.</p>
       </div>
     </div>
   </div>
@@ -506,7 +529,7 @@ video{display:block;width:100%;object-fit:cover;background:#000}
     <div class="reveal" style="text-align:center;margin-bottom:5rem">
       <p class="label" style="color:#f59e0b;margin-bottom:1rem">Real Results</p>
       <h2 class="title" style="font-size:clamp(2rem,5vw,3.6rem);color:#fff;margin-bottom:1.3rem">UNLOCKING<br><span class="g-amber">HIDDEN POTENTIAL</span></h2>
-      <p style="color:#9ca3af;font-size:1.05rem;max-width:38rem;margin:0 auto;line-height:1.75">Mandibular potential does not disappear at 22. Hypertrophic growth cartilage remains active into the 30s — and Osstivia is designed to unlock it.</p>
+      <p style="color:#9ca3af;font-size:1.05rem;max-width:38rem;margin:0 auto;line-height:1.75">Mandibular potential does not disappear at 22. Hypertrophic growth cartilage remains active into the 30s. Osstivia is designed to unlock it.</p>
     </div>
     <div class="g2">
       <!-- Video -->
@@ -538,9 +561,9 @@ video{display:block;width:100%;object-fit:cover;background:#000}
       </div>
       <!-- Content -->
       <div class="reveal d2" style="display:flex;flex-direction:column;gap:1.2rem">
-        <div class="dcard"><p style="color:#d1d5db;font-size:.95rem;line-height:1.77">At 22, natural development slows — but mandibular potential does not disappear. Hypertrophic growth cartilage remains active into the 30s, and condylar growth and remodeling is possible throughout life.</p></div>
+        <div class="dcard"><p style="color:#d1d5db;font-size:.95rem;line-height:1.77">At 22, natural development slows, but mandibular potential does not disappear. Hypertrophic growth cartilage remains active into the 30s, and condylar growth and remodeling is possible throughout life.</p></div>
         <div class="dcard"><p style="color:#d1d5db;font-size:.95rem;line-height:1.77">This subject utilized a dual approach: strategic orthodontic guidance from the CRC, combined with high-resistance mechanical stress (hard chewing) paired with <strong style="color:#fff">Osstivia</strong>.</p></div>
-        <div class="amcard"><p style="color:#fde68a;font-size:.95rem;line-height:1.77;font-weight:500">Our SNEDDS technology delivers Daemonorops Draco and Fructus Ligustri Lucidi to modulate the bone's response to physical stress — so chewing forces actively initiate mandibular remodeling, growth, and bone deposition. The result converts strategic guidance into tangible forward projection.</p></div>
+        <div class="amcard"><p style="color:#fde68a;font-size:.95rem;line-height:1.77;font-weight:500">Our SNEDDS technology delivers Fructus Ligustri Lucidi to modulate the bone's response to physical stress. Chewing forces actively initiate mandibular remodeling, growth, and bone deposition. The result converts strategic guidance into tangible forward projection.</p></div>
         <div>
           <p class="label" style="color:#4b5563;font-size:.6rem;margin-bottom:.72rem">Pathway Targets</p>
           <div style="display:flex;flex-wrap:wrap;gap:.38rem">
@@ -586,11 +609,11 @@ video{display:block;width:100%;object-fit:cover;background:#000}
           <table class="ctable">
             <thead><tr style="border-bottom:1px solid #f3f4f6"><th style="text-align:left;color:#6b7280;width:38%">Dimension</th><th style="text-align:center"><span class="cblu">OssiaLabs (SNEDDS)</span></th><th style="text-align:center;color:#9ca3af" class="hide-xs">Typical SNEDDS</th></tr></thead>
             <tbody>
-              <tr style="border-bottom:1px solid #f9fafb"><td style="color:#6b7280;font-size:.72rem;font-weight:500">Absorption of hard-to-dissolve actives</td><td style="text-align:center"><span class="cgrn">High — nano droplets</span></td><td style="text-align:center;color:#9ca3af;font-size:.72rem" class="hide-xs">Medium–High</td></tr>
+              <tr style="border-bottom:1px solid #f9fafb"><td style="color:#6b7280;font-size:.72rem;font-weight:500">Absorption of hard-to-dissolve actives</td><td style="text-align:center"><span class="cgrn">High, nano droplets</span></td><td style="text-align:center;color:#9ca3af;font-size:.72rem" class="hide-xs">Medium–High</td></tr>
               <tr style="border-bottom:1px solid #f9fafb;background:#fafafa"><td style="color:#6b7280;font-size:.72rem;font-weight:500">Time to effect</td><td style="text-align:center"><span class="cgrn">Often faster</span></td><td style="text-align:center;color:#9ca3af;font-size:.72rem" class="hide-xs">Varies</td></tr>
-              <tr style="border-bottom:1px solid #f9fafb"><td style="color:#6b7280;font-size:.72rem;font-weight:500">Consistency across doses</td><td style="text-align:center"><span class="cgrn">High — stays dissolved</span></td><td style="text-align:center;color:#9ca3af;font-size:.72rem" class="hide-xs">Medium–High</td></tr>
+              <tr style="border-bottom:1px solid #f9fafb"><td style="color:#6b7280;font-size:.72rem;font-weight:500">Consistency across doses</td><td style="text-align:center"><span class="cgrn">High, stays dissolved</span></td><td style="text-align:center;color:#9ca3af;font-size:.72rem" class="hide-xs">Medium–High</td></tr>
               <tr style="border-bottom:1px solid #f9fafb;background:#fafafa"><td style="color:#6b7280;font-size:.72rem;font-weight:500">Works for ingestible actives</td><td style="text-align:center"><span class="cgrn">✓ ✓</span></td><td style="text-align:center;color:#9ca3af;font-size:.72rem" class="hide-xs">✓ ✓</td></tr>
-              <tr><td style="color:#6b7280;font-size:.72rem;font-weight:500">Research-backed</td><td style="text-align:center"><span class="cgrn">Yes — citations</span></td><td style="text-align:center;color:#9ca3af;font-size:.72rem" class="hide-xs">Varies</td></tr>
+              <tr><td style="color:#6b7280;font-size:.72rem;font-weight:500">Research-backed</td><td style="text-align:center"><span class="cgrn">Yes, with citations</span></td><td style="text-align:center;color:#9ca3af;font-size:.72rem" class="hide-xs">Varies</td></tr>
             </tbody>
           </table>
         </div>
@@ -617,7 +640,7 @@ video{display:block;width:100%;object-fit:cover;background:#000}
         <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">"Been taking Osstivia for 3 months alongside my chewing regimen and my jawline definition has genuinely improved. The SNEDDS formulation makes all the difference. You can feel it working."</p>
         <div style="display:flex;align-items:center;gap:.72rem">
           <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#fef3c7,#fed7aa);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:#92400e;flex-shrink:0">MR</div>
-          <div><p style="font-size:.85rem;font-weight:600;color:#111">Marcus R.</p><p style="font-size:.7rem;color:#9ca3af">Verified — Osstivia</p></div>
+          <div><p style="font-size:.85rem;font-weight:600;color:#111">Marcus R.</p><p style="font-size:.7rem;color:#9ca3af">Verified, Osstivia</p></div>
         </div>
       </div>
 
@@ -626,34 +649,34 @@ video{display:block;width:100%;object-fit:cover;background:#000}
         <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">"Started H. Japonicus during my growth window. The taste is surprisingly pleasant, almost juicy. Inflammation is noticeably down. Unique product I haven't seen anywhere else."</p>
         <div style="display:flex;align-items:center;gap:.72rem">
           <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#d1fae5,#a7f3d0);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:#064e3b;flex-shrink:0">TK</div>
-          <div><p style="font-size:.85rem;font-weight:600;color:#111">Theo K.</p><p style="font-size:.7rem;color:#9ca3af">Verified — H. Japonicus</p></div>
+          <div><p style="font-size:.85rem;font-weight:600;color:#111">Theo K.</p><p style="font-size:.7rem;color:#9ca3af">Verified, H. Japonicus</p></div>
         </div>
       </div>
 
       <div class="review-card reveal d3" style="background:#fff;border:1px solid #f3f4f6;border-radius:1.5rem;padding:1.75rem;box-shadow:0 1px 4px rgba(0,0,0,.05)">
         <div style="color:#fbbf24;margin-bottom:1rem">★★★★★</div>
-        <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">"Finally a Bakuchiol formula that actually penetrates. The gel texture absorbs instantly, zero irritation. After 6 weeks my skin texture is smoother and I'm seeing real firmness. No retinol drama."</p>
+        <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">"Finally a Bakuchiol formula that actually penetrates. The gel texture absorbs instantly, I have had zero irritation. After 6 weeks my skin texture is smoother and I'm seeing real firmness. No need for retinol."</p>
         <div style="display:flex;align-items:center;gap:.72rem">
           <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#ede9fe,#ddd6fe);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:#4c1d95;flex-shrink:0">AM</div>
-          <div><p style="font-size:.85rem;font-weight:600;color:#111">Aisha M.</p><p style="font-size:.7rem;color:#9ca3af">Verified — Bakuchiol Nanoemulgel</p></div>
+          <div><p style="font-size:.85rem;font-weight:600;color:#111">Aisha M.</p><p style="font-size:.7rem;color:#9ca3af">Verified, Bakuchiol Nanoemulgel</p></div>
         </div>
       </div>
 
       <div class="review-card reveal" style="background:#fff;border:1px solid #f3f4f6;border-radius:1.5rem;padding:1.75rem;box-shadow:0 1px 4px rgba(0,0,0,.05)">
         <div style="color:#fbbf24;margin-bottom:1rem">★★★★★</div>
-        <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">"The science behind this is real. Daemonorops Draco in SNEDDS form is a completely different tier. Noticed better recovery and bone density after just 8 weeks."</p>
+        <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">"The science behind this is real. Fructus Ligustri Lucidi in SNEDDS form is a completely different thing, never seen this before. Noticed better recovery and mandible gains after just 8 weeks with chewing hard gum."</p>
         <div style="display:flex;align-items:center;gap:.72rem">
           <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#dbeafe,#bfdbfe);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:#1e3a8a;flex-shrink:0">JL</div>
-          <div><p style="font-size:.85rem;font-weight:600;color:#111">Jordan L.</p><p style="font-size:.7rem;color:#9ca3af">Verified — Osstivia</p></div>
+          <div><p style="font-size:.85rem;font-weight:600;color:#111">Jordan L.</p><p style="font-size:.7rem;color:#9ca3af">Verified, Osstivia</p></div>
         </div>
       </div>
 
       <div class="review-card reveal d1" style="background:#fff;border:1px solid #f3f4f6;border-radius:1.5rem;padding:1.75rem;box-shadow:0 1px 4px rgba(0,0,0,.05)">
         <div style="color:#fbbf24;margin-bottom:1rem">★★★★★</div>
-        <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">"OssiaLabs are literally the only company doing SNEDDS on H. Japonicus. The anti-inflammatory effects are real and I appreciate the science-based approach without overclaiming."</p>
+        <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">"OssiaLabs are literally the only company doing SNEDDS on H. Japonicus. The anti-inflammatory effects, sleeping benefits, and helping clear lungs is real and I appreciate the science based approach without overclaiming."</p>
         <div style="display:flex;align-items:center;gap:.72rem">
           <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#fce7f3,#fbcfe8);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:#831843;flex-shrink:0">CP</div>
-          <div><p style="font-size:.85rem;font-weight:600;color:#111">Cass P.</p><p style="font-size:.7rem;color:#9ca3af">Verified — H. Japonicus</p></div>
+          <div><p style="font-size:.85rem;font-weight:600;color:#111">Cass P.</p><p style="font-size:.7rem;color:#9ca3af">Verified, H. Japonicus</p></div>
         </div>
       </div>
 
@@ -662,7 +685,7 @@ video{display:block;width:100%;object-fit:cover;background:#000}
         <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">"This gel absorbs at a different level vs regular creams. Fine lines around my eyes are visibly softer. This is now a permanent part of my routine."</p>
         <div style="display:flex;align-items:center;gap:.72rem">
           <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#cffafe,#a5f3fc);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:#164e63;flex-shrink:0">DN</div>
-          <div><p style="font-size:.85rem;font-weight:600;color:#111">Dev N.</p><p style="font-size:.7rem;color:#9ca3af">Verified — Bakuchiol Nanoemulgel</p></div>
+          <div><p style="font-size:.85rem;font-weight:600;color:#111">Dev N.</p><p style="font-size:.7rem;color:#9ca3af">Verified, Bakuchiol Nanoemulgel</p></div>
         </div>
       </div>
 
@@ -671,16 +694,16 @@ video{display:block;width:100%;object-fit:cover;background:#000}
         <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">"My jaw has been asymmetric for years. Two months on Osstivia with hard chewing and I'm seeing genuine changes in definition. Was skeptical but the pathway science is legit."</p>
         <div style="display:flex;align-items:center;gap:.72rem">
           <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#fef9c3,#fde68a);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:#78350f;flex-shrink:0">RA</div>
-          <div><p style="font-size:.85rem;font-weight:600;color:#111">Ryan A.</p><p style="font-size:.7rem;color:#9ca3af">Verified — Osstivia</p></div>
+          <div><p style="font-size:.85rem;font-weight:600;color:#111">Ryan A.</p><p style="font-size:.7rem;color:#9ca3af">Verified, Osstivia</p></div>
         </div>
       </div>
 
       <div class="review-card reveal" style="background:#fff;border:1px solid #f3f4f6;border-radius:1.5rem;padding:1.75rem;box-shadow:0 1px 4px rgba(0,0,0,.05)">
         <div style="color:#fbbf24;margin-bottom:1rem">★★★★★</div>
-        <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">"I've tried a lot of growth support supplements for my 16 year old son. H. Japonicus is the only one with actual pharmacokinetic data behind the delivery. Parents — this is the one to try."</p>
+        <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">"I've tried a lot of height growth support supplements for my 16 year old son. H. Japonicus is the only one with actual pharmacokinetic data behind the delivery. Parents, this is honestly the one to try out."</p>
         <div style="display:flex;align-items:center;gap:.72rem">
-          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#d1fae5,#bbf7d0);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:#065f46;flex-shrink:0">KM</div>
-          <div><p style="font-size:.85rem;font-weight:600;color:#111">Karen M.</p><p style="font-size:.7rem;color:#9ca3af">Verified — H. Japonicus</p></div>
+          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#d1fae5,#bbf7d0);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:#065f46;flex-shrink:0">ET</div>
+          <div><p style="font-size:.85rem;font-weight:600;color:#111">Emily T.</p><p style="font-size:.7rem;color:#9ca3af">Verified, H. Japonicus</p></div>
         </div>
       </div>
 
@@ -689,7 +712,7 @@ video{display:block;width:100%;object-fit:cover;background:#000}
         <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">"I'm a biochem grad student and I was impressed by how transparent OssiaLabs is. The SNEDDS excipient list is clean, the bioavailability citations are real, and the product actually works."</p>
         <div style="display:flex;align-items:center;gap:.72rem">
           <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#e0e7ff,#c7d2fe);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:#3730a3;flex-shrink:0">SH</div>
-          <div><p style="font-size:.85rem;font-weight:600;color:#111">Sophia H.</p><p style="font-size:.7rem;color:#9ca3af">Verified — H. Japonicus</p></div>
+          <div><p style="font-size:.85rem;font-weight:600;color:#111">Sophia H.</p><p style="font-size:.7rem;color:#9ca3af">Verified, H. Japonicus</p></div>
         </div>
       </div>
 
@@ -698,7 +721,7 @@ video{display:block;width:100%;object-fit:cover;background:#000}
         <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">"Osstivia + chewing + orthodontics for 4 months. Cheekbones more prominent, jaw more structured. My face changed in ways I didn’t expect. Whatever is in this SNEDDS formula, it’s doing something real."</p>
         <div style="display:flex;align-items:center;gap:.72rem">
           <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#fce7f3,#fbb6ce);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:#9d174d;flex-shrink:0">LT</div>
-          <div><p style="font-size:.85rem;font-weight:600;color:#111">Lena T.</p><p style="font-size:.7rem;color:#9ca3af">Verified — Osstivia</p></div>
+          <div><p style="font-size:.85rem;font-weight:600;color:#111">Lena T.</p><p style="font-size:.7rem;color:#9ca3af">Verified, Osstivia</p></div>
         </div>
       </div>
 
@@ -707,7 +730,7 @@ video{display:block;width:100%;object-fit:cover;background:#000}
         <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">"The Bakuchiol Nanoemulgel replaced my entire retinol routine. My skin barrier is stronger, redness gone, and I'm waking up with actual glow. I've recommended it to 6 people already."</p>
         <div style="display:flex;align-items:center;gap:.72rem">
           <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#f0fdf4,#bbf7d0);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:#14532d;flex-shrink:0">NW</div>
-          <div><p style="font-size:.85rem;font-weight:600;color:#111">Nina W.</p><p style="font-size:.7rem;color:#9ca3af">Verified — Bakuchiol Nanoemulgel</p></div>
+          <div><p style="font-size:.85rem;font-weight:600;color:#111">Nina W.</p><p style="font-size:.7rem;color:#9ca3af">Verified, Bakuchiol Nanoemulgel</p></div>
         </div>
       </div>
 
@@ -716,7 +739,7 @@ video{display:block;width:100%;object-fit:cover;background:#000}
         <p class="body-sm" style="color:#6b7280;margin-bottom:1.25rem">"Joined the Discord after buying and the team actually answered my questions with research papers. That level of transparency is unheard of in supplements. Earned a lifetime customer."</p>
         <div style="display:flex;align-items:center;gap:.72rem">
           <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#f5f3ff,#ddd6fe);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:#5b21b6;flex-shrink:0">OB</div>
-          <div><p style="font-size:.85rem;font-weight:600;color:#111">Omar B.</p><p style="font-size:.7rem;color:#9ca3af">Verified — Osstivia</p></div>
+          <div><p style="font-size:.85rem;font-weight:600;color:#111">Omar B.</p><p style="font-size:.7rem;color:#9ca3af">Verified, Osstivia</p></div>
         </div>
       </div>
 
@@ -791,7 +814,7 @@ video{display:block;width:100%;object-fit:cover;background:#000}
           </span>
         </button>
         <div class="faq-body" style="max-height:0;overflow:hidden;transition:max-height .38s cubic-bezier(.22,1,.36,1)">
-          <p style="padding:0 1.5rem 1.35rem;font-size:.9rem;color:#6b7280;line-height:1.72">Yes — see the <a href="https://ossialabs.com/blogs/news/the-innovation-of-self-emulsifying-drug-delivery-systems-snedds" target="_blank" rel="noopener noreferrer" style="color:#06b6d4;font-weight:600;text-decoration:underline;text-underline-offset:3px">SNEDDS explainer</a> and <a href="https://ossialabs.com/blogs/news" target="_blank" rel="noopener noreferrer" style="color:#06b6d4;font-weight:600;text-decoration:underline;text-underline-offset:3px">blog</a> for citations and background.</p>
+          <p style="padding:0 1.5rem 1.35rem;font-size:.9rem;color:#6b7280;line-height:1.72">Yes, see the <a href="https://ossialabs.com/blogs/news/the-innovation-of-self-emulsifying-drug-delivery-systems-snedds" target="_blank" rel="noopener noreferrer" style="color:#06b6d4;font-weight:600;text-decoration:underline;text-underline-offset:3px">SNEDDS explainer</a> and <a href="https://ossialabs.com/blogs/news" target="_blank" rel="noopener noreferrer" style="color:#06b6d4;font-weight:600;text-decoration:underline;text-underline-offset:3px">blog</a> for citations and background.</p>
         </div>
       </div>
 
@@ -815,7 +838,7 @@ video{display:block;width:100%;object-fit:cover;background:#000}
           </span>
         </button>
         <div class="faq-body" style="max-height:0;overflow:hidden;transition:max-height .38s cubic-bezier(.22,1,.36,1)">
-          <p style="padding:0 1.5rem 1.35rem;font-size:.9rem;color:#6b7280;line-height:1.72">Health benefits and positive internal effects often arrive sooner than you can see them — your body is responding before the mirror confirms it. Bone and structural changes take time — most users report noticing visible differences between 6–12 weeks of consistent use paired with the right mechanical input. Skin improvements from Bakuchiol typically show within 4–8 weeks.</p>
+          <p style="padding:0 1.5rem 1.35rem;font-size:.9rem;color:#6b7280;line-height:1.72">Health benefits and positive internal effects often arrive sooner than you can see them. Your body is responding before the mirror confirms it. Bone and structural changes take time. Most users report noticing visible differences between 6–12 weeks of consistent use paired with the right mechanical input. Skin improvements from Bakuchiol typically show within 4–8 weeks.</p>
         </div>
       </div>
 
@@ -858,7 +881,7 @@ function toggleFaq(btn){
       </div>
       <p class="label" style="color:#818cf8;margin-bottom:1rem">Community</p>
       <h2 class="title" style="font-size:clamp(1.9rem,4vw,2.9rem);color:#fff;margin-bottom:1.3rem">Join the lab on Discord.</h2>
-      <p style="color:#9ca3af;font-size:1.05rem;line-height:1.77;margin-bottom:2.6rem">Discuss the science, share your results, ask questions directly, and stay ahead of new formulas before they launch. We're transparent — come talk to us.</p>
+      <p style="color:#9ca3af;font-size:1.05rem;line-height:1.77;margin-bottom:2.6rem">Discuss the science, share your results, ask questions directly, and stay ahead of new formulas before they launch. We're transparent. Come talk to us.</p>
       <div style="display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center;margin-bottom:2.6rem">
         <a href="https://discord.gg/vYrn6vYQ9u" target="_blank" rel="noopener noreferrer"
            style="display:inline-flex;align-items:center;gap:.75rem;background:#6366f1;color:#fff;font-weight:700;font-size:1rem;padding:1rem 2rem;border-radius:999px;box-shadow:0 12px 38px rgba(99,102,241,.3);transition:all .22s"
