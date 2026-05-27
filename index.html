@@ -191,7 +191,7 @@ video{display:block;width:100%;object-fit:cover;background:#000}
 .prod-arr-l{left:-22px}.prod-arr-r{right:-22px}
 /* ── Delivery carousel mobile ── */
 @media(max-width:600px){
-  .caro-img{height:172px;width:130px}
+  .caro-img{height:310px;width:240px}
   .caro-l,.caro-r{gap:.5rem}
   #caro-row2{display:none}
   #sp-section{padding:2.5rem 0 2rem}
@@ -308,57 +308,66 @@ video{display:block;width:100%;object-fit:cover;background:#000}
 
   if (isMobile) {
     /* ─────────────────────────────────────────────────────────────
-       MOBILE: RAF-driven auto-scroll on the ROW (overflow-x:auto).
-       Touch drag uses native browser scroll — no conflict at all.
-       After finger lifts, auto-scroll resumes after 1.5 s.
+       MOBILE: wait for images to load so scrollWidth is correct,
+       then fully replace inline style to unlock overflow-x scroll,
+       then RAF-drive the auto-scroll. Touch drag = native scroll.
     ───────────────────────────────────────────────────────────── */
-    var cfgs = [
-      { rowId:'caro-row1', trackId:'caro-track1', speed: 0.55 },
-      { rowId:'caro-row2', trackId:'caro-track2', speed:-0.50 }
-    ];
+    window.addEventListener('load', function(){
+      var cfgs = [
+        { rowId:'caro-row1', trackId:'caro-track1', speed: 0.6 },
+        { rowId:'caro-row2', trackId:'caro-track2', speed:-0.55 }
+      ];
 
-    cfgs.forEach(function(cfg){
-      var row   = document.getElementById(cfg.rowId);
-      var track = document.getElementById(cfg.trackId);
-      if (!row || !track) return;
+      cfgs.forEach(function(cfg){
+        var row   = document.getElementById(cfg.rowId);
+        var track = document.getElementById(cfg.trackId);
+        if (!row || !track) return;
 
-      /* Convert row into a native scroll container */
-      row.style.overflowX          = 'auto';
-      row.style.overflowY          = 'hidden';
-      row.style.webkitOverflowScrolling = 'touch';
-      row.style.scrollbarWidth     = 'none';
+        /* Completely replace inline style — kills overflow:hidden */
+        var mb = cfg.rowId === 'caro-row1' ? 'margin-bottom:.85rem;' : '';
+        row.setAttribute('style',
+          mb + 'overflow-x:auto;overflow-y:hidden;' +
+          '-webkit-overflow-scrolling:touch;scrollbar-width:none;' +
+          '-ms-overflow-style:none');
 
-      /* Kill the CSS animation so it doesn't fight scrollLeft */
-      track.style.animation  = 'none';
-      track.style.transform  = 'none';
-
-      /* For backward row: start halfway so loop works both ways */
-      var half = track.scrollWidth / 2;
-      if (cfg.speed < 0) row.scrollLeft = half;
-
-      var paused = false;
-      var resumeTimer;
-
-      /* Auto-scroll loop */
-      (function tick(){
-        if (!paused) {
-          row.scrollLeft += cfg.speed;
-          /* Infinite loop: clamp and wrap */
-          if (cfg.speed > 0 && row.scrollLeft >= half) row.scrollLeft -= half;
-          if (cfg.speed < 0 && row.scrollLeft <= 0)   row.scrollLeft += half;
+        /* Hide webkit scrollbar via a dynamic style tag */
+        if (!document.getElementById('caro-sb-hide')) {
+          var s = document.createElement('style');
+          s.id = 'caro-sb-hide';
+          s.textContent = '#caro-row1::-webkit-scrollbar,#caro-row2::-webkit-scrollbar{display:none}';
+          document.head.appendChild(s);
         }
-        requestAnimationFrame(tick);
-      })();
 
-      /* Pause while finger is down, resume 1.5 s after lift */
-      row.addEventListener('touchstart', function(){
-        paused = true;
-        clearTimeout(resumeTimer);
-      }, {passive:true});
+        /* Kill CSS animation — scrollLeft is now the source of truth */
+        track.style.animation = 'none';
+        track.style.transform = 'none';
 
-      row.addEventListener('touchend', function(){
-        resumeTimer = setTimeout(function(){ paused = false; }, 1500);
-      }, {passive:true});
+        /* half = width of one set (images are duplicated for infinite loop) */
+        var half = track.scrollWidth / 2;
+        /* Backward row starts at halfway so decrement loops correctly */
+        if (cfg.speed < 0) row.scrollLeft = half;
+
+        var paused = false;
+        var resumeTimer;
+
+        (function tick(){
+          if (!paused && half > 0) {
+            row.scrollLeft += cfg.speed;
+            if (cfg.speed > 0 && row.scrollLeft >= half) row.scrollLeft -= half;
+            if (cfg.speed < 0 && row.scrollLeft <= 0)   row.scrollLeft += half;
+          }
+          requestAnimationFrame(tick);
+        })();
+
+        row.addEventListener('touchstart', function(){
+          paused = true;
+          clearTimeout(resumeTimer);
+        }, {passive:true});
+
+        row.addEventListener('touchend', function(){
+          resumeTimer = setTimeout(function(){ paused = false; }, 1500);
+        }, {passive:true});
+      });
     });
 
   } else {
