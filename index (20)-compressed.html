@@ -4,6 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>OssiaLabs. Science that your body actually feels.</title>
+<link rel="preconnect" href="https://cdn.shopify.com" crossorigin/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
@@ -211,6 +212,125 @@ video{display:block;width:100%;object-fit:cover;background:#000}
 #caro-lb{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9999;align-items:center;justify-content:center;cursor:zoom-out}
 #caro-lb.lb-open{display:flex}
 #caro-lb img{max-width:92vw;max-height:88vh;border-radius:.75rem;object-fit:contain;box-shadow:0 24px 64px rgba(0,0,0,.5)}
+
+/* ── Reduced motion ── */
+@media(prefers-reduced-motion:reduce){
+  .caro-l,.caro-r{animation-play-state:paused!important}
+  .reveal{opacity:1!important;transform:none!important;transition:none!important}
+  .orb,.ring,.particle{animation:none!important}
+  .product-card,.review-card,.step-card,.mission-card{transition:none!important}
+}
+
+/* ── GPU compositing hints — only animate elements ── */
+.caro-l,.caro-r{backface-visibility:hidden}
+.product-card,.review-card,.step-card{backface-visibility:hidden}
+
+/* ── Section-field decorative overlays: disable on mobile (expensive repeating gradients) ── */
+@media(max-width:860px){
+  .section-field::before,.section-field::after{display:none}
+  .orb{filter:blur(55px)!important}
+}
+
+/* ── Mobile section vertical rhythm ── */
+@media(max-width:860px){
+  .wrap,.wrap-sm{padding-left:1.25rem;padding-right:1.25rem}
+}
+@media(max-width:600px){
+  .wrap,.wrap-sm{padding-left:1rem;padding-right:1rem}
+}
+
+/* ── Section padding overrides for mobile ── */
+@media(max-width:860px){
+  section[style*="padding:8rem"]{padding-top:5rem!important;padding-bottom:5rem!important}
+  section[style*="padding:6rem"]{padding-top:4rem!important;padding-bottom:4rem!important}
+}
+@media(max-width:600px){
+  section[style*="padding:8rem"]{padding-top:3.75rem!important;padding-bottom:3.75rem!important}
+  section[style*="padding:6rem"]{padding-top:3rem!important;padding-bottom:3rem!important}
+  .g2stat{grid-template-columns:1fr 1fr}
+  .g3stat{grid-template-columns:repeat(3,1fr)}
+}
+
+/* ── Mobile hero ── */
+@media(max-width:600px){
+  #hero{padding:4rem 1rem 3rem!important;min-height:92svh!important}
+  #hero h1{font-size:clamp(2.3rem,11vw,3.6rem)!important;letter-spacing:-.025em}
+  #hero p{font-size:.88rem!important}
+}
+
+/* ── Video sizing on mobile ── */
+@media(max-width:860px){
+  .v-portrait{aspect-ratio:4/5;max-height:72vw}
+}
+@media(max-width:600px){
+  .v-portrait{aspect-ratio:16/9;max-height:58vw}
+  .ctrl-pill{font-size:.6rem;padding:.22rem .65rem}
+}
+
+/* ── Research / nano 4-image grid: 2x2 on mobile ── */
+@media(max-width:600px){
+  div[style*="grid-template-columns:1fr 1fr;gap:1rem"]{gap:.6rem!important}
+  div[style*="grid-template-columns:1fr 1fr;gap:1rem"] img{border-radius:.75rem!important}
+}
+
+/* ── SNEDDS research gallery: 2x2 on very small screens ── */
+@media(max-width:480px){
+  .g4{grid-template-columns:1fr 1fr!important}
+}
+
+/* ── Product arrows hide on mobile ── */
+@media(max-width:640px){
+  .prod-arr{display:none!important}
+}
+
+/* ── Radar chart container: don't overflow on mobile ── */
+@media(max-width:600px){
+  #radarChart{max-width:100%!important}
+}
+
+/* ── FAQ width on mobile ── */
+@media(max-width:600px){
+  .faq-item{width:100%}
+}
+
+/* ── Discord CTA section on mobile ── */
+@media(max-width:600px){
+  .discord-glow{padding-left:1.25rem!important;padding-right:1.25rem!important}
+}
+
+/* ── Mission / How It Works cards: single column on xs ── */
+@media(max-width:480px){
+  .gauto{grid-template-columns:1fr!important}
+}
+
+/* ── Step counter badge sizing on mobile ── */
+@media(max-width:600px){
+  .step-card{padding:1.5rem!important}
+}
+
+/* ── Ultrasonication bullet cards on mobile ── */
+@media(max-width:600px){
+  div[style*="background:rgba(139,92,246,.06)"]{padding:.65rem .9rem!important}
+}
+
+/* ── Large blur blobs: reduce cost on mobile ── */
+@media(max-width:860px){
+  div[style*="filter:blur(110px)"]{opacity:.6!important;transform:scale(.85)!important}
+  div[style*="filter:blur(100px)"]{opacity:.5!important}
+  div[style*="filter:blur(90px)"]{opacity:.45!important}
+  div[style*="filter:blur(80px)"]{opacity:.4!important}
+}
+
+/* ── Typography clamp fix on mobile ── */
+@media(max-width:600px){
+  .title{letter-spacing:-.022em!important}
+  h2.title[style*="font-size:clamp(2.3rem"]{font-size:clamp(2rem,9vw,2.6rem)!important}
+  h2.title[style*="font-size:clamp(1.9rem"]{font-size:clamp(1.75rem,8vw,2.4rem)!important}
+}
+
+/* ── Ensure no horizontal overflow ── */
+html,body{overflow-x:hidden;max-width:100vw}
+img,video,canvas,iframe{max-width:100%}
 </style>
 </head>
 <body>
@@ -239,38 +359,38 @@ video{display:block;width:100%;object-fit:cover;background:#000}
     <!-- Row 1 — scrolls left -->
     <div style="overflow:hidden;margin-bottom:.85rem" id="caro-row1">
       <div class="caro-l" id="caro-track1">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_1907.jpg?v=1779847588" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_4154.jpg?v=1779847588" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_6472.jpg?v=1779847588" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_1905.jpg?v=1779847588" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_3784.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_3876.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_6379.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_1052.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_2241.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_7196.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_1788.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_1633.jpg?v=1779847590" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_6340.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_0756.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_2242.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/rn_image_picker_lib_temp_74a8d5a3-f4a5-4824-a15e-9dbe9df4ab30.jpg?v=1779847590" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_1907.jpg?v=1779847588" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_4154.jpg?v=1779847588" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_6472.jpg?v=1779847588" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_1905.jpg?v=1779847588" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_3784.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_3876.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_6379.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_1052.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_2241.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_7196.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_1788.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_1633.jpg?v=1779847590" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_6340.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_0756.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_2242.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/rn_image_picker_lib_temp_74a8d5a3-f4a5-4824-a15e-9dbe9df4ab30.jpg?v=1779847590" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_1907.jpg?v=1779847588" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_4154.jpg?v=1779847588" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_6472.jpg?v=1779847588" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_1905.jpg?v=1779847588" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_3784.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_3876.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_6379.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_1052.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_2241.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_7196.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_1788.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_1633.jpg?v=1779847590" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_6340.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_0756.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_2242.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/rn_image_picker_lib_temp_74a8d5a3-f4a5-4824-a15e-9dbe9df4ab30.jpg?v=1779847590" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_1907.jpg?v=1779847588" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_4154.jpg?v=1779847588" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_6472.jpg?v=1779847588" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_1905.jpg?v=1779847588" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_3784.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_3876.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_6379.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_1052.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_2241.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_7196.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_1788.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_1633.jpg?v=1779847590" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_6340.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_0756.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_2242.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/rn_image_picker_lib_temp_74a8d5a3-f4a5-4824-a15e-9dbe9df4ab30.jpg?v=1779847590" alt="Customer delivery photo" loading="lazy">
         
       </div>
     </div>
@@ -278,38 +398,38 @@ video{display:block;width:100%;object-fit:cover;background:#000}
     <!-- Row 2 — scrolls right -->
     <div style="overflow:hidden" id="caro-row2">
       <div class="caro-r" id="caro-track2">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_1829.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_5330.jpg?v=1779847590" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/rn_image_picker_lib_temp_ce49070b-5aae-454d-bea3-a6918ca9e4f3.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_3426.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_1612.jpg?v=1779847590" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_3169.jpg?v=1779847590" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_0899.jpg?v=1779847590" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_3395.jpg?v=1779847590" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_0139.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_0981.jpg?v=1779847590" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_7770.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_3045.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_5415.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_0740.jpg?v=1779847590" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_8172.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/image.png?v=1779847590" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_1829.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_5330.jpg?v=1779847590" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/rn_image_picker_lib_temp_ce49070b-5aae-454d-bea3-a6918ca9e4f3.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_3426.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_1612.jpg?v=1779847590" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_3169.jpg?v=1779847590" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_0899.jpg?v=1779847590" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_3395.jpg?v=1779847590" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_0139.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_0981.jpg?v=1779847590" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_7770.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_3045.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_5415.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_0740.jpg?v=1779847590" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_8172.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
-        <img class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/image.png?v=1779847590" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_1829.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_5330.jpg?v=1779847590" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/rn_image_picker_lib_temp_ce49070b-5aae-454d-bea3-a6918ca9e4f3.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_3426.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_1612.jpg?v=1779847590" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_3169.jpg?v=1779847590" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_0899.jpg?v=1779847590" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_3395.jpg?v=1779847590" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_0139.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_0981.jpg?v=1779847590" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_7770.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_3045.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_5415.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_0740.jpg?v=1779847590" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_8172.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/image.png?v=1779847590" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_1829.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_5330.jpg?v=1779847590" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/rn_image_picker_lib_temp_ce49070b-5aae-454d-bea3-a6918ca9e4f3.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_3426.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_1612.jpg?v=1779847590" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_3169.jpg?v=1779847590" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_0899.jpg?v=1779847590" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_3395.jpg?v=1779847590" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_0139.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_0981.jpg?v=1779847590" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_7770.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_3045.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_5415.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_0740.jpg?v=1779847590" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/IMG_8172.jpg?v=1779847589" alt="Customer delivery photo" loading="lazy">
+        <img decoding="async" class="caro-img" src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/image.png?v=1779847590" alt="Customer delivery photo" loading="lazy">
         
       </div>
     </div>
@@ -893,7 +1013,7 @@ video{display:block;width:100%;object-fit:cover;background:#000}
       <!-- Video -->
       <div class="reveal d2" style="position:relative">
         <div class="video-wrap">
-          <video id="vid3" class="v-portrait" loop playsinline preload="metadata" src="https://cdn.shopify.com/videos/c/o/v/e575004bcd4a420597d86f5e1ed8b98c.mp4" crossorigin="anonymous"></video>
+          <video id="vid3" class="v-portrait" loop playsinline preload="none" src="https://cdn.shopify.com/videos/c/o/v/e575004bcd4a420597d86f5e1ed8b98c.mp4" crossorigin="anonymous"></video>
           <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(3,7,18,.7),transparent);pointer-events:none"></div>
           <div class="play-overlay" id="vo3" onclick="toggleVid('vid3','vo3','vb3')">
             <div class="pcircle" style="width:80px;height:80px;background:rgba(139,92,246,.22);border-color:rgba(139,92,246,.5)">
@@ -1372,7 +1492,7 @@ import * as THREE from 'three';
 
   /* Mouse parallax */
   var mouse={x:0,y:0};
-  window.addEventListener('mousemove',function(e){mouse.x=(e.clientX/window.innerWidth-.5)*2;mouse.y=(e.clientY/window.innerHeight-.5)*2;});
+  window.addEventListener('mousemove',function(e){mouse.x=(e.clientX/window.innerWidth-.5)*2;mouse.y=(e.clientY/window.innerHeight-.5)*2;},{passive:true});
 
   /* ── Lights ── */
   scene.add(new THREE.AmbientLight(0xffffff,.65));
@@ -1557,11 +1677,19 @@ import * as THREE from 'three';
   var camTarget=new THREE.Vector3(0,.5,6.5);
   var camPos=new THREE.Vector3(0,.5,6.5);
 
-  var _paused=false;
-  document.addEventListener('visibilitychange',function(){if(document.hidden){_paused=true;}else{_paused=false;clock.getDelta();}});
+  var _paused=false,_heroVis=true;
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){_paused=true;}else{_paused=false;if(_heroVis)clock.getDelta();}
+  });
+  /* Pause RAF when hero is scrolled out of view — biggest perf win */
+  new IntersectionObserver(function(ent){
+    var v=ent[0].isIntersecting;
+    if(v&&!_heroVis&&!_paused){clock.getDelta();requestAnimationFrame(animate);}
+    _heroVis=v;
+  },{threshold:0.01}).observe(section);
   function animate(){
+    if(_paused||!_heroVis) return;
     requestAnimationFrame(animate);
-    if(_paused) return;
 
     var t=clock.getElapsedTime();
 
