@@ -213,13 +213,7 @@ video{display:block;width:100%;object-fit:cover;background:#000}
 #caro-lb.lb-open{display:flex}
 #caro-lb img{max-width:92vw;max-height:88vh;border-radius:.75rem;object-fit:contain;box-shadow:0 24px 64px rgba(0,0,0,.5)}
 
-/* ── Reduced motion ── */
-@media(prefers-reduced-motion:reduce){
-  .caro-l,.caro-r{animation-play-state:paused!important}
-  .reveal{opacity:1!important;transform:none!important;transition:none!important}
-  .orb,.ring,.particle{animation:none!important}
-  .product-card,.review-card,.step-card,.mission-card{transition:none!important}
-}
+
 
 /* ── GPU compositing hints — only animate elements ── */
 .caro-l,.caro-r{backface-visibility:hidden}
