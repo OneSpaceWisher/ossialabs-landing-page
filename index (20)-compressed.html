@@ -585,13 +585,7 @@ img,video,canvas,iframe{max-width:100%}
       <p style="margin-top:.85rem;font-size:.75rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;background:linear-gradient(90deg,#3b82f6,#06b6d4,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">OssiaLabs</p>
     </div>
 
-    <div style="display:inline-flex;align-items:center;gap:.5rem;padding:.58rem 1.25rem;border-radius:999px;background:rgba(0,0,0,.05);border:1px solid rgba(0,0,0,.09);backdrop-filter:blur(10px);font-size:.84rem;font-weight:500;color:#4b5563;margin-bottom:2.2rem">
-      <span style="position:relative;display:inline-flex;width:8px;height:8px">
-        <span class="ping" style="position:absolute;inset:0;border-radius:50%;background:#34d399;opacity:.75"></span>
-        <span style="width:8px;height:8px;border-radius:50%;background:#10b981;display:block;position:relative"></span>
-      </span>
-      Self-Nanoemulsifying Drug Delivery System
-    </div>
+
     <h1 style="font-size:clamp(2.8rem,8.5vw,7rem);font-weight:900;letter-spacing:-.038em;line-height:1;color:#111;margin-bottom:1.55rem">
       Science that your<br><span class="g-blue">body actually feels.</span>
     </h1>
@@ -795,7 +789,7 @@ img,video,canvas,iframe{max-width:100%}
       <!-- Video -->
       <div class="reveal d2" style="position:relative">
         <div class="video-wrap">
-          <video id="vid1" class="v-portrait" loop playsinline preload="metadata" src="https://i.imgur.com/XGkYcnq.mp4" crossorigin="anonymous"></video>
+          <video id="vid1" class="v-portrait" loop playsinline preload="metadata" poster="https://i.imgur.com/XGkYcnq.jpg" src="https://i.imgur.com/XGkYcnq.mp4" crossorigin="anonymous"></video>
           <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(3,7,18,.7),transparent);pointer-events:none"></div>
           <div class="play-overlay" id="vo1" onclick="toggleVid('vid1','vo1','vb1')">
             <div class="pcircle" style="width:80px;height:80px;background:rgba(255,255,255,.16)">
@@ -834,19 +828,67 @@ img,video,canvas,iframe{max-width:100%}
     <div class="g3">
       <div class="step-card reveal d1" style="background:linear-gradient(160deg,#eff6ff,#eef2ff);border-radius:1.5rem;padding:2rem;border:1px solid rgba(255,255,255,.9);position:relative;overflow:hidden">
         <span style="position:absolute;top:.6rem;right:1.2rem;font-size:5rem;font-weight:900;color:rgba(0,0,0,.044);line-height:1;pointer-events:none">01</span>
-        <div style="display:inline-flex;padding:.75rem;border-radius:1rem;background:rgba(59,130,246,.1);margin-bottom:1.25rem"><svg width="28" height="28" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="hw1" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#06b6d4"/><stop offset="1" stop-color="#10b981"/></linearGradient></defs><path d="M17 6h14M19 6v14L8 38a4 4 0 003.4 6h25.2A4 4 0 0040 38L29 20V6" stroke="url(#hw1)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 32h26" stroke="url(#hw1)" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <div style="width:54px;height:54px;border-radius:16px;background:linear-gradient(135deg,rgba(59,130,246,.15),rgba(6,182,212,.1));border:1px solid rgba(6,182,212,.2);display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;flex-shrink:0">
+  <svg width="30" height="30" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="hw1a" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#38bdf8"/><stop offset="1" stop-color="#10b981"/></linearGradient></defs>
+    <!-- Flask body -->
+    <path d="M18 6h12M20 6v12L9 36a5 5 0 004 8h22a5 5 0 004-8L28 18V6" stroke="url(#hw1a)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <!-- Liquid fill -->
+    <path d="M11 34h26L28 20H20L11 34z" fill="url(#hw1a)" opacity=".18"/>
+    <!-- Measurement marks -->
+    <line x1="20" y1="14" x2="24" y2="14" stroke="url(#hw1a)" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="20" y1="18" x2="23" y2="18" stroke="url(#hw1a)" stroke-width="1.5" stroke-linecap="round"/>
+    <!-- Nano dots in liquid -->
+    <circle cx="18" cy="34" r="2.2" fill="url(#hw1a)" opacity=".7"/>
+    <circle cx="24" cy="37" r="1.8" fill="#38bdf8" opacity=".8"/>
+    <circle cx="30" cy="33" r="2" fill="#10b981" opacity=".7"/>
+  </svg>
+</div>
         <h3 style="font-size:1.05rem;font-weight:700;color:#111;margin-bottom:.72rem">Formulate to Dissolve</h3>
         <p class="body-sm" style="color:#6b7280">Lipids and emulsifiers keep hydrophobic actives in stable solution, bypassing first-pass metabolism for direct bloodstream uptake.</p>
       </div>
       <div class="step-card reveal d2" style="background:linear-gradient(160deg,#ecfdf5,#f0fdfa);border-radius:1.5rem;padding:2rem;border:1px solid rgba(255,255,255,.9);position:relative;overflow:hidden">
         <span style="position:absolute;top:.6rem;right:1.2rem;font-size:5rem;font-weight:900;color:rgba(0,0,0,.044);line-height:1;pointer-events:none">02</span>
-        <div style="display:inline-flex;padding:.75rem;border-radius:1rem;background:rgba(16,185,129,.1);margin-bottom:1.25rem"><svg width="28" height="28" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="hw2" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f59e0b"/><stop offset="1" stop-color="#ef4444"/></linearGradient></defs><circle cx="24" cy="24" r="5" fill="url(#hw2)"/><circle cx="24" cy="8" r="3" fill="#f59e0b" opacity=".85"/><circle cx="24" cy="40" r="3" fill="#f59e0b" opacity=".85"/><circle cx="8" cy="24" r="3" fill="#ef4444" opacity=".85"/><circle cx="40" cy="24" r="3" fill="#ef4444" opacity=".85"/><line x1="24" y1="19" x2="24" y2="11" stroke="#f59e0b" stroke-width="2"/><line x1="24" y1="29" x2="24" y2="37" stroke="#f59e0b" stroke-width="2"/><line x1="19" y1="24" x2="11" y2="24" stroke="#ef4444" stroke-width="2"/><line x1="29" y1="24" x2="37" y2="24" stroke="#ef4444" stroke-width="2"/></svg></div>
+        <div style="width:54px;height:54px;border-radius:16px;background:linear-gradient(135deg,rgba(245,158,11,.15),rgba(239,68,68,.1));border:1px solid rgba(245,158,11,.22);display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;flex-shrink:0">
+  <svg width="30" height="30" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="hw2a" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f59e0b"/><stop offset="1" stop-color="#ef4444"/></linearGradient><radialGradient id="hw2b" cx="50%" cy="50%" r="50%"><stop stop-color="#fbbf24"/><stop offset="1" stop-color="#ef4444"/></radialGradient></defs>
+    <!-- Central large droplet -->
+    <circle cx="24" cy="24" r="7" fill="url(#hw2b)" opacity=".85"/>
+    <!-- Burst lines -->
+    <path d="M24 4l1.5 6M24 4l-1.5 6" stroke="#f59e0b" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M24 44l1.5-6M24 44l-1.5-6" stroke="#ef4444" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M4 24l6 1.5M4 24l6-1.5" stroke="#f59e0b" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M44 24l-6 1.5M44 24l-6-1.5" stroke="#ef4444" stroke-width="1.8" stroke-linecap="round"/>
+    <!-- Nano-droplets radiating out -->
+    <circle cx="24" cy="8" r="2.8" fill="#f59e0b" opacity=".8"/>
+    <circle cx="24" cy="40" r="2.8" fill="#ef4444" opacity=".8"/>
+    <circle cx="8" cy="24" r="2.8" fill="#f59e0b" opacity=".8"/>
+    <circle cx="40" cy="24" r="2.8" fill="#ef4444" opacity=".8"/>
+    <circle cx="11" cy="11" r="2" fill="#fbbf24" opacity=".65"/>
+    <circle cx="37" cy="11" r="2" fill="#fbbf24" opacity=".65"/>
+    <circle cx="11" cy="37" r="2" fill="#fbbf24" opacity=".65"/>
+    <circle cx="37" cy="37" r="2" fill="#fbbf24" opacity=".65"/>
+  </svg>
+</div>
         <h3 style="font-size:1.05rem;font-weight:700;color:#111;margin-bottom:.72rem">Nano-Disperse on Contact</h3>
         <p class="body-sm" style="color:#6b7280">Contact with aqueous fluid spontaneously forms nanodroplets, massively increasing interfacial surface area for absorption.</p>
       </div>
       <div class="step-card reveal d3" style="background:linear-gradient(160deg,#f5f3ff,#faf5ff);border-radius:1.5rem;padding:2rem;border:1px solid rgba(255,255,255,.9);position:relative;overflow:hidden">
         <span style="position:absolute;top:.6rem;right:1.2rem;font-size:5rem;font-weight:900;color:rgba(0,0,0,.044);line-height:1;pointer-events:none">03</span>
-        <div style="display:inline-flex;padding:.75rem;border-radius:1rem;background:rgba(139,92,246,.1);margin-bottom:1.25rem"><svg width="28" height="28" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="hw3" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#3b82f6"/><stop offset="1" stop-color="#06b6d4"/></linearGradient></defs><ellipse cx="24" cy="24" rx="20" ry="8" stroke="url(#hw3)" stroke-width="2" fill="none"/><ellipse cx="24" cy="24" rx="20" ry="8" stroke="url(#hw3)" stroke-width="2" fill="none" transform="rotate(60 24 24)"/><ellipse cx="24" cy="24" rx="20" ry="8" stroke="url(#hw3)" stroke-width="2" fill="none" transform="rotate(120 24 24)"/><circle cx="24" cy="24" r="4" fill="url(#hw3)"/></svg></div>
+        <div style="width:54px;height:54px;border-radius:16px;background:linear-gradient(135deg,rgba(99,102,241,.15),rgba(59,130,246,.1));border:1px solid rgba(99,102,241,.22);display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;flex-shrink:0">
+  <svg width="30" height="30" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="hw3a" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#818cf8"/><stop offset="1" stop-color="#06b6d4"/></linearGradient></defs>
+    <!-- Cell membrane (horizontal barrier) -->
+    <rect x="4" y="22" width="40" height="4" rx="2" fill="url(#hw3a)" opacity=".22"/>
+    <line x1="4" y1="22" x2="44" y2="22" stroke="url(#hw3a)" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <line x1="4" y1="26" x2="44" y2="26" stroke="url(#hw3a)" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <!-- Three upward absorption arrows -->
+    <path d="M15 38V28M15 28l-3.5 4M15 28l3.5 4" stroke="url(#hw3a)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M24 38V16M24 16l-4 5M24 16l4 5" stroke="url(#hw3a)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M33 38V28M33 28l-3.5 4M33 28l3.5 4" stroke="url(#hw3a)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Small glow dots above membrane (absorbed) -->
+    <circle cx="15" cy="15" r="2.5" fill="#818cf8" opacity=".7"/>
+    <circle cx="24" cy="9" r="3" fill="url(#hw3a)" opacity=".85"/>
+    <circle cx="33" cy="15" r="2.5" fill="#06b6d4" opacity=".7"/>
+  </svg>
+</div>
         <h3 style="font-size:1.05rem;font-weight:700;color:#111;margin-bottom:.72rem">Potency You Can Feel</h3>
         <p class="body-sm" style="color:#6b7280">Microscopic particles are taken up rapidly and efficiently, delivering the compounds your body can actually use, not waste.</p>
       </div>
@@ -1744,15 +1786,15 @@ import * as THREE from 'three';
   function render(){
     var isMob=window.innerWidth<640;
     var isMid=!isMob&&window.innerWidth<1024;
-    var spacing=isMob?130:isMid?200:300;
+    var spacing=isMob?230:isMid?210:300;
     cards.forEach(function(card,i){
       var d=i-cur;
       if(d>N/2)d-=N; if(d<-N/2)d+=N;
       var abs=Math.abs(d);
       var tx=d*spacing;
-      var ry=d>0?-Math.min(abs*48,62):Math.min(abs*48,62);
-      var sc=abs===0?1:abs===1?.72:abs===2?.52:.4;
-      var op=abs===0?1:abs===1?.32:abs===2?.1:0;
+      var ry=d>0?-Math.min(abs*52,65):Math.min(abs*52,65);
+      var sc=abs===0?1:abs===1?(isMob?.55:.72):abs===2?.42:.3;
+      var op=abs===0?1:abs===1?(isMob?.22:.32):abs===2?.08:0;
       var zi=20-abs;
       card.style.transform='translateX('+tx+'px) rotateY('+ry+'deg) scale('+sc+')';
       card.style.opacity=op;
