@@ -328,15 +328,15 @@ img,video,canvas,iframe{max-width:100%}
 
 /* ── Product coverflow ── */
 #pf-stage:active{cursor:grabbing}
-.pf-card{position:absolute;left:50%;top:0;width:min(300px,72vw);height:100%;margin-left:calc(min(300px,72vw)/-2);border-radius:1.5rem;overflow:hidden auto;transition:transform .52s cubic-bezier(.22,1,.36,1),opacity .52s cubic-bezier(.22,1,.36,1),box-shadow .52s;will-change:transform;backface-visibility:hidden;text-decoration:none;color:inherit;display:block}
+.pf-card{position:absolute;left:50%;top:0;width:min(400px,82vw);height:100%;margin-left:calc(min(400px,82vw)/-2);border-radius:1.5rem;overflow:hidden auto;transition:transform .54s cubic-bezier(.22,1,.36,1),opacity .54s,box-shadow .54s;will-change:transform;backface-visibility:hidden;text-decoration:none;color:inherit;display:block}
 .pf-card.pf-active{box-shadow:0 28px 60px rgba(0,0,0,.16)!important}
 @media(max-width:640px){
-  #pf-stage{height:min(500px,88vw)!important}
-  .pf-card{width:min(260px,76vw);margin-left:calc(min(260px,76vw)/-2)}
+  #pf-stage{height:min(530px,90vw)!important}
+  .pf-card{width:min(290px,80vw);margin-left:calc(min(290px,80vw)/-2)}
 }
 @media(max-width:400px){
-  #pf-stage{height:min(460px,90vw)!important}
-  .pf-card{width:min(230px,80vw);margin-left:calc(min(230px,80vw)/-2)}
+  #pf-stage{height:min(480px,92vw)!important}
+  .pf-card{width:min(250px,84vw);margin-left:calc(min(250px,84vw)/-2)}
 }
 </style>
 </head>
@@ -695,7 +695,7 @@ img,video,canvas,iframe{max-width:100%}
       <p style="color:#9ca3af;font-size:1.05rem;max-width:36rem;margin:0 auto;line-height:1.75">Every product is built around SNEDDS technology, self-nanoemulsifying systems that maximize bioavailability of lipophilic compounds.</p>
     </div>
     <!-- Product Coverflow Stage -->
-    <div id="pf-stage" style="position:relative;height:min(580px,85vw);perspective:1100px;overflow:visible;cursor:grab;user-select:none;margin-bottom:2rem">
+    <div id="pf-stage" style="position:relative;height:min(620px,85vw);perspective:1400px;overflow:hidden;cursor:grab;user-select:none;margin-bottom:2rem;mask-image:linear-gradient(to right,transparent 0%,#000 12%,#000 88%,transparent 100%);-webkit-mask-image:linear-gradient(to right,transparent 0%,#000 12%,#000 88%,transparent 100%)">
       <div id="pf-track" style="position:relative;width:100%;height:100%;transform-style:preserve-3d">
 
       <!-- Osstivia -->
@@ -1743,15 +1743,16 @@ import * as THREE from 'three';
 
   function render(){
     var isMob=window.innerWidth<640;
-    var spacing=isMob?72:115;
+    var isMid=!isMob&&window.innerWidth<1024;
+    var spacing=isMob?130:isMid?200:300;
     cards.forEach(function(card,i){
       var d=i-cur;
       if(d>N/2)d-=N; if(d<-N/2)d+=N;
       var abs=Math.abs(d);
       var tx=d*spacing;
-      var ry=d>0?-Math.min(abs*40,58):Math.min(abs*40,58);
-      var sc=abs===0?1:abs===1?.8:abs===2?.64:.5;
-      var op=abs===0?1:abs===1?.5:abs===2?.22:0;
+      var ry=d>0?-Math.min(abs*48,62):Math.min(abs*48,62);
+      var sc=abs===0?1:abs===1?.72:abs===2?.52:.4;
+      var op=abs===0?1:abs===1?.32:abs===2?.1:0;
       var zi=20-abs;
       card.style.transform='translateX('+tx+'px) rotateY('+ry+'deg) scale('+sc+')';
       card.style.opacity=op;
