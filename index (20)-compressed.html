@@ -325,6 +325,19 @@ video{display:block;width:100%;object-fit:cover;background:#000}
 /* ── Ensure no horizontal overflow ── */
 html,body{overflow-x:hidden;max-width:100vw}
 img,video,canvas,iframe{max-width:100%}
+
+/* ── Product coverflow ── */
+#pf-stage:active{cursor:grabbing}
+.pf-card{position:absolute;left:50%;top:0;width:min(300px,72vw);height:100%;margin-left:min(-150px,-36vw);border-radius:1.5rem;overflow:hidden auto;transition:transform .52s cubic-bezier(.22,1,.36,1),opacity .52s cubic-bezier(.22,1,.36,1),box-shadow .52s;will-change:transform;backface-visibility:hidden;text-decoration:none;color:inherit;display:block}
+.pf-card.pf-active{box-shadow:0 28px 60px rgba(0,0,0,.16)!important}
+@media(max-width:640px){
+  #pf-stage{height:min(500px,88vw)!important}
+  .pf-card{width:min(260px,76vw);margin-left:min(-130px,-38vw)}
+}
+@media(max-width:400px){
+  #pf-stage{height:min(460px,90vw)!important}
+  .pf-card{width:min(230px,80vw);margin-left:min(-115px,-40vw)}
+}
 </style>
 </head>
 <body>
@@ -619,44 +632,58 @@ img,video,canvas,iframe{max-width:100%}
 <!-- ══════════════════════════════════════════════════════════
   § 2  MISSION
 ══════════════════════════════════════════════════════════ -->
-<section class="mission-bg" style="position:relative;padding:8rem 0;overflow:hidden;background:linear-gradient(160deg,#faf9f6 0%,#f5f4f0 50%,#faf9f6 100%)">
-  <div class="section-field" aria-hidden="true"></div>
-  <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:900px;height:320px;background:rgba(6,182,212,.07);filter:blur(95px);border-radius:50%;pointer-events:none"></div>
-  <div style="position:absolute;bottom:0;right:0;width:280px;height:280px;background:rgba(139,92,246,.05);filter:blur(75px);border-radius:50%;pointer-events:none"></div>
+<section id="s-mission" style="position:relative;padding:8rem 0;overflow:hidden;background:#030712">
+  <!-- Grid overlay -->
+  <div class="linegrid" style="position:absolute;inset:0;opacity:.28;pointer-events:none"></div>
+  <!-- Blur blobs -->
+  <div style="position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:1100px;height:420px;background:radial-gradient(ellipse,rgba(6,182,212,.11) 0%,rgba(16,185,129,.06) 55%,transparent 80%);filter:blur(60px);pointer-events:none"></div>
+  <div style="position:absolute;bottom:-80px;left:-80px;width:440px;height:440px;background:rgba(59,130,246,.07);filter:blur(80px);border-radius:50%;pointer-events:none"></div>
+  <div style="position:absolute;top:30%;right:-60px;width:380px;height:380px;background:rgba(139,92,246,.07);filter:blur(80px);border-radius:50%;pointer-events:none"></div>
+  <!-- Floating rings for depth -->
+  <div style="position:absolute;top:18%;left:8%;width:260px;height:260px;border-radius:50%;border:1px solid rgba(6,182,212,.09);pointer-events:none"></div>
+  <div style="position:absolute;bottom:12%;right:6%;width:180px;height:180px;border-radius:50%;border:1px solid rgba(139,92,246,.1);pointer-events:none"></div>
   <div class="wrap" style="position:relative;z-index:1">
     <div class="reveal" style="text-align:center;margin-bottom:5rem">
-      <p class="label" style="color:#0891b2;margin-bottom:1.25rem">Our Mission</p>
-      <h2 class="title" style="font-size:clamp(2rem,5vw,3.6rem);color:#111;margin-bottom:1.3rem">Advancing the<br><span class="g-cyan">supplement frontier.</span></h2>
-      <p style="color:#6b7280;font-size:1.05rem;max-width:36rem;margin:0 auto;line-height:1.75">The industry has been coasting on outdated delivery for decades. We're changing that, one nanodroplet at a time.</p>
+      <p class="label" style="color:#22d3ee;margin-bottom:1.25rem;letter-spacing:.2em">Our Mission</p>
+      <h2 class="title" style="font-size:clamp(2rem,5vw,3.6rem);color:#fff;margin-bottom:1.3rem">Advancing the<br><span style="background:linear-gradient(90deg,#22d3ee,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">supplement frontier.</span></h2>
+      <p style="color:#9ca3af;font-size:1.05rem;max-width:36rem;margin:0 auto;line-height:1.75">The industry has been coasting on outdated delivery for decades. We're changing that, one nanodroplet at a time.</p>
     </div>
     <div class="gauto" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
-      <div class="mission-card reveal d1" style="background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:1.5rem;padding:2rem;box-shadow:0 2px 12px rgba(0,0,0,.04)"
-           onmouseover="this.style.background='#f9f9f9';this.style.borderColor='rgba(0,0,0,.14)'"
-           onmouseout="this.style.background='#fff';this.style.borderColor='rgba(0,0,0,.07)'">
-        <svg style="margin-bottom:1.2rem" width="44" height="44" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="mi1" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#3b82f6"/><stop offset="1" stop-color="#06b6d4"/></linearGradient></defs><ellipse cx="24" cy="24" rx="20" ry="8" stroke="url(#mi1)" stroke-width="2" fill="none"/><ellipse cx="24" cy="24" rx="20" ry="8" stroke="url(#mi1)" stroke-width="2" fill="none" transform="rotate(60 24 24)"/><ellipse cx="24" cy="24" rx="20" ry="8" stroke="url(#mi1)" stroke-width="2" fill="none" transform="rotate(120 24 24)"/><circle cx="24" cy="24" r="4" fill="url(#mi1)"/><circle cx="44" cy="24" r="2.5" fill="#3b82f6"/><circle cx="14" cy="8" r="2.5" fill="#06b6d4"/><circle cx="14" cy="40" r="2.5" fill="#10b981"/></svg>
-        <h3 style="font-size:1rem;font-weight:700;color:#111;margin-bottom:.65rem">Redefining Delivery</h3>
-        <p class="body-sm" style="color:#6b7280">We reject the status quo of poorly absorbed supplements. Every formula is built from the ground up with SNEDDS technology, the same nanoemulsifying approach used in pharmaceutical research.</p>
+      <div class="mission-card reveal d1" style="background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.1);border-radius:1.5rem;padding:2rem;box-shadow:0 4px 24px rgba(0,0,0,.35);backdrop-filter:blur(10px)"
+           onmouseover="this.style.background='rgba(255,255,255,.08)';this.style.borderColor='rgba(255,255,255,.2)'"
+           onmouseout="this.style.background='rgba(255,255,255,.045)';this.style.borderColor='rgba(255,255,255,.1)'">
+        <div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,rgba(59,130,246,.18),rgba(6,182,212,.12));border:1px solid rgba(6,182,212,.22);display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem">
+  <svg width="28" height="28" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="mi1a" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#38bdf8"/><stop offset="1" stop-color="#10b981"/></linearGradient></defs><path d="M24 6C18 6 12 14 12 22c0 6 3 11 7 14.5V42h10v-5.5C33 33 36 28 36 22c0-8-6-16-12-16z" fill="url(#mi1a)" opacity=".18"/><path d="M24 6C18 6 12 14 12 22c0 6 3 11 7 14.5V42h10v-5.5C33 33 36 28 36 22c0-8-6-16-12-16z" stroke="url(#mi1a)" stroke-width="2.2" stroke-linejoin="round" fill="none"/><circle cx="24" cy="20" r="4" fill="url(#mi1a)" opacity=".55"/><path d="M18 36h12" stroke="url(#mi1a)" stroke-width="2" stroke-linecap="round"/><circle cx="10" cy="18" r="1.8" fill="#38bdf8" opacity=".7"/><circle cx="8" cy="26" r="1.4" fill="#10b981" opacity=".6"/><circle cx="38" cy="16" r="1.8" fill="#38bdf8" opacity=".7"/><circle cx="40" cy="24" r="1.4" fill="#10b981" opacity=".6"/></svg>
+</div>
+        <h3 style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:.65rem">Redefining Delivery</h3>
+        <p class="body-sm" style="color:#a1a1aa">We reject the status quo of poorly absorbed supplements. Every formula is built from the ground up with SNEDDS technology, the same nanoemulsifying approach used in pharmaceutical research.</p>
       </div>
-      <div class="mission-card reveal d1" style="background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:1.5rem;padding:2rem;box-shadow:0 2px 12px rgba(0,0,0,.04)"
-           onmouseover="this.style.background='#f9f9f9';this.style.borderColor='rgba(0,0,0,.14)'"
-           onmouseout="this.style.background='#fff';this.style.borderColor='rgba(0,0,0,.07)'">
-        <svg style="margin-bottom:1.2rem" width="44" height="44" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="mi2" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#06b6d4"/><stop offset="1" stop-color="#10b981"/></linearGradient></defs><path d="M17 6h14M19 6v14L8 38a4 4 0 003.4 6h25.2A4 4 0 0040 38L29 20V6" stroke="url(#mi2)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 32h26" stroke="url(#mi2)" stroke-width="2" stroke-linecap="round"/><circle cx="16" cy="38" r="2" fill="#06b6d4" opacity=".75"/><circle cx="24" cy="36" r="1.5" fill="#10b981" opacity=".65"/><circle cx="32" cy="39" r="1.5" fill="#3b82f6" opacity=".75"/></svg>
-        <h3 style="font-size:1rem;font-weight:700;color:#111;margin-bottom:.65rem">No Compromise Formulation</h3>
-        <p class="body-sm" style="color:#6b7280">We don't dilute, we don't add cheap fillers. Our excipients are selected specifically to maximize permeability and bypass first-pass metabolism for direct bloodstream uptake.</p>
+      <div class="mission-card reveal d1" style="background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.1);border-radius:1.5rem;padding:2rem;box-shadow:0 4px 24px rgba(0,0,0,.35);backdrop-filter:blur(10px)"
+           onmouseover="this.style.background='rgba(255,255,255,.08)';this.style.borderColor='rgba(255,255,255,.2)'"
+           onmouseout="this.style.background='rgba(255,255,255,.045)';this.style.borderColor='rgba(255,255,255,.1)'">
+        <div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,rgba(6,182,212,.18),rgba(16,185,129,.12));border:1px solid rgba(16,185,129,.22);display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem">
+  <svg width="28" height="28" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="mi2a" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#06b6d4"/><stop offset="1" stop-color="#10b981"/></linearGradient></defs><path d="M17 6h14M19 6v13L8 37a4 4 0 003.4 7h25.2A4 4 0 0040 37L29 19V6" stroke="url(#mi2a)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M10 32h28" stroke="url(#mi2a)" stroke-width="1.8" stroke-linecap="round"/><path d="M24 24l-4 5h8l-4-5z" fill="url(#mi2a)" opacity=".45"/><circle cx="18" cy="39" r="2.2" fill="#06b6d4" opacity=".8"/><circle cx="24" cy="37" r="1.8" fill="#10b981" opacity=".8"/><circle cx="30" cy="39.5" r="2" fill="#38bdf8" opacity=".8"/><path d="M22 14h4M22 18h4" stroke="url(#mi2a)" stroke-width="1.5" stroke-linecap="round"/></svg>
+</div>
+        <h3 style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:.65rem">No Compromise Formulation</h3>
+        <p class="body-sm" style="color:#a1a1aa">We don't dilute, we don't add cheap fillers. Our excipients are selected specifically to maximize permeability and bypass first-pass metabolism for direct bloodstream uptake.</p>
       </div>
-      <div class="mission-card reveal d2" style="background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:1.5rem;padding:2rem;box-shadow:0 2px 12px rgba(0,0,0,.04)"
-           onmouseover="this.style.background='#f9f9f9';this.style.borderColor='rgba(0,0,0,.14)'"
-           onmouseout="this.style.background='#fff';this.style.borderColor='rgba(0,0,0,.07)'">
-        <svg style="margin-bottom:1.2rem" width="44" height="44" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="mi3" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs><rect x="19" y="4" width="10" height="18" rx="2" stroke="url(#mi3)" stroke-width="2.5" fill="none"/><path d="M14 22h20M24 22v8" stroke="url(#mi3)" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="24" cy="36" rx="12" ry="5" stroke="url(#mi3)" stroke-width="2" fill="none"/><circle cx="24" cy="12" r="4" fill="#6366f1" opacity=".28"/><circle cx="24" cy="12" r="2" fill="#8b5cf6"/><line x1="10" y1="44" x2="38" y2="44" stroke="url(#mi3)" stroke-width="2.5" stroke-linecap="round"/></svg>
-        <h3 style="font-size:1rem;font-weight:700;color:#111;margin-bottom:.65rem">Evidence-Aligned</h3>
-        <p class="body-sm" style="color:#6b7280">Every active we choose has a research basis. We map our targets to published data and never overclaim. You get transparency, not marketing fluff.</p>
+      <div class="mission-card reveal d2" style="background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.1);border-radius:1.5rem;padding:2rem;box-shadow:0 4px 24px rgba(0,0,0,.35);backdrop-filter:blur(10px)"
+           onmouseover="this.style.background='rgba(255,255,255,.08)';this.style.borderColor='rgba(255,255,255,.2)'"
+           onmouseout="this.style.background='rgba(255,255,255,.045)';this.style.borderColor='rgba(255,255,255,.1)'">
+        <div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,rgba(99,102,241,.18),rgba(139,92,246,.12));border:1px solid rgba(139,92,246,.22);display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem">
+  <svg width="28" height="28" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="mi3a" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#818cf8"/><stop offset="1" stop-color="#a78bfa"/></linearGradient></defs><rect x="6" y="28" width="7" height="14" rx="2" fill="url(#mi3a)" opacity=".55"/><rect x="16" y="20" width="7" height="22" rx="2" fill="url(#mi3a)" opacity=".7"/><rect x="26" y="12" width="7" height="30" rx="2" fill="url(#mi3a)" opacity=".85"/><path d="M6 44h36" stroke="url(#mi3a)" stroke-width="2" stroke-linecap="round"/><circle cx="38" cy="14" r="7" stroke="url(#mi3a)" stroke-width="2" fill="none"/><path d="M43 19l4 4" stroke="url(#mi3a)" stroke-width="2.2" stroke-linecap="round"/><path d="M36 12l3 3-1.5 1.5" stroke="url(#mi3a)" stroke-width="1.5" stroke-linecap="round"/></svg>
+</div>
+        <h3 style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:.65rem">Evidence-Aligned</h3>
+        <p class="body-sm" style="color:#a1a1aa">Every active we choose has a research basis. We map our targets to published data and never overclaim. You get transparency, not marketing fluff.</p>
       </div>
-      <div class="mission-card reveal d3" style="background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:1.5rem;padding:2rem;box-shadow:0 2px 12px rgba(0,0,0,.04)"
-           onmouseover="this.style.background='#f9f9f9';this.style.borderColor='rgba(0,0,0,.14)'"
-           onmouseout="this.style.background='#fff';this.style.borderColor='rgba(0,0,0,.07)'">
-        <svg style="margin-bottom:1.2rem" width="44" height="44" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="mi4" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#10b981"/><stop offset="1" stop-color="#3b82f6"/></linearGradient></defs><path d="M24 4L8 12v12c0 10 7 19 16 22 9-3 16-12 16-22V12L24 4z" stroke="url(#mi4)" stroke-width="2.5" stroke-linejoin="round" fill="none"/><path d="M16 24l5 5 11-11" stroke="url(#mi4)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <h3 style="font-size:1rem;font-weight:700;color:#111;margin-bottom:.65rem">Advancing the Industry</h3>
-        <p class="body-sm" style="color:#6b7280">The supplement industry is rife with poor absorption and empty promises. We're here to push the frontier, bringing pharmaceutical-grade delivery to botanical science.</p>
+      <div class="mission-card reveal d3" style="background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.1);border-radius:1.5rem;padding:2rem;box-shadow:0 4px 24px rgba(0,0,0,.35);backdrop-filter:blur(10px)"
+           onmouseover="this.style.background='rgba(255,255,255,.08)';this.style.borderColor='rgba(255,255,255,.2)'"
+           onmouseout="this.style.background='rgba(255,255,255,.045)';this.style.borderColor='rgba(255,255,255,.1)'">
+        <div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,rgba(16,185,129,.18),rgba(59,130,246,.12));border:1px solid rgba(16,185,129,.22);display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem">
+  <svg width="28" height="28" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="mi4a" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#34d399"/><stop offset="1" stop-color="#60a5fa"/></linearGradient></defs><path d="M24 4c-6 0-12 6-12 16v4l-4 4v6l6-2c2 3 6 5 10 5s8-2 10-5l6 2v-6l-4-4v-4C36 10 30 4 24 4z" fill="url(#mi4a)" opacity=".18"/><path d="M24 4c-6 0-12 6-12 16v4l-4 4v6l6-2c2 3 6 5 10 5s8-2 10-5l6 2v-6l-4-4v-4C36 10 30 4 24 4z" stroke="url(#mi4a)" stroke-width="2.2" stroke-linejoin="round" fill="none"/><circle cx="24" cy="16" r="4" fill="url(#mi4a)" opacity=".6"/><line x1="24" y1="8" x2="24" y2="12" stroke="url(#mi4a)" stroke-width="2" stroke-linecap="round"/><path d="M16 36c0 2 3 4 8 4s8-2 8-4" stroke="url(#mi4a)" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+</div>
+        <h3 style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:.65rem">Advancing the Industry</h3>
+        <p class="body-sm" style="color:#a1a1aa">The supplement industry is rife with poor absorption and empty promises. We're here to push the frontier, bringing pharmaceutical-grade delivery to botanical science.</p>
       </div>
     </div>
   </div>
@@ -665,27 +692,20 @@ img,video,canvas,iframe{max-width:100%}
 <!-- ══════════════════════════════════════════════════════════
   § 3  PRODUCTS
 ══════════════════════════════════════════════════════════ -->
-<section style="padding:8rem 0;background:#fff">
+<section id="s-products" style="padding:8rem 0;background:#fff">
   <div class="wrap">
     <div class="reveal" style="text-align:center;margin-bottom:5rem">
       <p class="label" style="color:#9ca3af;margin-bottom:1rem">Our Formulas</p>
       <h2 class="title" style="font-size:clamp(2rem,5vw,3.6rem);color:#111;margin-bottom:1.3rem">Engineered for absorption.</h2>
       <p style="color:#9ca3af;font-size:1.05rem;max-width:36rem;margin:0 auto;line-height:1.75">Every product is built around SNEDDS technology, self-nanoemulsifying systems that maximize bioavailability of lipophilic compounds.</p>
     </div>
-    <div style="position:relative;margin:0 -.5rem">
-      <!-- Arrows (visible on wider screens) -->
-      <button class="prod-arr prod-arr-l" onclick="document.getElementById('prod-caro').scrollBy({left:-370,behavior:'smooth'})" aria-label="Previous">
-        <svg width="16" height="16" viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7l5 5" stroke="#111" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
-      <button class="prod-arr prod-arr-r" onclick="document.getElementById('prod-caro').scrollBy({left:370,behavior:'smooth'})" aria-label="Next">
-        <svg width="16" height="16" viewBox="0 0 14 14" fill="none"><path d="M5 2l5 5-5 5" stroke="#111" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
-      <!-- Scroll track -->
-      <div id="prod-caro" style="overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;display:flex;gap:1.5rem;padding:.5rem .5rem 1.5rem;scrollbar-width:none;-ms-overflow-style:none">
+    <!-- Product Coverflow Stage -->
+    <div id="pf-stage" style="position:relative;height:min(580px,85vw);perspective:1100px;overflow:visible;cursor:grab;user-select:none;margin-bottom:2rem">
+      <div id="pf-track" style="position:relative;width:100%;height:100%;transform-style:preserve-3d">
 
       <!-- Osstivia -->
       <a href="https://ossialabs.com/products/ossialabs-osteva?variant=46668118655194" target="_blank" rel="noopener noreferrer"
-         class="product-card reveal d1" style="background:linear-gradient(160deg,#fffbeb,#fff7ed);border-radius:1.5rem;padding:2rem;border:1px solid rgba(0,0,0,.04);position:relative;overflow:hidden;display:block;width:min(340px,82vw);max-width:min(340px,82vw);scroll-snap-align:start;flex-shrink:0;flex-grow:0">
+         class="product-card pf-card" data-href="true" style="background:linear-gradient(160deg,#fffbeb,#fff7ed);border-radius:1.5rem;padding:2rem;border:1px solid rgba(0,0,0,.04)">
         <div style="position:absolute;top:0;right:0;width:200px;height:200px;background:#f59e0b;border-radius:50%;opacity:.06;filter:blur(50px);transform:translate(50%,-50%)"></div>
         <div style="display:inline-flex;padding:.75rem;border-radius:1rem;background:rgba(245,158,11,.13);margin-bottom:1.25rem">
           <svg width="36" height="36" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="pr1" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f59e0b"/><stop offset="1" stop-color="#ef4444"/></linearGradient></defs><circle cx="24" cy="24" r="5" fill="url(#pr1)"/><circle cx="24" cy="8" r="3" fill="#f59e0b" opacity=".85"/><circle cx="24" cy="40" r="3" fill="#f59e0b" opacity=".85"/><circle cx="8" cy="24" r="3" fill="#ef4444" opacity=".85"/><circle cx="40" cy="24" r="3" fill="#ef4444" opacity=".85"/><circle cx="12" cy="12" r="2.5" fill="#fbbf24" opacity=".75"/><circle cx="36" cy="12" r="2.5" fill="#fbbf24" opacity=".75"/><circle cx="12" cy="36" r="2.5" fill="#fbbf24" opacity=".75"/><circle cx="36" cy="36" r="2.5" fill="#fbbf24" opacity=".75"/><line x1="24" y1="19" x2="24" y2="11" stroke="#f59e0b" stroke-width="1.5"/><line x1="24" y1="29" x2="24" y2="37" stroke="#f59e0b" stroke-width="1.5"/><line x1="19" y1="24" x2="11" y2="24" stroke="#ef4444" stroke-width="1.5"/><line x1="29" y1="24" x2="37" y2="24" stroke="#ef4444" stroke-width="1.5"/><line x1="20.5" y1="20.5" x2="15" y2="15" stroke="#fbbf24" stroke-width="1.5"/><line x1="27.5" y1="20.5" x2="33" y2="15" stroke="#fbbf24" stroke-width="1.5"/><line x1="20.5" y1="27.5" x2="15" y2="33" stroke="#fbbf24" stroke-width="1.5"/><line x1="27.5" y1="27.5" x2="33" y2="33" stroke="#fbbf24" stroke-width="1.5"/></svg>
@@ -699,7 +719,7 @@ img,video,canvas,iframe{max-width:100%}
 
       <!-- H. Japonicus -->
       <a href="https://ossialabs.com/products/humulus-japonicus-snedds?variant=46668547522778" target="_blank" rel="noopener noreferrer"
-         class="product-card reveal d2" style="background:linear-gradient(160deg,#ecfdf5,#f0fdfa);border-radius:1.5rem;padding:2rem;border:1px solid rgba(0,0,0,.04);position:relative;overflow:hidden;display:block;width:min(340px,82vw);max-width:min(340px,82vw);scroll-snap-align:start;flex-shrink:0;flex-grow:0">
+         class="product-card pf-card" data-href="true" style="background:linear-gradient(160deg,#ecfdf5,#f0fdfa);border-radius:1.5rem;padding:2rem;border:1px solid rgba(0,0,0,.04)">
         <div style="position:absolute;top:0;right:0;width:200px;height:200px;background:#10b981;border-radius:50%;opacity:.06;filter:blur(50px);transform:translate(50%,-50%)"></div>
         <div style="display:inline-flex;padding:.75rem;border-radius:1rem;background:rgba(16,185,129,.13);margin-bottom:1.25rem">
           <svg width="36" height="36" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="pr2" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#8b5cf6"/><stop offset="1" stop-color="#ec4899"/></linearGradient></defs><path d="M16 4C16 4 32 12 32 24C32 36 16 44 16 44" stroke="url(#pr2)" stroke-width="2.5" stroke-linecap="round" fill="none"/><path d="M32 4C32 4 16 12 16 24C16 36 32 44 32 44" stroke="url(#pr2)" stroke-width="2.5" stroke-linecap="round" fill="none"/><line x1="18" y1="14" x2="30" y2="14" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round"/><line x1="14" y1="24" x2="34" y2="24" stroke="#ec4899" stroke-width="2" stroke-linecap="round"/><line x1="18" y1="34" x2="30" y2="34" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round"/></svg>
@@ -713,7 +733,7 @@ img,video,canvas,iframe{max-width:100%}
 
       <!-- Bakuchiol -->
       <a href="https://ossialabs.com/products/bakuchiol-nanoemulgel?variant=47223711924442" target="_blank" rel="noopener noreferrer"
-         class="product-card reveal d3" style="background:linear-gradient(160deg,#f5f3ff,#faf5ff);border-radius:1.5rem;padding:2rem;border:1px solid rgba(0,0,0,.04);position:relative;overflow:hidden;display:block;width:min(340px,82vw);max-width:min(340px,82vw);scroll-snap-align:start;flex-shrink:0;flex-grow:0">
+         class="product-card pf-card" data-href="true" style="background:linear-gradient(160deg,#f5f3ff,#faf5ff);border-radius:1.5rem;padding:2rem;border:1px solid rgba(0,0,0,.04)">
         <div style="position:absolute;top:0;right:0;width:200px;height:200px;background:#8b5cf6;border-radius:50%;opacity:.06;filter:blur(50px);transform:translate(50%,-50%)"></div>
         <div style="display:inline-flex;padding:.75rem;border-radius:1rem;background:rgba(139,92,246,.13);margin-bottom:1.25rem">
           <svg width="36" height="36" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="pr3" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#06b6d4"/><stop offset="1" stop-color="#10b981"/></linearGradient></defs><path d="M17 6h14M19 6v14L8 38a4 4 0 003.4 6h25.2A4 4 0 0040 38L29 20V6" stroke="url(#pr3)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 32h26" stroke="url(#pr3)" stroke-width="2" stroke-linecap="round"/><circle cx="16" cy="38" r="2" fill="#06b6d4" opacity=".75"/><circle cx="24" cy="36" r="1.5" fill="#10b981" opacity=".65"/><circle cx="32" cy="39" r="1.5" fill="#3b82f6" opacity=".75"/></svg>
@@ -727,7 +747,7 @@ img,video,canvas,iframe{max-width:100%}
 
       <!-- Dioscorea -->
       <a href="https://ossialabs.com/products/dioscorea-snedds?variant=47332489101530" target="_blank" rel="noopener noreferrer"
-         class="product-card reveal d1" style="background:linear-gradient(160deg,#fdf4ff,#f5f3ff);border-radius:1.5rem;padding:2rem;border:1px solid rgba(0,0,0,.04);position:relative;overflow:hidden;display:block;width:min(340px,82vw);max-width:min(340px,82vw);scroll-snap-align:start;flex-shrink:0;flex-grow:0">
+         class="product-card pf-card" data-href="true" style="background:linear-gradient(160deg,#fdf4ff,#f5f3ff);border-radius:1.5rem;padding:2rem;border:1px solid rgba(0,0,0,.04)">
         <div style="position:absolute;top:0;right:0;width:200px;height:200px;background:#7c3aed;border-radius:50%;opacity:.06;filter:blur(50px);transform:translate(50%,-50%)"></div>
         <div style="display:inline-flex;padding:.75rem;border-radius:1rem;background:rgba(124,58,237,.13);margin-bottom:1.25rem">
           <svg width="36" height="36" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="pr4" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#8b5cf6"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs><path d="M24 6C14 6 8 14 8 22c0 10 8 18 16 20 8-2 16-10 16-20 0-8-6-16-16-16z" stroke="url(#pr4)" stroke-width="2.5" fill="none"/><path d="M16 24c4-4 12-4 16 0" stroke="url(#pr4)" stroke-width="2" stroke-linecap="round" fill="none"/><path d="M20 18c0 0 2 4 4 4s4-4 4-4" stroke="url(#pr4)" stroke-width="2" stroke-linecap="round" fill="none"/><circle cx="24" cy="30" r="3" fill="#0ea5e9" opacity=".5"/><line x1="24" y1="6" x2="24" y2="12" stroke="url(#pr4)" stroke-width="2" stroke-linecap="round"/></svg>
@@ -739,20 +759,18 @@ img,video,canvas,iframe{max-width:100%}
         <span style="display:inline-flex;align-items:center;gap:.5rem;font-size:.85rem;font-weight:700;color:#111">Learn More <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 3l4 4-4 4" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg></span>
       </a>
 
-      </div><!-- /prod-caro track -->
-      <!-- Dot indicators -->
-      <div id="prod-dots" style="display:flex;justify-content:center;gap:.6rem;padding-top:1.75rem;list-style:none;margin:0">
-        <button class="pdot pdot-a" data-idx="0" aria-label="Card 1"></button>
-        <button class="pdot" data-idx="1" aria-label="Card 2"></button>
-        <button class="pdot" data-idx="2" aria-label="Card 3"></button>
-        <button class="pdot" data-idx="3" aria-label="Card 4"></button>
-      </div>
-      <!-- Swipe hint -->
-      <div style="display:flex;align-items:center;justify-content:center;gap:.45rem;margin-top:.85rem;color:#9ca3af;font-size:.78rem;font-weight:500">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="1.6" stroke-linecap="round"><path d="M5 12h14M14 7l5 5-5 5"/></svg>
-        Swipe to see all products
-      </div>
-    </div><!-- /prod carousel wrapper -->
+      </div><!-- /pf-track -->
+    </div><!-- /pf-stage -->
+    <!-- Controls -->
+    <div style="display:flex;align-items:center;justify-content:center;gap:1.4rem">
+      <button id="pf-prev" aria-label="Previous product" style="width:44px;height:44px;border-radius:50%;background:#f3f4f6;border:1px solid #e5e7eb;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s" onmouseover="this.style.background='#e5e7eb'" onmouseout="this.style.background='#f3f4f6'">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M9.5 2.5L5 7.5l4.5 5" stroke="#111" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div id="pf-dots" style="display:flex;gap:.55rem;align-items:center"></div>
+      <button id="pf-next" aria-label="Next product" style="width:44px;height:44px;border-radius:50%;background:#f3f4f6;border:1px solid #e5e7eb;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s" onmouseover="this.style.background='#e5e7eb'" onmouseout="this.style.background='#f3f4f6'">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M5.5 2.5L10 7.5l-4.5 5" stroke="#111" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
 
 
   </div>
@@ -925,7 +943,7 @@ img,video,canvas,iframe{max-width:100%}
 
 <!-- ══════════════════════════════════════════════════════════
   § 5b  ULTRASONICATION VIDEO
-══════════════════════════════════════════════════════════ -->
+══════════════════════════m;�═══════════════════════════════ -->
 <section class="science-bg" style="position:relative;padding:8rem 0;background:linear-gradient(160deg,#faf9f6 0%,#f5f4f0 50%,#faf9f6 100%);overflow:hidden">
   <div class="section-field" aria-hidden="true"></div>
   <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:960px;height:560px;background:rgba(139,92,246,.055);filter:blur(110px);border-radius:50%;pointer-events:none"></div>
@@ -1711,49 +1729,93 @@ import * as THREE from 'three';
 
 <script>
 (function(){
-  var caro = document.getElementById('prod-caro');
-  var dots = document.querySelectorAll('#prod-dots .pdot');
-  if(!caro || !dots.length) return;
+  var stage  = document.getElementById('pf-stage');
+  var track  = document.getElementById('pf-track');
+  var dotsEl = document.getElementById('pf-dots');
+  var cards  = Array.from(track.querySelectorAll('.pf-card'));
+  var N = cards.length;
+  var cur = 0;
 
-  function setDot(i){
-    dots.forEach(function(d,j){ d.classList.toggle('pdot-a', j===i); });
+  /* Build dots */
+  for(var k=0;k<N;k++){
+    (function(idx){
+      var d=document.createElement('div');
+      d.style.cssText='width:8px;height:8px;border-radius:50%;background:#d1d5db;transition:background .28s,transform .28s,width .28s;cursor:pointer;flex-shrink:0';
+      d.addEventListener('click',function(){go(idx);});
+      dotsEl.appendChild(d);
+    })(k);
   }
 
-  /* Scroll dots to click */
-  dots.forEach(function(d){
-    d.addEventListener('click', function(){
-      var idx = parseInt(d.getAttribute('data-idx'));
-      var card = caro.children[idx];
-      if(card) caro.scrollTo({left: card.offsetLeft - caro.offsetLeft, behavior:'smooth'});
+  function render(){
+    var isMob=window.innerWidth<640;
+    var spacing=isMob?72:115;
+    cards.forEach(function(card,i){
+      var d=i-cur;
+      if(d>N/2)d-=N; if(d<-N/2)d+=N;
+      var abs=Math.abs(d);
+      var tx=d*spacing;
+      var ry=d>0?-Math.min(abs*40,58):Math.min(abs*40,58);
+      var sc=abs===0?1:abs===1?.8:abs===2?.64:.5;
+      var op=abs===0?1:abs===1?.5:abs===2?.22:0;
+      var zi=20-abs;
+      card.style.transform='translateX('+tx+'px) rotateY('+ry+'deg) scale('+sc+')';
+      card.style.opacity=op;
+      card.style.zIndex=zi;
+      card.style.pointerEvents=abs<=1?'auto':'none';
+      card.classList.toggle('pf-active',abs===0);
+    });
+    Array.from(dotsEl.children).forEach(function(d,i){
+      var a=i===cur;
+      d.style.background=a?'#111':'#d1d5db';
+      d.style.transform=a?'scale(1.4)':'scale(1)';
+      d.style.width=a?'22px':'8px';
+      d.style.borderRadius=a?'4px':'50%';
+    });
+  }
+
+  function go(i){cur=((i%N)+N)%N;render();}
+
+  render();
+
+  /* Block link navigation on side cards; allow on center */
+  cards.forEach(function(card,i){
+    card.addEventListener('click',function(e){
+      var d=i-cur; if(d>N/2)d-=N; if(d<-N/2)d+=N;
+      if(Math.abs(d)>0){e.preventDefault();go(i);}
     });
   });
 
-  /* Update active dot on scroll */
-  var timer;
-  caro.addEventListener('scroll', function(){
-    clearTimeout(timer);
-    timer = setTimeout(function(){
-      var closest = 0, minDist = Infinity;
-      Array.from(caro.children).forEach(function(c, i){
-        var dist = Math.abs(c.offsetLeft - caro.offsetLeft - caro.scrollLeft);
-        if(dist < minDist){ minDist = dist; closest = i; }
-      });
-      setDot(closest);
-    }, 60);
-  });
+  /* Arrows */
+  document.getElementById('pf-prev').addEventListener('click',function(){go(cur-1);});
+  document.getElementById('pf-next').addEventListener('click',function(){go(cur+1);});
 
-  /* Hide arrows on mobile */
-  function checkArrows(){
-    var isMobile = window.innerWidth < 640;
-    document.querySelectorAll('.prod-arr').forEach(function(a){
-      a.style.display = isMobile ? 'none' : 'flex';
-    });
-  }
-  checkArrows();
-  window.addEventListener('resize', checkArrows);
+  /* Keyboard */
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowLeft')go(cur-1);
+    if(e.key==='ArrowRight')go(cur+1);
+  },{passive:true});
+
+  /* Touch / mouse drag */
+  var dragStart=null;
+  stage.addEventListener('touchstart',function(e){dragStart=e.touches[0].clientX;},{passive:true});
+  stage.addEventListener('touchend',function(e){
+    if(dragStart===null)return;
+    var dx=e.changedTouches[0].clientX-dragStart;dragStart=null;
+    if(Math.abs(dx)>32)go(dx<0?cur+1:cur-1);
+  },{passive:true});
+  stage.addEventListener('mousedown',function(e){dragStart=e.clientX;},{passive:true});
+  window.addEventListener('mouseup',function(e){
+    if(dragStart===null)return;
+    var dx=e.clientX-dragStart;dragStart=null;
+    if(Math.abs(dx)>32)go(dx<0?cur+1:cur-1);
+  },{passive:true});
+
+  /* Resize */
+  window.addEventListener('resize',render,{passive:true});
 })();
 </script>
 
+<div id="caro-lb"
 <div id="caro-lb" onclick="this.classList.remove('lb-open')"><img id="caro-lb-img" src="" alt="Customer delivery photo"></div>
 <!-- Research image lightbox -->
 <div id="res-lb" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9999;align-items:center;justify-content:center;cursor:zoom-out" onclick="this.style.display='none'">
