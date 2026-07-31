@@ -342,6 +342,8 @@ img,video,canvas,iframe{max-width:100%}
 /* ── Desktop: video sections use narrower video column ── */
 @media(min-width:1025px){
   .g2-vid{grid-template-columns:1.3fr 0.7fr!important;gap:4rem}
+  /* let videos breathe at their natural ratio — no forced 16/9 crop */
+  .g2-vid .v-portrait{aspect-ratio:auto!important;max-height:none!important}
 }
 </style>
 </head>
