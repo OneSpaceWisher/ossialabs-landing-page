@@ -338,6 +338,13 @@ img,video,canvas,iframe{max-width:100%}
   #pf-stage{height:min(480px,92vw)!important}
   .pf-card{width:min(250px,84vw);margin-left:calc(min(250px,84vw)/-2)}
 }
+
+/* ── Desktop: video sections use narrower video column ── */
+@media(min-width:1025px){
+  .g2-vid{grid-template-columns:1.3fr 0.7fr!important;gap:4rem}
+  .g2-vid .video-wrap{max-height:420px;overflow:hidden;border-radius:1.5rem}
+  .g2-vid .video-wrap video{width:100%;height:100%;object-fit:cover;border-radius:1.5rem}
+}
 </style>
 </head>
 <body>
@@ -593,7 +600,7 @@ img,video,canvas,iframe{max-width:100%}
       SNEDDS formulas that keep tough plant actives dissolved and bioavailable. Breakthrough delivery for results you can actually feel.
     </p>
     <div style="display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center;margin-bottom:4.5rem">
-      <a href="https://ossialabs.com/" target="_blank" rel="noopener noreferrer"
+      <a href="https://ossialabs.com/collections/all" target="_blank" rel="noopener noreferrer"
          style="display:inline-block;background:#111;color:#fff;font-weight:600;font-size:1rem;padding:1rem 2rem;border-radius:999px;box-shadow:0 12px 38px rgba(0,0,0,.22);transition:all .24s"
          onmouseover="this.style.cssText=this.dataset.on" onmouseout="this.style.cssText=this.dataset.off"
          data-on="display:inline-block;color:#fff;font-weight:600;font-size:1rem;padding:1rem 2rem;border-radius:999px;box-shadow:0 16px 46px rgba(37,99,235,.32);transition:all .24s;background:linear-gradient(90deg,#2563eb,#06b6d4)"
@@ -772,7 +779,7 @@ img,video,canvas,iframe{max-width:100%}
   <div class="section-field" aria-hidden="true"></div>
   <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:960px;height:560px;background:rgba(6,182,212,.06);filter:blur(110px);border-radius:50%;pointer-events:none"></div>
   <div class="wrap" style="position:relative;z-index:1">
-    <div class="g2">
+    <div class="g2 g2-vid">
       <!-- Text -->
       <div class="reveal">
         <p class="label" style="color:#0891b2;margin-bottom:1.5rem">The Science</p>
@@ -985,7 +992,7 @@ img,video,canvas,iframe{max-width:100%}
   <div class="section-field" aria-hidden="true"></div>
   <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:960px;height:560px;background:rgba(139,92,246,.055);filter:blur(110px);border-radius:50%;pointer-events:none"></div>
   <div class="wrap" style="position:relative;z-index:1">
-    <div class="g2">
+    <div class="g2 g2-vid">
       <!-- Text -->
       <div class="reveal">
         <p class="label" style="color:#7c3aed;margin-bottom:1.5rem">Manufacturing Process</p>
