@@ -158,13 +158,43 @@ video{display:block;width:100%;object-fit:cover;background:#000}
 .discord-glow{background:radial-gradient(ellipse at 50% 40%,rgba(99,102,241,.14) 0%,transparent 65%)}
 
 /* Refined science section fields */
-.mission-bg{background:linear-gradient(150deg,#fbfdfa 0%,#f5fbff 46%,#fffaf2 100%)!important}
+.mission-bg{background:#fafafa!important}
 .science-bg{background:linear-gradient(150deg,#f8fcff 0%,#f7fbf8 44%,#fff9f1 100%)!important}
 .section-field{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 .section-field:before{content:"";position:absolute;inset:0;background-image:linear-gradient(90deg,rgba(6,182,212,.075) 1px,transparent 1px),linear-gradient(rgba(16,185,129,.06) 1px,transparent 1px);background-size:72px 72px;mask-image:linear-gradient(to bottom,transparent 0,#000 18%,#000 82%,transparent 100%)}
 .section-field:after{content:"";position:absolute;inset:-22% -10%;background:repeating-linear-gradient(125deg,transparent 0 44px,rgba(59,130,246,.07) 44px 45px,transparent 45px 92px),repeating-linear-gradient(35deg,transparent 0 68px,rgba(245,158,11,.055) 68px 69px,transparent 69px 136px);opacity:.7;transform:skewY(-6deg)}
-.mission-bg .section-field:before{background-image:linear-gradient(90deg,rgba(16,185,129,.07) 1px,transparent 1px),linear-gradient(rgba(6,182,212,.055) 1px,transparent 1px)}
+.mission-bg .section-field:before{background-image:linear-gradient(90deg,rgba(17,24,39,.045) 1px,transparent 1px),linear-gradient(rgba(17,24,39,.035) 1px,transparent 1px)}
+.mission-bg .section-field:after{display:none}
 .science-bg .section-field:before{background-image:linear-gradient(90deg,rgba(6,182,212,.08) 1px,transparent 1px),linear-gradient(rgba(139,92,246,.055) 1px,transparent 1px)}
+
+/* Mission: editorial and monochrome, not decorative */
+#s-mission > div[style*="filter:blur"]{display:none}
+#s-mission .mission-card > div:first-child{display:none!important}
+#s-mission .mission-card::before{content:"01";display:block;width:30px;height:30px;border:1px solid #d1d5db;border-radius:50%;color:#374151;font-size:.66rem;font-weight:800;letter-spacing:.04em;line-height:28px;text-align:center;margin-bottom:1.15rem}
+#s-mission .mission-card:nth-child(2)::before{content:"02"}
+#s-mission .mission-card:nth-child(3)::before{content:"03"}
+#s-mission .mission-card:nth-child(4)::before{content:"04"}
+
+/* Formula gallery: a quieter, more intentional product presentation */
+#s-products{position:relative;background:linear-gradient(180deg,#fff 0%,#fafafa 100%)!important}
+#s-products > .wrap > .reveal > p:last-of-type{color:#4b5563!important;font-weight:500}
+.formula-summary{display:flex;align-items:center;justify-content:center;gap:.75rem;margin-top:1.5rem;color:#6b7280;font-size:.67rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.formula-summary span+span{display:flex;align-items:center;gap:.75rem}
+.formula-summary span+span::before{content:"";width:3px;height:3px;border-radius:50%;background:#9ca3af}
+#pf-stage .pf-card > div:nth-of-type(2){display:none!important}
+#pf-stage .pf-card > div:nth-of-type(3){border-top:1px solid rgba(17,24,39,.12);padding-top:.95rem;margin-bottom:.9rem!important}
+
+/* Process: compact scientific step markers replace ornamental illustration */
+.step-card > span:first-child{display:none}
+.step-card > div:first-of-type{width:42px!important;height:42px!important;border-radius:50%!important;background:#fff!important;border:1px solid #d1d5db!important;box-shadow:none!important;margin-bottom:1.1rem!important}
+.step-card > div:first-of-type svg{display:none}
+.step-card > div:first-of-type::before{content:"01";color:#374151;font-size:.68rem;font-weight:800;letter-spacing:.04em}
+.step-card:nth-child(2) > div:first-of-type::before{content:"02"}
+.step-card:nth-child(3) > div:first-of-type::before{content:"03"}
+
+/* Ultrasonication: use clear checkmarks rather than decorative dots */
+.ultra-checklist > div > div{width:16px!important;height:16px!important;border-radius:50%!important;background:#8b5cf6!important;position:relative;flex-shrink:0}
+.ultra-checklist > div > div::after{content:"";position:absolute;left:4px;top:3px;width:6px;height:3px;border-left:1.8px solid #fff;border-bottom:1.8px solid #fff;transform:rotate(-45deg)}
 /* ── Responsive ── */
 @media(max-width:1024px){.g4{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:860px){
@@ -646,8 +676,8 @@ img,video,canvas,iframe{max-width:100%}
   <div style="position:absolute;top:40%;left:-60px;width:260px;height:260px;background:rgba(16,185,129,.05);filter:blur(70px);border-radius:50%;pointer-events:none"></div>
   <div class="wrap" style="position:relative;z-index:1">
     <div class="reveal" style="text-align:center;margin-bottom:5rem">
-      <p class="label" style="color:#0891b2;margin-bottom:1.25rem">Our Mission</p>
-      <h2 class="title" style="font-size:clamp(2rem,5vw,3.6rem);color:#111;margin-bottom:1.3rem">Advancing the<br><span class="g-cyan">supplement frontier.</span></h2>
+      <p class="label" style="color:#6b7280;margin-bottom:1.25rem">Our Mission</p>
+      <h2 class="title" style="font-size:clamp(2rem,5vw,3.6rem);color:#111;margin-bottom:1.3rem">Advancing the<br><span>supplement frontier.</span></h2>
       <p style="color:#6b7280;font-size:1.05rem;max-width:36rem;margin:0 auto;line-height:1.75">The industry has been coasting on outdated delivery for decades. We're changing that, one nanodroplet at a time.</p>
     </div>
     <div class="gauto" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
@@ -700,6 +730,7 @@ img,video,canvas,iframe{max-width:100%}
       <p class="label" style="color:#9ca3af;margin-bottom:1rem">Our Formulas</p>
       <h2 class="title" style="font-size:clamp(2rem,5vw,3.6rem);color:#111;margin-bottom:1.3rem">Engineered for absorption.</h2>
       <p style="color:#9ca3af;font-size:1.05rem;max-width:36rem;margin:0 auto;line-height:1.75">Every product is built around SNEDDS technology, self-nanoemulsifying systems that maximize bioavailability of lipophilic compounds.</p>
+      <div class="formula-summary"><span>Four focused formulas</span><span>One delivery platform</span></div>
     </div>
     <!-- Product Coverflow Stage -->
     <div id="pf-stage" style="position:relative;height:min(620px,85vw);perspective:1400px;overflow:hidden;cursor:grab;user-select:none;margin-bottom:2rem;mask-image:linear-gradient(to right,transparent 0%,#000 12%,#000 88%,transparent 100%);-webkit-mask-image:linear-gradient(to right,transparent 0%,#000 12%,#000 88%,transparent 100%)">
@@ -1005,7 +1036,7 @@ img,video,canvas,iframe{max-width:100%}
         <h2 class="title" style="font-size:clamp(1.9rem,4vw,3rem);color:#111;margin-bottom:2rem">ULTRASONICATION<br>FOR <span style="background:linear-gradient(90deg,#8b5cf6,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">PRECISE<br>DISSOLUTION</span></h2>
         <p style="color:#6b7280;font-size:1rem;line-height:1.77;margin-bottom:1.5rem">Ultrasonication sends sound-wave vibrations through a solvent, creating tiny bubbles that rapidly form and collapse. This is known as <strong style="color:#374151">cavitation</strong>.</p>
         <p style="color:#6b7280;font-size:1rem;line-height:1.77;margin-bottom:2rem">When those bubbles collapse, they create small zones of intense mixing, shear force, and localized heat that dramatically improve the dissolution and dispersion of compounds into the SNEDDS matrix.</p>
-        <div style="display:flex;flex-direction:column;gap:.75rem;margin-bottom:2rem">
+        <div class="ultra-checklist" style="display:flex;flex-direction:column;gap:.75rem;margin-bottom:2rem">
           <div style="display:flex;align-items:center;gap:.75rem;padding:.85rem 1.1rem;border-radius:.85rem;background:rgba(139,92,246,.06);border:1px solid rgba(139,92,246,.14)">
             <div style="width:7px;height:7px;border-radius:50%;background:#8b5cf6;flex-shrink:0"></div>
             <p style="font-size:.85rem;color:#374151;line-height:1.55"><strong>Breaking up powder clumps</strong> for more uniform particle size</p>
