@@ -344,6 +344,12 @@ img,video,canvas,iframe{max-width:100%}
   .g2-vid{grid-template-columns:1.3fr 0.7fr!important;gap:4rem}
   /* let videos breathe at their natural ratio — no forced 16/9 crop */
   .g2-vid .v-portrait{aspect-ratio:auto!important;max-height:none!important}
+  /* Formula coverflow: a lighter, more balanced desktop presentation */
+  #s-products{padding:7rem 0!important}
+  #s-products > .wrap > .reveal{margin-bottom:3.5rem!important}
+  #s-products > .wrap > .reveal .title{font-size:clamp(2.25rem,3.5vw,3rem)!important}
+  #pf-stage{height:540px!important;perspective:1500px!important;margin-bottom:1.25rem!important}
+  .pf-card{width:360px;height:520px;margin-left:-180px;overflow:hidden}
 }
 </style>
 </head>
@@ -596,7 +602,7 @@ img,video,canvas,iframe{max-width:100%}
     <h1 style="font-size:clamp(2.8rem,8.5vw,7rem);font-weight:900;letter-spacing:-.038em;line-height:1;color:#111;margin-bottom:1.55rem">
       Science that your<br><span class="g-blue">body actually feels.</span>
     </h1>
-    <p style="font-size:clamp(1rem,2vw,1.2rem);color:#6b7280;max-width:38rem;margin:0 auto 2.7rem;line-height:1.77;font-weight:300">
+    <p style="font-size:clamp(1rem,2vw,1.2rem);color:#4b5563;max-width:38rem;margin:0 auto 2.7rem;line-height:1.77;font-weight:600">
       SNEDDS formulas that keep tough plant actives dissolved and bioavailable. Breakthrough delivery for results you can actually feel.
     </p>
     <div style="display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center;margin-bottom:4.5rem">
@@ -1793,7 +1799,7 @@ import * as THREE from 'three';
   function render(){
     var isMob=window.innerWidth<640;
     var isMid=!isMob&&window.innerWidth<1024;
-    var spacing=isMob?230:isMid?210:300;
+    var spacing=isMob?230:isMid?210:275;
     cards.forEach(function(card,i){
       var d=i-cur;
       if(d>N/2)d-=N; if(d<-N/2)d+=N;
