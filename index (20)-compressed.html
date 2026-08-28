@@ -356,6 +356,75 @@ video{display:block;width:100%;object-fit:cover;background:#000}
 html,body{overflow-x:hidden;max-width:100vw}
 img,video,canvas,iframe{max-width:100%}
 
+/* ── Editorial system: full-page fields, separators, and sharper edges ── */
+.editorial-section{position:relative;isolation:isolate}
+.editorial-section > .wrap,.editorial-section > .wrap-sm{position:relative;z-index:1}
+.editorial-section::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(90deg,rgba(17,24,39,.035) 1px,transparent 1px),linear-gradient(rgba(17,24,39,.028) 1px,transparent 1px);background-size:72px 72px;mask-image:linear-gradient(to bottom,transparent 0,#000 16%,#000 84%,transparent 100%);opacity:.7}
+.editorial-section::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(120deg,transparent 0 36%,rgba(255,255,255,.62) 50%,transparent 66%);opacity:.45}
+.editorial-products,.editorial-process,.editorial-research,.editorial-nanoemulgel,.editorial-evidence,.editorial-reviews,.editorial-faq{background:#f8f9f7!important}
+.editorial-science,.editorial-ultra{background:#f7f8f6!important}
+.editorial-products::after,.editorial-process::after,.editorial-research::after,.editorial-nanoemulgel::after,.editorial-evidence::after,.editorial-reviews::after,.editorial-faq::after,.editorial-science::after,.editorial-ultra::after{opacity:.24}
+.editorial-section .title{letter-spacing:-.042em}
+
+/* Content groups read as one page instead of a grid of pastel cards. */
+#s-mission .gauto{grid-template-columns:repeat(2,minmax(0,1fr));gap:0 3rem}
+#s-mission .mission-card{background:transparent!important;border:0!important;border-top:1px solid rgba(17,24,39,.14)!important;border-radius:0!important;box-shadow:none!important;padding:2rem 0!important}
+#s-mission .mission-card:hover{background:rgba(255,255,255,.35)!important}
+#s-mission .mission-card::before{margin-bottom:1rem}
+#s-mission .mission-card > h3{letter-spacing:-.02em}
+
+#s-products{background:#f8f9f7!important;background-image:linear-gradient(90deg,rgba(17,24,39,.035) 1px,transparent 1px),linear-gradient(rgba(17,24,39,.028) 1px,transparent 1px)!important;background-size:72px 72px!important}
+#s-products .formula-summary{color:#667085}
+#pf-stage{mask-image:none!important;-webkit-mask-image:none!important}
+#pf-stage .pf-card{background:#fff!important;border:1px solid rgba(17,24,39,.14)!important;border-radius:0!important;box-shadow:0 16px 34px rgba(17,24,39,.08)!important}
+#pf-stage .pf-card.pf-active{box-shadow:0 22px 48px rgba(17,24,39,.13)!important}
+#pf-stage .pf-card > div:first-child{opacity:.025!important}
+
+.g2stat{gap:0!important}
+.statcard{background:transparent!important;border:0!important;border-top:1px solid rgba(17,24,39,.14)!important;border-radius:0!important;box-shadow:none!important;padding:1.15rem 0!important}
+
+.editorial-process .g3{gap:0 2.5rem}
+.editorial-process .step-card{background:transparent!important;border:0!important;border-top:1px solid rgba(17,24,39,.14)!important;border-radius:0!important;box-shadow:none!important;padding:2rem 0!important}
+.editorial-process .step-card:hover{box-shadow:none!important}
+.editorial-process .step-card > div:first-of-type{background:#f8f9f7!important}
+
+.research-card{border-radius:0!important;overflow:hidden;box-shadow:none!important;border:0!important;border-top:1px solid rgba(17,24,39,.14)!important;background:transparent!important}
+.research-card img{height:220px!important;object-fit:cover;border-radius:0!important;box-shadow:none!important}
+.research-card > div{padding:1rem 0 1.2rem!important}
+
+.nano-benefits{gap:0!important;border-top:1px solid rgba(17,24,39,.14)}
+.nano-benefit{padding:1rem 0!important;border:0!important;border-bottom:1px solid rgba(17,24,39,.14)!important;border-radius:0!important;background:transparent!important}
+.nano-benefit-icon{width:34px!important;height:34px!important;border-radius:50%!important;background:#f8f9f7!important;border:1px solid rgba(17,24,39,.18)!important}
+.nano-benefit-icon svg{width:17px;height:17px}
+.nano-benefit-icon svg *{stroke:#475467!important}
+.editorial-nanoemulgel .g2 > .reveal:last-child img{border-radius:0!important;box-shadow:none!important}
+
+.editorial-evidence .g2 > .reveal{background:transparent!important;border:0!important;border-top:1px solid rgba(17,24,39,.14)!important;border-radius:0!important;box-shadow:none!important}
+.editorial-evidence .g2 > .reveal:first-child{padding:1.5rem 0 0!important}
+.editorial-evidence .g2 > .reveal:last-child{overflow:visible!important}
+.editorial-evidence .ctable th,.editorial-evidence .ctable td{border-color:rgba(17,24,39,.1)!important}
+
+.editorial-reviews .grev{gap:0 2.5rem}
+.editorial-reviews .review-card{background:transparent!important;border:0!important;border-top:1px solid rgba(17,24,39,.14)!important;border-radius:0!important;box-shadow:none!important;padding:1.75rem 0!important}
+.editorial-reviews .review-card:hover{box-shadow:none!important}
+
+.editorial-faq #faq-list{gap:0!important;border-top:1px solid rgba(17,24,39,.14)}
+.editorial-faq .faq-item{background:transparent!important;border:0!important;border-bottom:1px solid rgba(17,24,39,.14)!important;border-radius:0!important}
+.editorial-faq .faq-icon{border-radius:50%!important;background:transparent!important;border:1px solid rgba(17,24,39,.16)}
+
+@media(max-width:860px){
+  #s-mission .gauto{grid-template-columns:1fr;gap:0}
+  .editorial-process .g3{gap:0}
+  .editorial-reviews .grev{gap:0}
+  .editorial-section::before{display:none}
+}
+
+@media(max-width:600px){
+  #s-mission .mission-card,.editorial-process .step-card{padding:1.5rem 0!important}
+  .research-card img{height:180px!important}
+  .nano-benefit{padding:1rem 0!important}
+}
+
 /* ── Product coverflow ── */
 #pf-stage:active{cursor:grabbing}
 .pf-card{position:absolute;left:50%;top:0;width:min(400px,82vw);height:100%;margin-left:calc(min(400px,82vw)/-2);border-radius:1.5rem;overflow:hidden auto;transition:transform .54s cubic-bezier(.22,1,.36,1),opacity .54s,box-shadow .54s;will-change:transform;backface-visibility:hidden;text-decoration:none;color:inherit;display:block}
@@ -724,7 +793,7 @@ img,video,canvas,iframe{max-width:100%}
 <!-- ══════════════════════════════════════════════════════════
   § 3  PRODUCTS
 ══════════════════════════════════════════════════════════ -->
-<section id="s-products" style="padding:8rem 0;background:#fff">
+<section id="s-products" class="editorial-section editorial-products" style="padding:8rem 0;background:#fff">
   <div class="wrap">
     <div class="reveal" style="text-align:center;margin-bottom:5rem">
       <p class="label" style="color:#9ca3af;margin-bottom:1rem">Our Formulas</p>
@@ -812,7 +881,7 @@ img,video,canvas,iframe{max-width:100%}
 <!-- ══════════════════════════════════════════════════════════
   § 4  SNEDDS VIDEO
 ══════════════════════════════════════════════════════════ -->
-<section class="science-bg" style="position:relative;padding:8rem 0;background:linear-gradient(160deg,#faf9f6 0%,#f5f4f0 50%,#faf9f6 100%);overflow:hidden">
+<section class="science-bg editorial-section editorial-science" style="position:relative;padding:8rem 0;background:linear-gradient(160deg,#faf9f6 0%,#f5f4f0 50%,#faf9f6 100%);overflow:hidden">
   <div class="section-field" aria-hidden="true"></div>
   <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:960px;height:560px;background:rgba(6,182,212,.06);filter:blur(110px);border-radius:50%;pointer-events:none"></div>
   <div class="wrap" style="position:relative;z-index:1">
@@ -863,7 +932,7 @@ img,video,canvas,iframe{max-width:100%}
 <!-- ══════════════════════════════════════════════════════════
   § 5  HOW IT WORKS
 ══════════════════════════════════════════════════════════ -->
-<section style="padding:8rem 0;background:#fff">
+<section class="editorial-section editorial-process" style="padding:8rem 0;background:#fff">
   <div class="wrap">
     <div class="reveal" style="text-align:center;margin-bottom:5rem">
       <p class="label" style="color:#9ca3af;margin-bottom:1rem">The Process</p>
@@ -943,7 +1012,7 @@ img,video,canvas,iframe{max-width:100%}
 <!-- ══════════════════════════════════════════════════════════
   § 7b  SNEDDS RESEARCH GALLERY
 ══════════════════════════════════════════════════════════ -->
-<section style="padding:5.5rem 0;background:#f9fafb">
+<section class="editorial-section editorial-research" style="padding:5.5rem 0;background:#f9fafb">
   <div class="wrap">
     <div class="reveal" style="text-align:center;margin-bottom:3.5rem">
       <p class="label" style="color:#0891b2;margin-bottom:1rem">Published Research</p>
@@ -951,19 +1020,19 @@ img,video,canvas,iframe{max-width:100%}
       <p style="color:#9ca3af;font-size:1rem;max-width:34rem;margin:0 auto;line-height:1.72">The nanoemulsifying technology behind every OssiaLabs formula has decades of published research supporting its superior bioavailability.</p>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.25rem">
-      <div class="reveal d1" style="border-radius:1.25rem;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.07);border:1px solid #f0f0f0;background:#fff">
+      <div class="research-card reveal d1" style="border-radius:1.25rem;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.07);border:1px solid #f0f0f0;background:#fff">
         <img src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/showGraphicalAbstractImage_1ed58f1c-fd8a-4e3f-8380-1535dc82a33a.jpg?v=1781479883" alt="SNEDDS graphical abstract research" loading="lazy" decoding="async" style="width:100%;height:210px;object-fit:cover;display:block;cursor:zoom-in" onclick="openResLb(this.src,this.alt)">
         <div style="padding:.9rem 1.1rem"><p style="font-size:.78rem;font-weight:700;color:#374151">Graphical Abstract: SNEDDS Mechanism</p><p style="font-size:.7rem;color:#9ca3af;margin-top:.22rem">Nanoemulsifying delivery systems — mechanism of action</p></div>
       </div>
-      <div class="reveal d2" style="border-radius:1.25rem;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.07);border:1px solid #f0f0f0;background:#fff">
+      <div class="research-card reveal d2" style="border-radius:1.25rem;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.07);border:1px solid #f0f0f0;background:#fff">
         <img src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/SNEDDSResearch2.jpg?v=1781479850" alt="SNEDDS bioavailability research" loading="lazy" decoding="async" style="width:100%;height:210px;object-fit:cover;display:block;cursor:zoom-in" onclick="openResLb(this.src,this.alt)">
         <div style="padding:.9rem 1.1rem"><p style="font-size:.78rem;font-weight:700;color:#374151">Bioavailability Enhancement Data</p><p style="font-size:.7rem;color:#9ca3af;margin-top:.22rem">Comparative pharmacokinetic profiles of SNEDDS vs standard</p></div>
       </div>
-      <div class="reveal d3" style="border-radius:1.25rem;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.07);border:1px solid #f0f0f0;background:#fff">
+      <div class="research-card reveal d3" style="border-radius:1.25rem;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.07);border:1px solid #f0f0f0;background:#fff">
         <img src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/SNEDDSResearch.jpg?v=1781479852" alt="SNEDDS nanoemulsion formation" loading="lazy" decoding="async" style="width:100%;height:210px;object-fit:cover;display:block;cursor:zoom-in" onclick="openResLb(this.src,this.alt)">
         <div style="padding:.9rem 1.1rem"><p style="font-size:.78rem;font-weight:700;color:#374151">Nanoemulsion Formation Study</p><p style="font-size:.7rem;color:#9ca3af;margin-top:.22rem">Self-emulsification dynamics and droplet size characterization</p></div>
       </div>
-      <div class="reveal d4" style="border-radius:1.25rem;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.07);border:1px solid #f0f0f0;background:#fff">
+      <div class="research-card reveal d4" style="border-radius:1.25rem;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.07);border:1px solid #f0f0f0;background:#fff">
         <img src="https://cdn.shopify.com/s/files/1/0769/4362/2362/files/SNEDDSResearch3.jpg?v=1781479850" alt="SNEDDS formulation optimization" loading="lazy" decoding="async" style="width:100%;height:210px;object-fit:cover;display:block;cursor:zoom-in" onclick="openResLb(this.src,this.alt)">
         <div style="padding:.9rem 1.1rem"><p style="font-size:.78rem;font-weight:700;color:#374151">Formulation Optimization Results</p><p style="font-size:.7rem;color:#9ca3af;margin-top:.22rem">Excipient screening and optimization for maximum permeation</p></div>
       </div>
@@ -974,7 +1043,7 @@ img,video,canvas,iframe{max-width:100%}
 <!-- ══════════════════════════════════════════════════════════
   § 8b  NANOEMULGEL
 ══════════════════════════════════════════════════════════ -->
-<section style="padding:8rem 0;background:#fff">
+<section class="editorial-section editorial-nanoemulgel" style="padding:8rem 0;background:#fff">
   <div class="wrap">
     <div class="g2" style="gap:4rem">
       <div class="reveal">
@@ -982,22 +1051,22 @@ img,video,canvas,iframe{max-width:100%}
         <h2 class="title" style="font-size:clamp(1.9rem,4vw,3rem);color:#111;margin-bottom:1.5rem">Why <span style="background:linear-gradient(90deg,#8b5cf6,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Nanoemulgel</span><br>penetrates deeper.</h2>
         <p style="color:#6b7280;font-size:1rem;line-height:1.77;margin-bottom:1.4rem">Lipophilic compounds like Bakuchiol have a hard time bypassing the stratum corneum on their own. The outer skin layer acts as a barrier that most standard creams simply cannot cross effectively.</p>
         <p style="color:#6b7280;font-size:1rem;line-height:1.77;margin-bottom:2rem">Nanoemulgels create ultra-fine nano drops so small that the outer skin layers cannot stop them, delivering active compounds deep into the dermis where collagen synthesis and cell turnover actually occur.</p>
-        <div style="display:flex;flex-direction:column;gap:.85rem;margin-bottom:2rem">
-          <div style="display:flex;align-items:flex-start;gap:.85rem;padding:1rem 1.2rem;border-radius:1rem;background:#f5f3ff;border:1px solid rgba(139,92,246,.15)">
-            <div style="width:36px;height:36px;border-radius:.6rem;background:rgba(139,92,246,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#8b5cf6" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="#8b5cf6" opacity=".3"/><circle cx="12" cy="12" r="2" fill="#8b5cf6"/></svg>
+        <div class="nano-benefits" style="display:flex;flex-direction:column;gap:.85rem;margin-bottom:2rem">
+          <div class="nano-benefit" style="display:flex;align-items:flex-start;gap:.85rem;padding:1rem 1.2rem;border-radius:1rem;background:#f5f3ff;border:1px solid rgba(139,92,246,.15)">
+            <div class="nano-benefit-icon" style="width:36px;height:36px;border-radius:.6rem;background:rgba(139,92,246,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="2.5" stroke="#8b5cf6" stroke-width="1.6"/><circle cx="16" cy="12" r="3.5" stroke="#8b5cf6" stroke-width="1.6"/><circle cx="8" cy="17" r="1.8" stroke="#8b5cf6" stroke-width="1.6"/></svg>
             </div>
             <div><p style="font-size:.85rem;font-weight:700;color:#111;margin-bottom:.2rem">Ultra-fine nano droplets</p><p style="font-size:.78rem;color:#6b7280;line-height:1.6">Particle sizes small enough to pass through the skin's natural barrier layers</p></div>
           </div>
-          <div style="display:flex;align-items:flex-start;gap:.85rem;padding:1rem 1.2rem;border-radius:1rem;background:#fdf4ff;border:1px solid rgba(236,72,153,.15)">
-            <div style="width:36px;height:36px;border-radius:.6rem;background:rgba(236,72,153,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3c0 0 6 4 6 9s-6 9-6 9-6-4-6-9 6-9 6-9z" stroke="#ec4899" stroke-width="1.8" stroke-linejoin="round"/><line x1="12" y1="8" x2="12" y2="16" stroke="#ec4899" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <div class="nano-benefit" style="display:flex;align-items:flex-start;gap:.85rem;padding:1rem 1.2rem;border-radius:1rem;background:#fdf4ff;border:1px solid rgba(236,72,153,.15)">
+            <div class="nano-benefit-icon" style="width:36px;height:36px;border-radius:.6rem;background:rgba(236,72,153,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 5h14M5 12h14M5 19h14" stroke="#ec4899" stroke-width="1.6" stroke-linecap="round"/><path d="M12 3v18" stroke="#ec4899" stroke-width="1.6" stroke-linecap="round"/></svg>
             </div>
             <div><p style="font-size:.85rem;font-weight:700;color:#111;margin-bottom:.2rem">Deep dermal delivery</p><p style="font-size:.78rem;color:#6b7280;line-height:1.6">Active compounds reach the dermis for real collagen stimulation and cell turnover</p></div>
           </div>
-          <div style="display:flex;align-items:flex-start;gap:.85rem;padding:1rem 1.2rem;border-radius:1rem;background:#f0fdf4;border:1px solid rgba(16,185,129,.15)">
-            <div style="width:36px;height:36px;border-radius:.6rem;background:rgba(16,185,129,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L19 7" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div class="nano-benefit" style="display:flex;align-items:flex-start;gap:.85rem;padding:1rem 1.2rem;border-radius:1rem;background:#f0fdf4;border:1px solid rgba(16,185,129,.15)">
+            <div class="nano-benefit-icon" style="width:36px;height:36px;border-radius:.6rem;background:rgba(16,185,129,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-2.8 7.9-7 10-4.2-2.1-7-5.5-7-10V6l7-3z" stroke="#10b981" stroke-width="1.6" stroke-linejoin="round"/><path d="M8.5 12l2.3 2.3 4.7-4.7" stroke="#10b981" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
             <div><p style="font-size:.85rem;font-weight:700;color:#111;margin-bottom:.2rem">Gentle for all skin types</p><p style="font-size:.78rem;color:#6b7280;line-height:1.6">No irritation, no downtime. Unlike retinol, Bakuchiol is tolerated even by sensitive skin</p></div>
           </div>
@@ -1025,7 +1094,7 @@ img,video,canvas,iframe{max-width:100%}
 <!-- ══════════════════════════════════════════════════════════
   § 5b  ULTRASONICATION VIDEO
 ══════════════════════════════════════════════════════════ -->
-<section class="science-bg" style="position:relative;padding:8rem 0;background:linear-gradient(160deg,#faf9f6 0%,#f5f4f0 50%,#faf9f6 100%);overflow:hidden">
+<section class="science-bg editorial-section editorial-ultra" style="position:relative;padding:8rem 0;background:linear-gradient(160deg,#faf9f6 0%,#f5f4f0 50%,#faf9f6 100%);overflow:hidden">
   <div class="section-field" aria-hidden="true"></div>
   <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:960px;height:560px;background:rgba(139,92,246,.055);filter:blur(110px);border-radius:50%;pointer-events:none"></div>
   <div class="wrap" style="position:relative;z-index:1">
@@ -1089,7 +1158,7 @@ img,video,canvas,iframe{max-width:100%}
 <!-- ══════════════════════════════════════════════════════════
   § 7  RADAR CHART
 ══════════════════════════════════════════════════════════ -->
-<section style="padding:8rem 0;background:#f9fafb;overflow:hidden">
+<section class="editorial-section editorial-evidence" style="padding:8rem 0;background:#f9fafb;overflow:hidden">
   <div class="wrap">
     <div class="reveal" style="text-align:center;margin-bottom:5rem">
       <p class="label" style="color:#9ca3af;margin-bottom:1rem">Proof</p>
@@ -1128,7 +1197,7 @@ img,video,canvas,iframe{max-width:100%}
 <!-- ══════════════════════════════════════════════════════════
   § 8  REVIEWS (12 reviews)
 ══════════════════════════════════════════════════════════ -->
-<section style="padding:8rem 0;background:#fff">
+<section class="editorial-section editorial-reviews" style="padding:8rem 0;background:#fff">
   <div class="wrap">
     <div class="reveal" style="text-align:center;margin-bottom:5rem">
       <p class="label" style="color:#9ca3af;margin-bottom:1rem">Community</p>
@@ -1253,7 +1322,7 @@ img,video,canvas,iframe{max-width:100%}
 <!-- ══════════════════════════════════════════════════════════
   § 9  FAQ
 ══════════════════════════════════════════════════════════ -->
-<section style="padding:8rem 0;background:#f9fafb">
+<section class="editorial-section editorial-faq" style="padding:8rem 0;background:#f9fafb">
   <div class="wrap-sm" style="max-width:56rem">
     <div class="reveal" style="margin-bottom:3.5rem">
       <p class="label" style="color:#9ca3af;margin-bottom:1rem">Got questions?</p>
